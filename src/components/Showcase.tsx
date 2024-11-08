@@ -79,9 +79,9 @@ export function Showcase() {
           <p className="text-[14px] text-white my-2">
             SafeLink helps you organize your business details, photos, and
             prices in one simple link. No need to fill up your phone or your
-            clients’ phones with too many pictures—just send one link! It’s
-            easier for your customers to buy from you and share your
-            business with others.
+            clients' phones with too many pictures—just send one link! It's
+            easier for your customers to buy from you and share your business
+            with others.
           </p>
           <button
             onClick={openSignUpModal}
