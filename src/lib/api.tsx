@@ -265,7 +265,7 @@ export const fetchUsers = async (router: any): Promise<any[] | null> => {
   try {
     const api = await createApiInstance(router);
     const response = await api.get(`/user/all`);
-    console.log("Users response:", response);
+    // console.log("Users response:", response);
 
     const data = response.data.data;
     return data;
