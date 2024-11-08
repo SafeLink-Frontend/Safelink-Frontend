@@ -6,6 +6,7 @@ import QA from "@/components/QA";
 import {
   baseUrl,
   fetchQuestionsAnswers,
+  fetchQuestionsAnswersById,
   fetchUserById,
   fetchUserInventory,
 } from "@/lib/api";
@@ -70,7 +71,7 @@ const Page = () => {
   ];
 
   const fetchQuestionsAndAnswerdata = async () => {
-    const response = await fetchQuestionsAnswers(router);
+    const response = await fetchQuestionsAnswersById(router, id ?? "");
     if (response) {
       setQuestions(response);
     }
@@ -87,11 +88,13 @@ const Page = () => {
   };
 
   useEffect(() => {
-    fetchQuestionsAndAnswerdata();
-    setIsCategoriesLoading(true);
-    // Simulate loading time for categories (remove this in production)
-    setTimeout(() => setIsCategoriesLoading(false), 1000);
-  }, []);
+    if (id) {
+      fetchQuestionsAndAnswerdata();
+      setIsCategoriesLoading(true);
+      // Simulate loading time for categories (remove this in production)
+      setTimeout(() => setIsCategoriesLoading(false), 1000);
+    }
+  }, [id]);
 
   useEffect(() => {
     if (user) {

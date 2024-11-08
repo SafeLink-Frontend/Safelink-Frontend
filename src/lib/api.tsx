@@ -240,6 +240,26 @@ export const fetchQuestionsAnswers = async (
   }
 };
 
+export const fetchQuestionsAnswersById = async (
+  router: any,
+  id: string
+): Promise<any[] | null> => {
+  Toast.dismiss();
+  try {
+    const api = await createApiInstance(router);
+    const response = await api.get(`/questions/answer/${id}`);
+    console.log("Questions and Answers response:", response);
+
+    const data = response.data.data;
+
+    return data;
+  } catch (error) {
+    console.error("Error fetching question and answers:", error);
+    //Toast.error("Error fetching question and answers:");
+    return null;
+  }
+};
+
 export const fetchUsers = async (router: any): Promise<any[] | null> => {
   Toast.dismiss();
   try {

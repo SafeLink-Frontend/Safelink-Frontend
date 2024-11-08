@@ -105,7 +105,7 @@ export function Showcase() {
             users?.map((item, index) => (
               <Link
                 href={{
-                  pathname: "/profile",
+                  pathname: "/profile/user",
                   query: {
                     userId: item._id,
                   },
