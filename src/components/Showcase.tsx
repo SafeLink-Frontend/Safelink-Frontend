@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Product } from "@/types/product";
 import { useRouter } from "next/navigation";
 import useListStore from "@/store/useListStore";
+import Link from "next/link";
 //import { User } from "@/types/user"; // Add this import
 
 export interface User {
@@ -102,7 +103,13 @@ export function Showcase() {
           ) : (
             users.length > 0 &&
             users?.map((item, index) => (
-              <div
+              <Link
+                href={{
+                  pathname: "/profile",
+                  query: {
+                    userId: item._id,
+                  },
+                }}
                 key={index}
                 className="border-x border-b border-[#000000] rounded-lg  flex flex-col"
               >
@@ -131,7 +138,7 @@ export function Showcase() {
                   </div>
                 </div>
                 <div className="flex-grow mb-4"></div>
-              </div>
+              </Link>
             ))
           )}
         </div>
