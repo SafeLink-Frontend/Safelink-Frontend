@@ -39,7 +39,7 @@ export function Showcase() {
     const getUsers = async () => {
       setIsLoading(true);
       const usersArray = await fetchUsers(router);
-      console.log("users loaded", usersArray);
+      // console.log("users loaded", usersArray);
       if (usersArray) {
         setUsers(usersArray);
       }
@@ -117,7 +117,11 @@ export function Showcase() {
                   <div
                     className="w-full h-[200px] border rounded-lg bg-cover bg-no-repeat relative"
                     style={{
-                      backgroundImage: `url(${item?.professionalPictures[0] || ""})`,
+                      backgroundImage: `url(${
+                        item?.profilePicture
+                          ? item.profilePicture
+                          : "/Placeholder_view_vector.svg.png"
+                      })`,
                     }}
                   >
                     <div className="absolute -bottom-5 left-3">
