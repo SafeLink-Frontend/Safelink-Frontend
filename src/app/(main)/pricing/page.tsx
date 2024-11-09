@@ -20,58 +20,13 @@ const page = () => {
       const plans = await getSubscriptionPlans(router);
       console.log({ plans });
       setIsLoading(false);
-      setSubscriptionPlans(plans);
+      setSubscriptionPlans(plans?.filter((item) => item.name !== "free") ?? []);
       console.log({ plans });
     };
 
     fetchSubscriptionPlans();
   }, [router]);
-  const SubscriptionList = [
-    {
-      type: "basic",
-      amount: "N2,000",
-      duration: "monthly",
-      offers: [
-        "Unlimited Listings",
-        "1 MONTH SUBSCRIPTION",
-        "Occasional Feature on the homepage",
-        "Occasional Feature on the Safelink social media platforms",
-      ],
-    },
-    {
-      type: "3 months plan",
-      amount: "N5,500",
-      duration: "3 months",
-      offers: [
-        "Unlimited Listings",
-        "1 MONTH SUBSCRIPTION",
-        "Occasional Feature on the homepage",
-        "Occasional Feature on the Safelink social media platforms",
-      ],
-    },
-    {
-      type: "6 months plan",
-      amount: "N10,000",
-      duration: "6 months",
-      offers: [
-        "Unlimited Listings",
-        "6 MONTH SUBSCRIPTION",
-        "Occasional Feature on the homepage",
-        "Occasional Feature on the Safelink social media platforms",
-      ],
-    },
-    {
-      type: "12 months plan",
-      amount: "N18,000",
-      duration: "12 months",
-      offers: [
-        "Unlimited Listings",
-        "12 MONTH SUBSCRIPTION",
-        "Occasional Feature on the homepage",
-        "Occasional Feature on the Safelink social media platforms",
-      ],
-    },
-  ];
+
   return (
     <section className="px-5 py-10">
       <div className="flex items-start justify-between mb-5">
@@ -95,7 +50,7 @@ const page = () => {
 
       <div className="sm:w-full sm:flex sm:flex-col grid grid-cols-2 gap-5 max-w-[860px] mx-auto">
         {subscriptionPlans?.map((subscription, idx) => (
-          <SubscriptionCard key={idx} subscriptions={subscription} />
+          <SubscriptionCard key={idx} subscription={subscription} />
         ))}
         {/* <SubscriptionCard subscriptions={SubscriptionList} /> */}
       </div>

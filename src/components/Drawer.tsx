@@ -39,7 +39,7 @@ import useUserStore from "@/store/useUserStore";
 
 const Drawer = () => {
   const { closeDrawer, openDrawer, isDrawerOpen } = useModalStore();
-  const [user] = useLocalStorage<any>("user", null);
+  const user = useUserStore();
 
   return (
     <div
@@ -106,7 +106,7 @@ const Drawer = () => {
             <span>About</span>
           </div>
         </NavLink> */}
-        <Link
+        <a
           href="mailto:usesafelink@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
@@ -116,7 +116,7 @@ const Drawer = () => {
             <MdContactMail />
             <span>Contact Us</span>
           </div>
-        </Link>
+        </a>
         {!user && (
           <>
             <NavLink href="/login">

@@ -27,7 +27,7 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("http://localhost:4050"), // Set the base URL for metadata
+  metadataBase: new URL("https://usesafelink.com"), // Set the base URL for metadata
   title: "SAFELINK",
   description:
     "SAFELINK helps you tell your prospects and clients about yourself, your business and why they should buy from you",
@@ -39,14 +39,27 @@ export const metadata: Metadata = {
     //siteName: "safelink",
     images: [
       {
-        url: "homepage-image-2.jpg",
-        width: "100%",
-        height: "100%",
+        url: "/homepage-image-2.jpg",
+        width: "1200",
+        height: "630",
+        alt: "SAFELINK Homepage Preview",
       },
     ],
   },
   icons: {
-    icon: "favicon.ico",
+    icon: [
+      {
+        url: "/favicon.ico",
+        sizes: "any",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SAFELINK",
+    description:
+      "SafeLink helps you organize your business details, photos, and prices in one simple link",
+    images: ["/homepage-image-2.jpg"],
   },
 };
 const googleClientKey = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_KEY || "";

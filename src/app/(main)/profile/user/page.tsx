@@ -23,6 +23,8 @@ import "yet-another-react-lightbox/plugins/thumbnails.css";
 import LoadingModal from "@/components/LoadingModal";
 import Loading from "@/app/loading";
 import UserProfileHeader from "@/components/UserProfileHeader";
+import router from "next/router";
+import Head from "next/head";
 
 const Page = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -33,7 +35,7 @@ const Page = () => {
   const fetchUser = async () => {
     if (!id) return;
 
-    const user = await fetchUserById(router, id);
+    const user = await fetchUserById(id);
     console.log("puser", user);
     if (user) setUser(user);
   };
@@ -107,6 +109,29 @@ const Page = () => {
       <LoadingModal isOpen={user === null}>
         {user === null && <Loading />}
       </LoadingModal>
+      {user && (
+        <Head>
+          {/* These meta tags will update client-side */}
+          <meta
+            name="description"
+            content={`Profile page for ${user.name || user.email}`}
+          />
+          <meta
+            property="og:title"
+            content={`${user.name || user.email} | SAFELINK Profile`}
+          />
+          <meta
+            property="og:description"
+            content={
+              user.about ?? `Profile page for ${user.name || user.email}`
+            }
+          />
+          {user?.profilePicture && (
+            <meta property="og:image" content={user?.profilePicture} />
+          )}
+        </Head>
+      )}
+
       {/* <Head>
         <title>{user?.email}</title>
         <link rel="icon" href="@/favicon.ico" />
