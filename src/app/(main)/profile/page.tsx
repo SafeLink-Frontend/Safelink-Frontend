@@ -14,6 +14,34 @@ import { MdDelete } from "react-icons/md";
 import useUserStore from "@/store/useUserStore";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
+import { Metadata } from "next";
+import Head from "next/head";
+
+// export async function generateMetadata(): Promise<Metadata> {
+//   return {
+//     title: "My Profile | SAFELINK",
+//     description:
+//       "View and manage your SAFELINK profile, inventory, and pictures",
+//     openGraph: {
+//       title: "My Profile | SAFELINK",
+//       description:
+//         "View and manage your SAFELINK profile, inventory, and pictures",
+//       type: "profile",
+//       images: [
+//         {
+//           url: "/default-profile.jpg", // Default fallback image
+//           width: 1200,
+//           height: 630,
+//           alt: "Profile Page",
+//         },
+//       ],
+//     },
+//     robots: {
+//       index: false, // Typically you don't want to index personal profile management pages
+//       follow: false,
+//     },
+//   };
+// }
 
 const Page = () => {
   const { user } = useUserStore();
@@ -86,10 +114,28 @@ const Page = () => {
 
   return (
     <div className="w-full">
-      {/* <Head>
-        <title>{user?.email}</title>
-        <link rel="icon" href="@/favicon.ico" />
-      </Head> */}
+      {user && (
+        <Head>
+          {/* These meta tags will update client-side */}
+          <meta
+            name="description"
+            content={`Profile page for ${user.name || user.email}`}
+          />
+          <meta
+            property="og:title"
+            content={`${user.name || user.email} | SAFELINK Profile`}
+          />
+          <meta
+            property="og:description"
+            content={
+              user.about ?? `Profile page for ${user.name || user.email}`
+            }
+          />
+          {user?.profilePicture && (
+            <meta property="og:image" content={user?.profilePicture} />
+          )}
+        </Head>
+      )}
 
       <ProfileHeader />
       {questions.length > 0 && <QA questions={questions} />}

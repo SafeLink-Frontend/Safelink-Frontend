@@ -17,7 +17,7 @@ const ProfileHeader = ({ user }: { user: User }) => {
   const [shareUrl, setShareUrl] = useState("");
 
   useEffect(() => {
-    setShareUrl(`${window.location.origin}/profile/${user?._id}`);
+    setShareUrl(`${window.location.origin}/profile/og/${user?._id}`);
   }, [user?._id]);
 
   const [open, setOpen] = useState(false);
