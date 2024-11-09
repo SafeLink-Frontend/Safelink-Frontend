@@ -238,14 +238,14 @@ export const fetchQuestionsAnswers = async (
   }
 };
 
-export const fetchQuestionsAnswersById = async (
-  router: any,
+export const fetchQuestionsAnswersByUserId = async (
   id: string
 ): Promise<any[] | null> => {
   Toast.dismiss();
   try {
-    const api = await createApiInstance(router);
-    const response = await api.get(`/questions/answer/${id}`);
+    const response = await axios.get(
+      `http://localhost:3001/api/v1/questions/answer/user/${id}`
+    );
     console.log("Questions and Answers response:", response);
 
     const data = response.data.data;

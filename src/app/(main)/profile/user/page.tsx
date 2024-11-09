@@ -6,7 +6,7 @@ import QA from "@/components/QA";
 import {
   baseUrl,
   fetchQuestionsAnswers,
-  fetchQuestionsAnswersById,
+  fetchQuestionsAnswersByUserId,
   fetchUserById,
   fetchUserInventory,
 } from "@/lib/api";
@@ -73,7 +73,7 @@ const Page = () => {
   ];
 
   const fetchQuestionsAndAnswerdata = async () => {
-    const response = await fetchQuestionsAnswersById(router, id ?? "");
+    const response = await fetchQuestionsAnswersByUserId(id ?? "");
     if (response) {
       setQuestions(response);
     }

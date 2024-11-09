@@ -62,7 +62,7 @@ const ProfileHeader = () => {
               : "/cp-placeholder.png"
           }
           alt=""
-          className="h-[300px] w-full sm:h-[200px] object-cover"
+          className="h-[150px] w-full  object-cover"
         />
         <button
           className="capitalize absolute top-[85px] left-[50px] sm:top-[10px] sm:left-[15px] flex z-20 items-center gap-2"
