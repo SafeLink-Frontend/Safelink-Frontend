@@ -1,4 +1,5 @@
 // components/ServerLoginForm.js
+// "use client";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -7,23 +8,9 @@ import { MdCancel } from "react-icons/md";
 import ModalButton from "./ModalButton";
 import SignUpButton from "./SignUpButton";
 import GoogleAuthButton from "./GoogleAuthButton";
-
-// async function createInvoice(formData: FormData) {
-//   'use server'
-//   const rawFormData = {
-//     email: formData.get("email"),
-//     password: formData.get("password"),
-//   };
-//   console.log("form data", rawFormData);
-
-//   // Handle form submission logic here
-
-//   // After successful login, redirect
-//   redirect("/");
-// }
+import PasswordInput from "./PasswordInput";
 
 export default function SignupForm() {
-  console.log("asccx");
   return (
     <div className="text-black text-[12px]">
       <div className="flex-row w-full flex items-center">
@@ -38,11 +25,7 @@ export default function SignupForm() {
         <div>Welcome</div>
       </div>
 
-      <form
-        // action={createInvoice}
-        // method="post"
-        className="flex flex-col w-full text-black space-y-2"
-      >
+      <form method="post" className="flex flex-col w-full text-black space-y-2">
         <div>
           <label htmlFor="email">Email</label>
           <input
@@ -65,28 +48,10 @@ export default function SignupForm() {
             type="text"
           />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            className="border border-[#737373] outline-none focus:border-2 focus:border-primary p-2 w-full rounded-[4px]"
-            id="password"
-            name="password"
-            placeholder="••••••••"
-            type="password"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Confirm Password</label>
-          <input
-            className="border border-[#737373] outline-none focus:border-2 focus:border-primary p-2 w-full rounded-[4px]"
-            id="confirmPassword"
-            name="confirmPassword"
-            placeholder="••••••••"
-            type="password"
-            required
-          />
-        </div>
+
+        <PasswordInput id="password" label="Password" />
+        <PasswordInput id="confirmPassword" label="Confirm Password" />
+
         <div className="flex flex-row space-x-2 items-start">
           <input type="checkbox"></input>
           <div className="text-xs">
@@ -101,6 +66,7 @@ export default function SignupForm() {
             </Link>
           </div>
         </div>
+
         <SignUpButton />
       </form>
       <div className="flex flex-row justify-center mt-2 items-center space-x-2">

@@ -9,23 +9,6 @@ import { toast } from "react-hot-toast";
 import { MdCancel } from "react-icons/md";
 
 async function page() {
-  //const router = useRouter();
-  async function createInvoice(formData: FormData) {
-    "use server";
-
-    const rawFormData = {
-      customerId: formData.get("customerId"),
-      amount: formData.get("amount"),
-      //status: formData.get("status"),
-    };
-    console.log("form data", rawFormData);
-
-    // mutate data
-    // revalidate cache
-  }
-  //const data = await getData();
-  //console.log("data", data);
-
   return (
     <div className="flex flex-col items-center sm:px-[5%] h-screen max-w-[500px] mx-auto">
       <div className="flex-row w-full flex items-center">
@@ -60,8 +43,10 @@ async function page() {
             type="text"
           />
         </div>
+
         <PasswordInput id="password" label="Password" />
         <PasswordInput id="confirmPassword" label="Confirm Password" />
+
         <div className="flex flex-row space-x-2 items-start">
           <input type="checkbox"></input>
           <div className="text-xs">

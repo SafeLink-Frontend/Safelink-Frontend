@@ -73,9 +73,11 @@ const Page = () => {
   ];
 
   const fetchQuestionsAndAnswerdata = async () => {
+    setIsCategoriesLoading(true);
     const response = await fetchQuestionsAnswersByUserId(id ?? "");
     if (response) {
       setQuestions(response);
+      setIsCategoriesLoading(false);
     }
   };
 
@@ -92,9 +94,6 @@ const Page = () => {
   useEffect(() => {
     if (id) {
       fetchQuestionsAndAnswerdata();
-      setIsCategoriesLoading(true);
-      // Simulate loading time for categories (remove this in production)
-      setTimeout(() => setIsCategoriesLoading(false), 1000);
     }
   }, [id]);
 

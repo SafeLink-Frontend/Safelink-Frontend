@@ -50,7 +50,7 @@ const ModalButton: React.FC<ModalButtonProps> = ({ actionKey, children }) => {
     <div>
       <button
         onClick={handleClick}
-        className="text-blue-500 text-[10px] font-medium"
+        className="text-blue-500 text-[10px]  py-0 mt-0 font-medium"
       >
         {children}
       </button>

@@ -9,6 +9,7 @@ import useModalStore from "@/store/useModalStore";
 import { logIn } from "@/actions/authActions";
 import LogInButton from "./LogInButton";
 import GoogleAuthButton from "./GoogleAuthButton";
+import PasswordInput from "./PasswordInput";
 
 export default function LoginForm() {
   const {
@@ -55,17 +56,8 @@ export default function LoginForm() {
               required
             />
           </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              className="border border-[#737373] outline-none focus:border-2 focus:border-primary p-2 w-full rounded-[4px]"
-              id="password"
-              name="password"
-              placeholder="••••••••"
-              type="password"
-              required
-            />
-          </div>
+          <PasswordInput id="password" label="Password" />
+
           {/* <button
           type="submit"
           className="bg-gradient-to-r from bg-[#f2be5c] to-white py-2 rounded-md"
