@@ -18,9 +18,10 @@ const PictureCategories = ({
               {category?.images?.map((image, idx) => (
                 <img
                   key={idx}
-                  src={URL.createObjectURL(
-                    base64ToFile(image, `image${index}.png`, "image/png")
-                  )}
+                  src={image}
+                  // src={URL.createObjectURL(
+                  //   base64ToFile(image, `image${index}.png`, "image/png")
+                  // )}
                   alt={category?.title}
                   className="w-[100%] h-[50vh] sm:w-[45vw] sm:h-auto rounded"
                 />

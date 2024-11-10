@@ -206,11 +206,13 @@ export const submitAnswer = async (
     const response = await api.post(`/questions/${questionId}/answer`, {
       answer,
     });
-    if (response.status === 200) {
+    console.log("submitted answer response", response);
+    if (response.status === 200 || response.status === 201) {
       //Toast.success("Answer submitted successfully");
       console.log("Answer submitted successfully");
     } else {
-      Toast.error("Error submitting answer");
+      console.log("Error submitting answer");
+      return;
     }
   } catch (e) {
     console.error("Error submitting answer:", e);

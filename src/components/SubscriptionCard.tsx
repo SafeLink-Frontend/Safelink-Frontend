@@ -55,22 +55,20 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
             </div>
           ))}
         </div>
-        <div>
-          <button className="bg-[#F2BE5C] w-full py-4 px-5 rounded-full my-3 text-white capitalize text-[12px] leading-5 text-center font-bold cursor-pointer">
-            <Link
-              href={{
-                pathname: "/payment",
-                query: {
-                  id: subscription._id,
-                },
-              }}
-            >
-              Get started
-            </Link>
-          </button>
+        <div className="flex">
+          <Link
+            className="bg-[#F2BE5C] w-full py-2 px-5 rounded-full my-3 text-white capitalize text-[12px] leading-5 text-center font-bold cursor-pointer"
+            href={{
+              pathname: "/payment",
+              query: {
+                id: subscription._id,
+              },
+            }}
+          >
+            Get started
+          </Link>
         </div>
       </div>
-      )
     </div>
   );
 };
