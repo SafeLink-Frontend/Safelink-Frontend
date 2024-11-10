@@ -265,6 +265,7 @@ const Page = () => {
       // Handle answers submission
       for (const [questionId, answer] of Object.entries(form.answers)) {
         if (answer && answer.trim() !== "") {
+          // console.log("answer", answer);
           await submitAnswer(questionId, answer, router);
         }
       }

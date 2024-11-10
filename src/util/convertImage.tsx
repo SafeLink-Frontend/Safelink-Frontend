@@ -1,27 +1,37 @@
-export const convertFilesToBase64 = (files: File[]): Promise<string[]> => {
-  return Promise.all(
-    files.map((file) => {
-      return new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = (error) => reject(error);
-      });
-    })
-  );
-};
+// export const convertFilesToBase64 = (files: File[]): Promise<string[]> => {
+//   return Promise.all(
+//     files.map((file) => {
+//       return new Promise<string>((resolve, reject) => {
+//         const reader = new FileReader();
+//         reader.readAsDataURL(file);
+//         reader.onload = () => resolve(reader.result as string);
+//         reader.onerror = (error) => reject(error);
+//       });
+//     })
+//   );
+// };
 
-export const convertFileToBase64 = (file: File[] | null): Promise<string> => {
+export const convertFileToBase64 = (file: File | null): Promise<string> => {
   return new Promise((resolve, reject) => {
     if (!file) {
       resolve(""); // or resolve(null) depending on what you want for empty inputs
       return;
     }
     const reader = new FileReader();
-    reader.readAsDataURL(file[0]);
+    reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result as string);
     reader.onerror = (error) => reject(error);
   });
+};
+
+export const convertFilesToBase64 = async (
+  files: (File | string)[]
+): Promise<string[]> => {
+  return Promise.all(
+    files.map(async (file) =>
+      file instanceof File ? await convertFileToBase64(file) : file
+    )
+  );
 };
 
 export function base64ToFile(
