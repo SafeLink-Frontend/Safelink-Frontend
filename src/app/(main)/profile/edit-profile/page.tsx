@@ -19,6 +19,7 @@ import {
   convertFileToBase64,
 } from "@/util/convertImage";
 import useLocalStorage from "use-local-storage";
+import useUserStore from "@/store/useUserStore";
 
 interface FormState {
   name: string;
@@ -29,10 +30,10 @@ interface FormState {
   // question4: string;
   // question5: string;
   // question6: string;
-  cover: File | null;
-  professionalPictures: File[];
-  workPictures: File[];
-  leisurePictures: File[];
+  cover: File | null | string;
+  professionalPictures: (string | File)[];
+  workPictures: (string | File)[];
+  leisurePictures: (string | File)[];
   address: string;
   country: string;
   state: string;
@@ -58,7 +59,7 @@ const Page = () => {
 
   const [answers, setAnswers] = useState([]);
   const [questionForm, setQuestionsForm] = useState({});
-  const [user] = useLocalStorage<any>("user", null);
+  const { user } = useUserStore();
 
   console.log("user", user);
   const id = user?._id;

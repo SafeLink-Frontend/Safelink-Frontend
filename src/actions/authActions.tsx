@@ -37,16 +37,13 @@ export async function logIn(formData: FormData) {
   console.log("raw form data", rawFormData);
 
   try {
-    const response = await fetch(
-      `https://cream-card-api.onrender.com/api/v1/auth/login`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(rawFormData),
-      }
-    );
+    const response = await fetch(`${baseUrl}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(rawFormData),
+    });
 
     if (!response.ok) {
       console.log("error", response);

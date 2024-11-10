@@ -85,7 +85,9 @@ const ProfileHeader = () => {
           </button>
           <div className="">
             <h1 className="flex items-center gap-1 font-semibold sm:w-auto w-[40vw] text-[22px] sm1:text-[12px] break-words">
-              <span className="max-w-full overflow-hidden">{user?.email}</span>
+              <span className="max-w-full overflow-hidden">
+                {user?.name ?? user?.email}
+              </span>
               <img src={"/verification.svg"} alt="" />
             </h1>
             <small className="text-[14px]  sm1:text-[12px] font-semibold leading-5 text-[#737373]">

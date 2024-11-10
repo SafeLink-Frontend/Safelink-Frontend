@@ -245,9 +245,7 @@ export const fetchQuestionsAnswersByUserId = async (
 ): Promise<any[] | null> => {
   Toast.dismiss();
   try {
-    const response = await axios.get(
-      `http://localhost:3001/api/v1/questions/answer/user/${id}`
-    );
+    const response = await axios.get(`${baseUrl}/questions/answer/user/${id}`);
     console.log("Questions and Answers response:", response);
 
     const data = response.data.data;

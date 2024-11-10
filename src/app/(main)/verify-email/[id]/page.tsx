@@ -1,4 +1,5 @@
 "use client";
+import { baseUrl } from "@/lib/api";
 import { useRouter, useParams, usePathname } from "next/navigation";
 import React, { useEffect } from "react";
 import toast from "react-hot-toast";
@@ -15,16 +16,13 @@ function page() {
       token: id,
     };
     try {
-      const response = await fetch(
-        `https://cream-card-api.onrender.com/api/v1/auth/verify-account`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        }
-      );
+      const response = await fetch(`${baseUrl}/auth/verify-account`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
 
       if (!response.ok) {
         //console.log("res", response);
