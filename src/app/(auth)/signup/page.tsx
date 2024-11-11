@@ -10,7 +10,7 @@ import { MdCancel } from "react-icons/md";
 
 async function page() {
   return (
-    <div className="flex flex-col items-center sm:px-[5%] h-screen max-w-[500px] mx-auto">
+    <div className="flex flex-1 flex-col items-center sm:px-[5%]  max-w-[500px] mx-auto">
       <div className="flex-row w-full flex items-center">
         {/* <Link href={"/"}>
           <MdCancel size={28} />
@@ -74,7 +74,8 @@ async function page() {
         <div>sign up with google</div>
       </button> */}
       <GoogleAuthButton />
-      <div className="flex flex-row w-full justify-center space-x-[2px] mt-2">
+
+      <div className="flex flex-row w-full justify-center space-x-[2px] mt-2 mb-12">
         <div className="text-[14px] font-medium">Have an account?</div>
         <Link href={"/login"} className="text-blue-500 text-[14px] font-medium">
           Sign in

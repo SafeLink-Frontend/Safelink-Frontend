@@ -7,14 +7,21 @@ import NextJsLightBox from "./NextJsLightBox";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
+import useLocalStorage from "use-local-storage";
+import Drawer from "./Drawer";
+import useUserStore from "@/store/useUserStore";
+import { useGoogleLogin } from "@react-oauth/google";
+import CustomGoogleAuthButton from "./CustomGoogleAuthButon";
 //import { ShareSocial } from "react-share-social";
 
 const ProfileHeader = ({ user }: { user: User }) => {
   const router = useRouter();
 
-  console.log("user", user);
+  // console.log("user", user);
 
   const [shareUrl, setShareUrl] = useState("");
+  const [token] = useLocalStorage("accessToken", null);
+  const isVisitor = useUserStore().user === null;
 
   useEffect(() => {
     setShareUrl(`${window.location.origin}/profile/og/${user?._id}`);
@@ -22,6 +29,14 @@ const ProfileHeader = ({ user }: { user: User }) => {
 
   const [open, setOpen] = useState(false);
   const imageSlides = [{ src: user?.profilePicture ?? "/pp-placeholder.png" }];
+
+  const handleBackNavigation = () => {
+    if (typeof window !== "undefined" && window.history.length > 2) {
+      router.back();
+    } else {
+      router.push("/"); // Fallback to the homepage or another desired path
+    }
+  };
 
   return (
     <header className="w-full overflow-x-hidden">
@@ -49,10 +64,13 @@ const ProfileHeader = ({ user }: { user: User }) => {
         />
         <button
           className="capitalize absolute top-2 left-2 flex items-center gap-2"
-          onClick={() => router.back()}
+          onClick={handleBackNavigation}
         >
           <FaArrowLeftLong size={24} /> back
         </button>
+        {/* <div className="absolute top-2 right-2 z-50 bg-red-500">
+          <Drawer />
+        </div> */}
       </div>
       <div className="w-full mx-auto flex  items-center mt-3 justify-between sm1:px-2 ">
         <div className="flex flex-row items-center gap-2 ">
@@ -95,6 +113,7 @@ const ProfileHeader = ({ user }: { user: User }) => {
                 share profile
               </button>
             </RWebShare>
+            {isVisitor && <CustomGoogleAuthButton />}
           </div>
         </div>
       </div>

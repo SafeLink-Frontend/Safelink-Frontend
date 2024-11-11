@@ -10,7 +10,7 @@ function GoogleAuthButton() {
   const router = useRouter();
   const { setUser } = useUserStore();
   return (
-    <div className="w-[100%]">
+    <div className="w-[100%] flex justify-center">
       <GoogleLogin
         //width={"100%"}
         onSuccess={(googleResponse) =>
