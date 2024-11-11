@@ -25,6 +25,7 @@ import Loading from "@/app/loading";
 import UserProfileHeader from "@/components/UserProfileHeader";
 import router from "next/router";
 import Head from "next/head";
+import useLocalStorage from "use-local-storage";
 
 const Page = () => {
   const [user, setUser] = useState<User | null>(null);

@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 import { MdCancel } from "react-icons/md";
 import ModalButton from "./ModalButton";
@@ -18,6 +18,7 @@ export default function LoginForm() {
     isLogInModalOpen,
     isSignUpModalOpen,
   } = useModalStore();
+  const router = useRouter();
 
   return (
     <>
@@ -79,8 +80,16 @@ export default function LoginForm() {
         <GoogleAuthButton />
         <div className="flex flex-row w-full items-center justify-center space-x-[2px] mt-2">
           <div className="text-[10px] font-medium">Don't have an account?</div>
-
-          <ModalButton actionKey="openSignUp">Sign up</ModalButton>
+          <button
+            onClick={() => {
+              closeLogInModal();
+              router.push("signup");
+            }}
+            className="text-blue-500 text-[10px]  py-0 mt-0 font-medium"
+          >
+            Sign up
+          </button>
+          {/* <ModalButton actionKey="openSignUp">Sign up</ModalButton> */}
         </div>
       </div>
     </>
