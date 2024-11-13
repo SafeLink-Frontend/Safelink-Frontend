@@ -3,6 +3,7 @@ import Toast, { toast } from "react-hot-toast";
 import axios from "axios";
 import { clearUserData, getAccessToken } from "./userDetails";
 import { PaymentPlan } from "@/types/PaymentPlan";
+import { Answer, Question } from "@/types/Question";
 //const { fetch } = useFetch();
 
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
@@ -179,7 +180,9 @@ export const addInventory = async (data: any, router: any) => {
   }
 };
 
-export const fetchQuestions = async (router: any): Promise<any[] | null> => {
+export const fetchQuestions = async (
+  router: any
+): Promise<Question[] | null> => {
   Toast.dismiss();
   try {
     const api = await createApiInstance(router);
@@ -189,8 +192,8 @@ export const fetchQuestions = async (router: any): Promise<any[] | null> => {
     const data = response.data.data;
     return data;
   } catch (error) {
-    console.error("Error fetching inventory:", error);
-    Toast.error("Error fetching inventory");
+    console.error("Error fetching questions:", error);
+    Toast.error("Error fetching questions");
     return null;
   }
 };
@@ -223,7 +226,7 @@ export const submitAnswer = async (
 
 export const fetchQuestionsAnswers = async (
   router: any
-): Promise<any[] | null> => {
+): Promise<Answer[] | null> => {
   Toast.dismiss();
   try {
     const api = await createApiInstance(router);

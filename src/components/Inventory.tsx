@@ -8,25 +8,33 @@ const Inventory = ({ inventory }: { inventory: Product[] }) => {
     <section className="w-full h-full p-6">
       <div className="flex justify-start items-start gap-4 w-full flex-wrap">
         {inventory?.map((item, index) => (
-          <div key={index} className="relative rounded-3xl w-[400px] min-h-[580px] bg-[#F6F6F6]">
+          <div
+            key={index}
+            className="relative rounded-3xl w-[400px]  bg-[#F6F6F6]"
+          >
             <img
-              className="rounded-t-3xl w-full h-[287px] object-cover sm:36"
+              className="rounded-t-3xl w-full h-[287px] object-cover"
               src={item?.images[0]}
               alt=""
             />
             <div className="p-2">
-              <h3 className="text-[#1C1B1F] text-[24px] font-semibold my-2">
+              <p className="text-[#1C1B1F] text-[24px] font-semibold mb-1">
                 {item?.title}
-              </h3>
-              <p className="text-[#49454F] text-[16px] tracking-wide my-1">
-                {item?.price}
               </p>
-              <small className="text-[#49454F] text-[14px] leading-3">
+              <p className="text-[#49454F] text-[16px] tracking-wide mb-2">
+                {item.currency} {item?.price}
+              </p>
+              <small className="text-[#49454F] text-[14px] leading-5 line-clamp-5 ">
                 {item?.description}
               </small>
             </div>
-            <button className="bg-[#F2BE5C] absolute bottom-0 left-0 m-1 p-2 rounded-lg w-full text-white border-[#CAC4D0] border">
-              <Link href={{ pathname: "/product", query: { id: item._id } }}>
+            <button className="bg-[#F2BE5C] py-2 rounded-lg w-full text-white border-[#CAC4D0] border">
+              <Link
+                href={{
+                  pathname: "/product",
+                  query: { id: item._id as string },
+                }}
+              >
                 view more
               </Link>
             </button>

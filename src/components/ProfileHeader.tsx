@@ -56,11 +56,7 @@ const ProfileHeader = () => {
       />
       <div className="z-10">
         <img
-          src={
-            user?.professionalPictures && user?.professionalPictures.length > 0
-              ? user?.professionalPictures[0]
-              : "/cp-placeholder.png"
-          }
+          src={user?.profilePicture ?? "/cp-placeholder.png"}
           alt=""
           className="h-[150px] w-full  object-cover"
         />
@@ -132,7 +128,7 @@ const ProfileHeader = () => {
         </div>
       </div>
 
-      <p className="my-2 mx-[8%] sm1:mx-[5%] mt-[28px] text-[#444544] tracking-wide sm:text-[12px] text-[18px] leading-4">
+      <p className="my-2 mx-[5%] sm1:mx-[5%] mt-[28px] text-[#444544] tracking-wide sm:text-[12px] text-[18px] leading-4">
         {user?.about}
       </p>
 

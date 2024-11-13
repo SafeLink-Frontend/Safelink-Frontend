@@ -1,4 +1,3 @@
-"use client";
 import { logIn } from "@/actions/authActions";
 import GoogleAuthButton from "@/components/GoogleAuthButton";
 import LogInButton from "@/components/LogInButton";
@@ -11,21 +10,6 @@ import toast from "react-hot-toast";
 import { MdCancel } from "react-icons/md";
 
 async function page() {
-  //const router = useRouter();
-  const handleSubmit = async (formData: FormData) => {
-    try {
-      const result = await logIn(formData);
-      if (result.success) {
-        toast.success("Logged in successfully");
-      } else {
-        toast.error(result.message || "An error occurred");
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      toast.error("An error occurred");
-    }
-  };
-
   return (
     <div className="flex flex-col items-center sm:px-[5%] min-h-screen max-w-[500px] mx-auto">
       <div className="flex-row w-full flex items-center">

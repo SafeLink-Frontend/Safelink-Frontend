@@ -105,7 +105,7 @@ const Page = () => {
   }, [user]);
 
   return (
-    <div className="w-full">
+    <div className="w-full  flex-1">
       <LoadingModal isOpen={user === null}>
         {user === null && <Loading />}
       </LoadingModal>
@@ -137,9 +137,12 @@ const Page = () => {
         <link rel="icon" href="@/favicon.ico" />
       </Head> */}
 
-      {user && <UserProfileHeader user={user} />}
-      {questions.length > 0 && <QA questions={questions} />}
-      <div className="flex-row flex justify-around my-8 border-y-4 border-[#ECEDEE]">
+      <div className="w-full">
+        {user && <UserProfileHeader user={user} />}
+        {questions.length > 0 && <QA questions={questions} />}
+      </div>
+
+      <div className="flex-row flex w-full justify-around my-8 border-y-4 border-[#ECEDEE]">
         <button
           className="items-center flex flex-col"
           onClick={() => setType("images")}
@@ -151,7 +154,7 @@ const Page = () => {
           </div>
           {type === "images" && (
             <div
-              className={`h-[6px] sm:h-[4px] sm:bg-[#000000] bg-[#00000080] w-48 sm:w-28 rounded-md`}
+              className={`h-[6px] sm:h-[4px] bg-primary w-48 sm:w-28 rounded-md`}
             />
           )}
         </button>
@@ -163,7 +166,7 @@ const Page = () => {
             Patronize me
           </div>
           {type === "inventory" && (
-            <div className="h-[6px] sm:h-[4px] sm:w-28 sm:bg-[#000000] bg-[#00000080] w-48 rounded-md" />
+            <div className="h-[6px] sm:h-[4px] sm:w-28 bg-primary w-48 rounded-md" />
           )}
         </button>
       </div>
