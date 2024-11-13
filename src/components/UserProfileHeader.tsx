@@ -39,7 +39,7 @@ const ProfileHeader = ({ user }: { user: User }) => {
   };
 
   return (
-    <header className="w-full overflow-x-hidden">
+    <header className="w-full ">
       <Lightbox
         open={open}
         close={() => setOpen(false)}
@@ -54,11 +54,7 @@ const ProfileHeader = ({ user }: { user: User }) => {
       />
       <div className="relative ">
         <img
-          src={
-            user?.professionalPictures && user?.professionalPictures.length > 0
-              ? user?.professionalPictures[0]
-              : "/cp-placeholder.png"
-          }
+          src={user?.profilePicture ?? "/cp-placeholder.png"}
           alt=""
           className="h-[150px] w-full object-cover"
         />
@@ -72,7 +68,7 @@ const ProfileHeader = ({ user }: { user: User }) => {
           <Drawer />
         </div> */}
       </div>
-      <div className="w-full mx-auto flex  items-center mt-3 justify-between sm1:px-2 ">
+      <div className=" flex mx-[2.5%] items-center mt-3 justify-between sm1:px-2 ">
         <div className="flex flex-row items-center gap-2 ">
           <button
             onClick={() => setOpen(true)}
@@ -99,7 +95,7 @@ const ProfileHeader = ({ user }: { user: User }) => {
             <FaCamera size={8} />
           </button> */}
         </div>
-        <div className="flex items-center gap-2   ">
+        <div className="flex items-center gap-2 ">
           <div className="flex items-center gap-3 justify-between sm1:flex-wrap sm1:justify-center">
             <RWebShare
               data={{

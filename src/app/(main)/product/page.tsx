@@ -21,6 +21,7 @@ import { fetchSingleInventory } from "@/lib/api";
 import Loading from "@/app/loading";
 import useListStore from "@/store/useListStore";
 import Toast from "react-hot-toast";
+import { RWebShare } from "react-web-share";
 
 function Page() {
   const router = useRouter();
@@ -35,7 +36,7 @@ function Page() {
   // }));
 
   const [isLoading, setIsLoading] = useState(false);
-  const [inventory, setInventory] = useState<Product | any>({});
+  const [inventory, setInventory] = useState<Product | null>(null);
 
   useEffect(() => {
     const loadInventory = async () => {
@@ -60,14 +61,17 @@ function Page() {
   const isFavorite = favorites.some((item) => item.id === inventory?._id);
 
   const handleFavoriteToggle = () => {
+    if (!inventory) return;
     if (isFavorite && inventory?._id !== null) {
-      removeFromFavorites(inventory._id);
+      removeFromFavorites(
+        typeof inventory?._id === "string" ? inventory._id : ""
+      );
       Toast.error("item removed from your list");
     } else {
       // Add the item to favorites with relevant properties
       Toast.success("item added to your list");
       addToFavorites({
-        id: inventory._id,
+        id: typeof inventory?._id === "string" ? inventory._id : "",
         title: inventory.title,
         description: inventory.description,
         price: inventory.price,
@@ -75,6 +79,8 @@ function Page() {
       });
     }
   };
+
+  const whatsappText = `Hi, I'm interested in these items from your store: ${inventory?.title}`;
 
   if (isLoading) {
     return (
@@ -118,7 +124,7 @@ function Page() {
               {new Intl.NumberFormat("en-NG", {
                 style: "currency",
                 currency: "NGN",
-              }).format(inventory?.price)}
+              }).format(inventory?.price ?? 0)}
             </p>
           </div>
         </div>
@@ -141,7 +147,7 @@ function Page() {
         </div>
 
         <div className="mt-4 sm:mt-2 gap-3 grid">
-          {inventory.images && inventory.videos && (
+          {inventory?.images && inventory.videos && (
             <div className="space-y-4 flex flex-col items-center">
               {mediaType === "images" ? (
                 <ProductImages images={inventory?.images} />
@@ -171,16 +177,18 @@ function Page() {
               <div className="bg-primary/[0.6] py-4 w-[60%] rounded-lg sm:w-[90%] space-y-4 items-start px-2 flex flex-col">
                 <div className="font-semibold">Your List</div>
                 <div className="flex flex-row sm:flex-col justify-between  w-full ">
-                  <Link
-                    prefetch={false}
-                    href={""}
-                    className="bg-green-700 hover:bg-opacity-80 py-1 px-2 font-semibold sm:justify-center rounded-lg text-white flex flex-row items-center sm:space-x-2 space-x-1"
-                  >
-                    <FaWhatsapp size={24} color="#fff" />
-                    <div className="sm:text-sm">
-                      Share list to seller via Whatsapp
-                    </div>
-                  </Link>
+                  <div className="flex items-center gap-2   ">
+                    <a
+                      className="bg-green-700 hover:bg-opacity-80 py-1 px-2 font-semibold sm:justify-center rounded-lg text-white flex flex-row items-center sm:space-x-2 space-x-1"
+                      href={`https://wa.me/${"+234" + inventory.owner.phoneNumber}/?text=${whatsappText}`}
+                      data-action="share/whatsapp/share"
+                    >
+                      <FaWhatsapp size={24} color="#fff" />
+                      <div className="sm:text-sm">
+                        Share list to seller via Whatsapp
+                      </div>
+                    </a>
+                  </div>
                   <button className="bg-red-700 hover:bg-opacity-80 p-1 font-semibold sm:justify-center rounded-lg text-white flex flex-row items-center sm:mt-2 sm:space-x-2 space-x-1">
                     <MdDelete color="#fff" size={24} />
                     <div>Clear list</div>

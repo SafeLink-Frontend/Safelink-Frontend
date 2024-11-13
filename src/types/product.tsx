@@ -1,5 +1,5 @@
 export interface Product {
-  _id: { $oid: string }; // | string
+  _id: { $oid: string } | string;
   title: string;
   description: string;
   price: number;
@@ -7,19 +7,11 @@ export interface Product {
   images: [string];
   videos: [string];
   owner: {
-    firstName: string;
-    lastName: string;
+    name: string;
     _id: string;
-    about: string;
+    id: string;
+    email: string;
     profilePicture: string;
-    professionalPictures: [string];
-    workPictures: [string];
-    leisurePictures: [string];
-    address: string;
-    country: string;
-    state: string;
-    city: string;
-    zipCode: string;
     phoneNumber: number;
   };
 }

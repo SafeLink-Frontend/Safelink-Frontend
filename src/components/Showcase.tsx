@@ -10,13 +10,8 @@ import useListStore from "@/store/useListStore";
 import Link from "next/link";
 //import { User } from "@/types/user"; // Add this import
 
-export interface User {
-  _id: string;
-  name: string;
-  about: string;
-  profilePicture?: string;
-  professionalPictures: string[];
-  // Add other relevant fields
+interface _Product extends Product {
+  _id: { $oid: string };
 }
 
 export function Showcase() {
@@ -53,8 +48,9 @@ export function Showcase() {
 
   const isFavorite = (id: string) => favorites.some((item) => item.id === id);
 
-  const handleFavoriteToggle = (data: Product) => {
+  const handleFavoriteToggle = (data: _Product) => {
     // Add type annotation
+
     if (isFavorite(data._id.$oid)) {
       removeFromFavorites(data._id.$oid);
     } else {

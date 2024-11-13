@@ -73,9 +73,13 @@ const Page = () => {
   ];
 
   const fetchQuestionsAndAnswerdata = async () => {
+    setIsCategoriesLoading(true);
     const response = await fetchQuestionsAnswers(router);
     if (response) {
       setQuestions(response);
+      setIsCategoriesLoading(false);
+    } else {
+      setIsCategoriesLoading(false);
     }
   };
 
@@ -104,7 +108,7 @@ const Page = () => {
 
   const LoadingSpinner = () => (
     <div className="flex justify-center items-center">
-      <div className="my-4 border-4 border-primary rounded-full border-dashed animate-spin w-8 h-8 sm:w-6 sm:h-6"></div>
+      <div className="my-4 border-t-2 border-b-2 border-primary rounded-full  animate-spin w-8 h-8 sm:w-6 sm:h-6"></div>
     </div>
   );
 
@@ -151,7 +155,7 @@ const Page = () => {
           </div>
           {type === "images" && (
             <div
-              className={`h-[6px] sm:h-[4px] sm:bg-[#000000] bg-[#00000080] w-48 sm:w-28 rounded-md`}
+              className={`h-[6px] sm:h-[4px] bg-primary w-48 sm:w-28 rounded-md`}
             />
           )}
         </button>
@@ -163,7 +167,7 @@ const Page = () => {
             Patronize me
           </div>
           {type === "inventory" && (
-            <div className="h-[6px] sm:h-[4px] sm:w-28 sm:bg-[#000000] bg-[#00000080] w-48 rounded-md" />
+            <div className="h-[6px] sm:h-[4px] sm:w-28 bg-primary w-48 rounded-md" />
           )}
         </button>
       </div>
