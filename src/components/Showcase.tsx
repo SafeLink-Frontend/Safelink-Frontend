@@ -79,12 +79,12 @@ export function Showcase() {
             easier for your customers to buy from you and share your business
             with others.
           </p>
-          <button
-            onClick={openSignUpModal}
+          <Link
+            href={"/signup"}
             className="bg-[#F2BE5C] py-2 px-4 rounded border border-[#F2BE5C] text-white my-5 font-medium"
           >
             Create an Account
-          </button>
+          </Link>
         </div>
       </section>
       <section className="p-5">
@@ -172,12 +172,12 @@ export function Showcase() {
               </p>
             </div>
 
-            <button
-              onClick={openSignUpModal}
+            <Link
+              href={"/signup"}
               className="bg-[#F2BE5C] py-2 px-4 rounded border border-[#F2BE5C] text-white my-5 font-medium"
             >
               SIGN UP FOR A PROFILE TODAY
-            </button>
+            </Link>
           </div>
         </div>
       </section>

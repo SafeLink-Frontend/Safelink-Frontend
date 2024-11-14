@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     images: ["/homepage-image-2.jpg"],
   },
 };
-const googleClientKey = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_KEY || "";
+const googleClientKey = process.env.GOOGLE_CLIENT_KEY || "";
 
 export default function RootLayout({
   children,
