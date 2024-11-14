@@ -41,12 +41,9 @@ export const handleGoogleLogin = async (
   setUser: any
 ) => {
   try {
-    const response = await axios.post(
-      `${"http://localhost:3001/api/v1"}/auth/google`,
-      {
-        token: googleResponse.credential,
-      }
-    );
+    const response = await axios.post(`${baseUrl}/auth/google`, {
+      token: googleResponse.credential,
+    });
     console.log("google sign in response", response);
     toast.success("google sign in response");
     localStorage.setItem("accessToken", response.data.accessToken);
