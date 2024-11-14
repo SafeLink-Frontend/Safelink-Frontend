@@ -12,6 +12,7 @@ import Drawer from "./Drawer";
 import useUserStore from "@/store/useUserStore";
 import { useGoogleLogin } from "@react-oauth/google";
 import CustomGoogleAuthButton from "./CustomGoogleAuthButon";
+import { User } from "@/types/user";
 //import { ShareSocial } from "react-share-social";
 
 const ProfileHeader = ({ user }: { user: User }) => {
@@ -83,7 +84,7 @@ const ProfileHeader = ({ user }: { user: User }) => {
           <div className="">
             <h1 className="flex items-center gap-1 font-semibold sm:w-auto w-[40vw] text-[22px] sm1:text-[12px] break-words">
               <span className="max-w-full overflow-hidden">
-                {user.name ?? user?.email}
+                {user.username ?? user?.email}
               </span>
               <img src={"/verification.svg"} alt="" />
             </h1>

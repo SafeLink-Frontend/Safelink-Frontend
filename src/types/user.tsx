@@ -1,6 +1,11 @@
-interface User {
+import { SubscriptionStatus } from "./SubscriptionStatus";
+
+export interface User {
   id: string;
-  name: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  subscriptionStatus: SubscriptionStatus;
   email: string;
   phoneNumber?: string;
   profilePicture?: string;

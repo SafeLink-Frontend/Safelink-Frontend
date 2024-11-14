@@ -123,16 +123,16 @@ const Page = () => {
           {/* These meta tags will update client-side */}
           <meta
             name="description"
-            content={`Profile page for ${user?.name || user?.email}`}
+            content={`Profile page for ${user?.username || user?.email}`}
           />
           <meta
             property="og:title"
-            content={`${user?.name || user?.email} | SAFELINK Profile`}
+            content={`${user?.username || user?.email} | SAFELINK Profile`}
           />
           <meta
             property="og:description"
             content={
-              user?.about ?? `Profile page for ${user?.name || user?.email}`
+              user?.about ?? `Profile page for ${user?.username || user?.email}`
             }
           />
           {user?.profilePicture && (

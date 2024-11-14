@@ -33,13 +33,13 @@ async function page() {
           />
         </div>
         <div className="">
-          <div>Username</div>
+          <div>Username (Preferrably your Business Name)</div>
           <input
             className="border border-[#737373] outline-none focus:border-2 focus:border-primary p-3 w-full rounded-[4px]"
-            id="name"
-            title="Name"
-            name="name"
-            placeholder="Enter your Name here"
+            id="username"
+            title="UserName"
+            name="username"
+            placeholder="Enter your Username here"
             type="text"
           />
         </div>

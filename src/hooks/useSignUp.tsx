@@ -10,7 +10,7 @@ export function useSignUp() {
 
   const schema = object({
     email: string().required("Email is required").email("Invalid email format"),
-    name: string().required("Your name is required"),
+    username: string().required("Your Username is required"),
     password: string()
       .required("Password is required")
       .min(8, "Password must be at least 8 characters long"),
@@ -23,7 +23,7 @@ export function useSignUp() {
     console.log("raw form data", rawFormData);
     const formData = {
       email: rawFormData.get("email"),
-      name: rawFormData.get("name"),
+      username: rawFormData.get("username"),
       password: rawFormData.get("password"),
       confirmPassword: rawFormData.get("confirmPassword"),
     };

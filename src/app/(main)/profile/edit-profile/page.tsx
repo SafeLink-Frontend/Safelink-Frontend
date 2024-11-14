@@ -23,8 +23,10 @@ import useUserStore from "@/store/useUserStore";
 import { Answer, Question } from "@/types/Question";
 
 interface FormState {
-  name: string;
+  username: string;
   about: string;
+  firstName: string;
+  lastName: string;
   // question1: string;
   // question2: string;
   // question3: string;
@@ -60,7 +62,7 @@ const Page = () => {
 
   const [answers, setAnswers] = useState<Answer[] | null>([]);
   const [questionForm, setQuestionsForm] = useState({});
-  const { user } = useUserStore();
+  const { user, setUser } = useUserStore();
 
   console.log("user", user);
   const id = user?._id;
@@ -116,8 +118,10 @@ const Page = () => {
   }, [answers]);
 
   const [form, setForm] = useState<FormState>({
-    name: user?.name || "",
+    username: user?.username || "",
     about: user?.about || "",
+    firstName: user?.firstName || "",
+    lastName: user?.lastName || "",
     // question1: "",
     // question2: "",
     // question3: "",
@@ -200,7 +204,9 @@ const Page = () => {
     if (user) {
       setForm((prevForm) => ({
         ...prevForm,
-        name: user.name || prevForm.name,
+        username: user.username || prevForm.username,
+        firstName: user.firstName || prevForm.firstName,
+        lastName: user.lastName || prevForm.lastName,
         about: user.about || prevForm.about,
         cover: user.profilePicture || prevForm.cover,
         professionalPictures:
@@ -289,8 +295,9 @@ const Page = () => {
 
       // Prepare profile payload
       const profilePayload = {
-        firstName: form.name.split(" ")[0],
-        lastName: form.name.split(" ")[1] || "",
+        username: form.username,
+        firstName: form.firstName,
+        lastName: form.lastName,
         _id: id,
         about: form.about,
         profilePicture: profilePictureBase64,
@@ -304,11 +311,9 @@ const Page = () => {
       };
 
       // Update profile
-      const response = await updateProfile(profilePayload, router);
-      console.log("Profile updated successfully:", response);
+      const response = await updateProfile(profilePayload, router, setUser);
 
-      // Redirect or show success message
-      router.push("/profile");
+      console.log("Profile updated successfully:", response);
     } catch (error) {
       console.error("Error submitting the form", error);
       // Show error message to user
@@ -324,15 +329,47 @@ const Page = () => {
         <div className="flex flex-col items-start gap-2 my-2">
           <label
             className="text-[#252625] font-medium text-[14px] mb-1 leading-3"
-            htmlFor="name"
+            htmlFor="username"
           >
-            Name
+            User Name
           </label>
           <input
             className="border-[0.5px] border-[#A6A6A6] rounded w-full p-2 focus:outline-none"
             type="text"
-            name="name"
-            value={form.name}
+            name="username"
+            value={form.username}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="flex flex-col items-start gap-2 my-2">
+          <label
+            className="text-[#252625] font-medium text-[14px] mb-1 leading-3"
+            htmlFor="firstName"
+          >
+            First Name
+          </label>
+          <input
+            className="border-[0.5px] border-[#A6A6A6] rounded w-full p-2 focus:outline-none"
+            type="text"
+            name="firstName"
+            value={form.firstName}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="flex flex-col items-start gap-2 my-2">
+          <label
+            className="text-[#252625] font-medium text-[14px] mb-1 leading-3"
+            htmlFor="lastName"
+          >
+            Last Name
+          </label>
+          <input
+            className="border-[0.5px] border-[#A6A6A6] rounded w-full p-2 focus:outline-none"
+            type="text"
+            name="lastName"
+            value={form.lastName}
             onChange={handleChange}
           />
         </div>
