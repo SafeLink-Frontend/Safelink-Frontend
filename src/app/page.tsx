@@ -10,7 +10,6 @@ import { IoSearch } from "react-icons/io5";
 import { MdImageSearch } from "react-icons/md";
 
 export default function Home() {
-  const router = useRouter();
   const images = [
     "/homepage-image-1.jpg",
     "/homepage-image-2.jpg",

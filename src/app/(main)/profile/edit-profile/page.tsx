@@ -186,8 +186,8 @@ const Page = () => {
             answers: newAnswers,
           }));
         }
-      } catch (error) {
-        console.error("Error fetching answers:", error);
+      } catch (error: any) {
+        console.error("Error fetching answers:", error.response);
       } finally {
         setIsLoading(false);
       }

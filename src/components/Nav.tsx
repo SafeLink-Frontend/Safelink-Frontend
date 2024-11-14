@@ -29,13 +29,7 @@ export function NavLink(props: Omit<ComponentProps<typeof Link>, "className">) {
 }
 
 export function Nav({ children }: { children: ReactNode }) {
-  const router = useRouter();
   const { user } = useUserStore();
-  //const user = stringifiedUser;
-  console.log("user", user);
-  // Replca this with the actual user
-  //const [user, setUser] = useState(true);
-
   const pathName = usePathname();
   const {
     isLogInModalOpen,
