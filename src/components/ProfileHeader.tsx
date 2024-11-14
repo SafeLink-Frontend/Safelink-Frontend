@@ -18,6 +18,7 @@ import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
+import { SubscriptionStatus } from "@/types/SubscriptionStatus";
 //import { ShareSocial } from "react-share-social";
 
 const ProfileHeader = () => {
@@ -82,7 +83,7 @@ const ProfileHeader = () => {
           <div className="">
             <h1 className="flex items-center gap-1 font-semibold sm:w-auto w-[40vw] text-[22px] sm1:text-[12px] break-words">
               <span className="max-w-full overflow-hidden">
-                {user?.name ?? user?.email}
+                {user?.username ?? user?.email}
               </span>
               <img src={"/verification.svg"} alt="" />
             </h1>
@@ -117,13 +118,22 @@ const ProfileHeader = () => {
               </button>
             </RWebShare>
 
-            <Link
-              href={"/pricing"}
-              className="bg-[#252625] text-[#F2F2F2] capitalize flex items-center gap-3 leading-6 p-2 border border-[#252625] rounded cursor-pointer text-nowrap sm1:hidden"
-            >
-              <HiUpload size={20} />
-              upgrade account
-            </Link>
+            {user?.subscriptionStatus === SubscriptionStatus.FREE ? (
+              <Link
+                href={"/pricing"}
+                className="bg-[#252625] text-[#F2F2F2] capitalize flex items-center gap-3 leading-6 p-2 border border-[#252625] rounded cursor-pointer text-nowrap sm1:hidden"
+              >
+                <HiUpload size={20} />
+                upgrade account
+              </Link>
+            ) : (
+              <div className="flex flex-col">
+                <div className="font-semibold">Subscription Plan</div>
+                <div className="text-primary text-lg font-semibold">
+                  {user?.subscriptionStatus}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -4,6 +4,8 @@ import axios from "axios";
 import { clearUserData, getAccessToken } from "./userDetails";
 import { PaymentPlan } from "@/types/PaymentPlan";
 import { Answer, Question } from "@/types/Question";
+import { User } from "@/types/user";
+import { SubscriptionStatus } from "@/types/SubscriptionStatus";
 //const { fetch } = useFetch();
 
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
@@ -139,7 +141,7 @@ export const fetchInventoryBySearch = async (
   }
 };
 
-export const updateProfile = async (data: any, router: any) => {
+export const updateProfile = async (data: any, router: any, setUser: any) => {
   Toast.dismiss();
   const api = await createApiInstance(router);
   try {
@@ -147,8 +149,16 @@ export const updateProfile = async (data: any, router: any) => {
     console.log("rr", response.data.data);
     if (response.status === 200) {
       if (typeof window !== "undefined") {
-        localStorage.setItem("user", JSON.stringify(response.data.data));
+        // localStorage.setItem("user", JSON.stringify(response.data.data));
+        const user: User = response.data.data;
+        setUser(user);
         Toast.success("Profile updated successfully");
+
+        if (user.subscriptionStatus === SubscriptionStatus.FREE) {
+          router.push("/pricing");
+        } else {
+          router.push("/profile");
+        }
       }
     } else {
       //console.log()

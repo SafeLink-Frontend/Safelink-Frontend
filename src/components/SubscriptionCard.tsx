@@ -1,6 +1,9 @@
+import useUserStore from "@/store/useUserStore";
 import { PaymentPlan } from "@/types/PaymentPlan";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
+import { toast } from "react-hot-toast";
 
 interface Subscription {
   _id: string;
@@ -18,6 +21,29 @@ interface SubscriptionCardProps {
 const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
   subscription,
 }) => {
+  const router = useRouter();
+  const { user } = useUserStore();
+
+  const handleClick = (id: string) => {
+    if (!user) {
+      toast.error(
+        "Please make sure you are signed in before you can make a payment"
+      );
+      router.push("/login");
+      return;
+    }
+
+    if (!user.firstName || !user.lastName) {
+      toast.error(
+        "Please complete your profile before you can make your subscription"
+      );
+      router.push("/edit-profile"); // Redirect immediately after toast
+      return;
+    }
+
+    router.push(`/payment/${id}`);
+  };
+
   return (
     <div>
       <div
@@ -56,17 +82,18 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
           ))}
         </div>
         <div className="flex">
-          <Link
+          <button
+            onClick={() => handleClick(subscription._id)}
             className="bg-[#F2BE5C] w-full py-2 px-5 rounded-full my-3 text-white capitalize text-[12px] leading-5 text-center font-bold cursor-pointer"
-            href={{
-              pathname: "/payment",
-              query: {
-                id: subscription._id,
-              },
-            }}
+            // href={{
+            //   pathname: "/payment",
+            //   query: {
+            //     id: subscription._id,
+            //   },
+            // }}
           >
             Get started
-          </Link>
+          </button>
         </div>
       </div>
     </div>

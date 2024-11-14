@@ -8,6 +8,7 @@ import { Product } from "@/types/product";
 import { useRouter } from "next/navigation";
 import useListStore from "@/store/useListStore";
 import Link from "next/link";
+import { User } from "@/types/user";
 //import { User } from "@/types/user"; // Add this import
 
 interface _Product extends Product {
@@ -67,7 +68,7 @@ export function Showcase() {
 
   return (
     <>
-      <section className="flex items-center justify-center text-center bg-[#0D0D0D] p-28 my-5 sm:p-4">
+      <section className="flex items-center z-50 justify-center text-center bg-[#0D0D0D] p-28 my-5 sm:mt-16 sm:p-4">
         <div>
           <h2 className="font-medium leading-8 text-[24px] text-center text-white">
             What is <span className="text-[#F2BE5C]">Safelink?</span>
@@ -130,7 +131,7 @@ export function Showcase() {
                   </div>
                   <div className="px-4 mt-10 w-full">
                     <h3 className="text-[18px] text-left leading-6 text-black my-2">
-                      {item?.name}
+                      {item?.username}
                     </h3>
                     <p className="text-[#444544F2] text-left leading-5 text-[14px] tracking-wide">
                       {item?.about}
