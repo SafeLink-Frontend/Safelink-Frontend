@@ -5,6 +5,7 @@ import { object, string, InferType } from "yup";
 import { baseUrl } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import useUserStore from "@/store/useUserStore";
+import { saveAccessToken } from "@/lib/userDetails";
 
 export function useLogin() {
   const [isLoading, setIsLoading] = useState(false);
@@ -53,11 +54,13 @@ export function useLogin() {
 
       const data = await response.json();
       console.log("response", data.data.user);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("accessToken", data.data.accessToken);
-        localStorage.setItem("user", JSON.stringify(data.data.user));
-      }
+      const token = data.data.accessToken;
+      console.log("token", token);
+      saveAccessToken(token);
+      // localStorage.setItem("accessToken", data.data.accessToken);
       setUser(data.data.user);
+
+      // localStorage.setItem("user", JSON.stringify(data.data.user));
 
       router.replace("/");
       toast.success("Logged in successfully");

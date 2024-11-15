@@ -27,18 +27,18 @@ export async function generateMetadata({
     // console.log("baseurl", baseUrl);
 
     return {
-      title: `${user.name} | YourApp`,
+      title: `${user.username} | YourApp`,
       description: user.about,
       openGraph: {
-        title: `${user.name} | ${user.email}`,
+        title: `${user.username} | ${user.email}`,
         description: user.about,
         images: [ogImageUrl],
-        url: `${baseUrl}/link/${user.name || user.email}`,
+        url: `${baseUrl}/link/${user.username || user.email}`,
         type: "profile",
       },
       twitter: {
         card: "summary_large_image",
-        title: `${user.name} | ${user.email}`,
+        title: `${user.username} | ${user.email}`,
         description: user.about,
         images: [ogImageUrl],
       },

@@ -37,11 +37,13 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
       toast.error(
         "Please complete your profile before you can make your subscription"
       );
-      router.push("/edit-profile"); // Redirect immediately after toast
+      setTimeout(() => {
+        router.push("/profile/edit-profile"); // Redirect immediately after toast
+      }, 2000);
       return;
     }
 
-    router.push(`/payment/${id}`);
+    router.push(`/payment/initiate-payment/${id}`);
   };
 
   return (
