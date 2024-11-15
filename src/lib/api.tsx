@@ -11,8 +11,8 @@ import { SubscriptionStatus } from "@/types/SubscriptionStatus";
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 // export const baseUrl = "http://localhost:3001/api/v1";
 export const createApiInstance = async (router: any) => {
-  const accessToken = await getAccessToken();
-  //console.log({ accessToken });
+  const accessToken = getAccessToken();
+  console.log({ accessToken });
   const api = axios.create({
     baseURL: baseUrl,
     //timeout: 20000,

@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { FaArrowLeft } from "react-icons/fa";
 import PaymentTransfer from "@/components/PaymentTransfer";
 import PaymentCard from "@/components/PaymentCard";
@@ -10,26 +10,16 @@ import Loading from "@/app/loading";
 
 const page = () => {
   const router = useRouter();
+  const pathName = usePathname();
   const params = useSearchParams();
-  const id = params.get("id") || "";
+  const id = pathName.split("/").pop(); //params.get("id") || "";
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState<"card" | "transfer">("card");
-  const SubscriptionList = [
-    {
-      type: "12 months plan",
-      amount: "N18,000",
-      duration: "12 months",
-      offers: [
-        "Unlimited Listings",
-        "12 MONTH SUBSCRIPTION",
-        "Occasional Feature on the homepage",
-        "Occasional Feature on the Safelink social media platforms",
-      ],
-    },
-  ];
 
+  console.log("id", id);
   const initiateTransaction = async () => {
     setIsLoading(true);
+
     const response = await initiateSubcription(router, id);
     if (!response) {
       // toast.error("Error initiating payment, please try again later");
