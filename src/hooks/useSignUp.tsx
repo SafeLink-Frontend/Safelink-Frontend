@@ -44,8 +44,12 @@ export function useSignUp() {
       if (!response.ok) {
         //console.log("res", response);
         const res = await response.json();
-        console.log("res", response, res);
-        toast.error(res.error);
+        console.log("res", res);
+        toast.error(
+          typeof res.error === "string"
+            ? res.error
+            : "An error occurred, try again"
+        );
         // if (response.status === 400) {
         //   toast.error("The email has been used already");
         // } else {
@@ -68,7 +72,9 @@ export function useSignUp() {
         toast.error(error.errors[0]);
       } else {
         console.log("error", error);
-        toast.error(error.message || "An error occurred");
+        toast.error(
+          error && typeof error === "string" ? error : "An error occurred"
+        );
       }
       return { success: false, error: error.message };
     } finally {

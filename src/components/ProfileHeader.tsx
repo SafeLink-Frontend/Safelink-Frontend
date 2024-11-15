@@ -57,9 +57,11 @@ const ProfileHeader = () => {
       />
       <div className="z-10">
         <img
-          src={user?.profilePicture ?? "/cp-placeholder.png"}
-          alt=""
-          className="h-[150px] w-full  object-cover"
+          src={
+            user?.profilePicture || user?.profilePicture === ""
+              ? "/cp-placeholder.png"
+              : user?.profilePicture
+          }
         />
         <button
           className="capitalize absolute top-[85px] left-[50px] sm:top-[10px] sm:left-[15px] flex z-20 items-center gap-2"
@@ -76,7 +78,11 @@ const ProfileHeader = () => {
           >
             <img
               className="w-full h-full rounded-full"
-              src={user?.profilePicture ?? "/pp-placeholder.png"}
+              src={
+                user?.profilePicture || user?.profilePicture === ""
+                  ? "/pp-placeholder.png"
+                  : user?.profilePicture
+              }
               alt="profile"
             />
           </button>

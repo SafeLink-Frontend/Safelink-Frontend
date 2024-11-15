@@ -1,11 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaRegUserCircle } from "react-icons/fa";
 import SubscriptionCard from "@/components/SubscriptionCard";
 import { getSubscriptionPlans } from "@/lib/api";
 import LoadingModal from "@/components/LoadingModal";
 import Loading from "@/app/loading";
+import Drawer from "@/components/Drawer";
+import { MdPerson } from "react-icons/md";
 
 const page = () => {
   const router = useRouter();
@@ -29,23 +31,32 @@ const page = () => {
 
   return (
     <section className="px-5 py-10">
-      <div className="flex items-start justify-between mb-5">
+      <div className="flex items-center justify-between mb-2">
         <button
-          className="p-2 -mt-5"
+          className=" "
           onClick={() => {
             router.back();
           }}
         >
           <FaArrowLeft size={20} />
         </button>
-        <div className="flex-1 text-center">
-          <h1 className="font-semibold text-[#252625] text-[20px] leading-7">
-            Prices
-          </h1>
-          <p className="text-[#252625] leading-4 text-[10px]">
-            by showcasing your exclusive listings to our highly-esteemed users
-          </p>
-        </div>
+        <button
+          className="p-2 sm:flex hidden "
+          onClick={() => {
+            router.push("/profile");
+          }}
+        >
+          <FaRegUserCircle size={24} />
+        </button>
+      </div>
+
+      <div className="flex-1 text-center">
+        <h1 className="font-semibold text-[#252625] text-[20px] leading-7">
+          Prices
+        </h1>
+        <p className="text-[#252625] leading-4 text-[10px]">
+          by showcasing your exclusive listings to our highly-esteemed users
+        </p>
       </div>
 
       <div className="sm:w-full sm:flex sm:flex-col grid grid-cols-2 gap-5 max-w-[860px] mx-auto">
