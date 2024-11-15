@@ -55,7 +55,11 @@ const ProfileHeader = ({ user }: { user: User }) => {
       />
       <div className="relative ">
         <img
-          src={user?.profilePicture ?? "/cp-placeholder.png"}
+          src={
+            user?.profilePicture || user.profilePicture === ""
+              ? "/cp-placeholder.png"
+              : user.profilePicture
+          }
           alt=""
           className="h-[150px] w-full object-cover"
         />
@@ -77,7 +81,11 @@ const ProfileHeader = ({ user }: { user: User }) => {
           >
             <img
               className="w-full h-full rounded-full"
-              src={user?.profilePicture ?? "/pp-placeholder.png"}
+              src={
+                user?.profilePicture || user.profilePicture === ""
+                  ? "/pp-placeholder.png"
+                  : user.profilePicture
+              }
               alt="profile"
             />
           </button>

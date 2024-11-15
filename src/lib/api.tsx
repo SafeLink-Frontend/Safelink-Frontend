@@ -9,6 +9,7 @@ import { SubscriptionStatus } from "@/types/SubscriptionStatus";
 //const { fetch } = useFetch();
 
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+// export const baseUrl = "http://localhost:3001/api/v1";
 export const createApiInstance = async (router: any) => {
   const accessToken = await getAccessToken();
   //console.log({ accessToken });
@@ -47,7 +48,7 @@ export const handleGoogleLogin = async (
       token: googleResponse.credential,
     });
     console.log("google sign in response", response);
-    toast.success("google sign in response");
+    toast.success("google sign in successful");
     localStorage.setItem("accessToken", response.data.accessToken);
     localStorage.setItem("user", JSON.stringify(response.data.user));
     setUser(response.data.user);
@@ -154,11 +155,13 @@ export const updateProfile = async (data: any, router: any, setUser: any) => {
         setUser(user);
         Toast.success("Profile updated successfully");
 
-        if (user.subscriptionStatus === SubscriptionStatus.FREE) {
-          router.push("/pricing");
-        } else {
-          router.push("/profile");
-        }
+        setTimeout(() => {
+          if (user.subscriptionStatus === SubscriptionStatus.FREE) {
+            router.push("/pricing");
+          } else {
+            router.push("/profile");
+          }
+        }, 2000);
       }
     } else {
       //console.log()
