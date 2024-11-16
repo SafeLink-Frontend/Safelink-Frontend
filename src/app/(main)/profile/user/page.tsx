@@ -85,7 +85,7 @@ const Page = () => {
 
   const loadInventory = async () => {
     setIsLoading(true);
-    const data = user && (await fetchUserInventory(user._id, router));
+    const data = user && (await fetchUserInventory(user._id));
     if (data) {
       setInventory(data);
       console.log("loaded inventory", data);

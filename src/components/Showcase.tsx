@@ -102,7 +102,8 @@ export function Showcase() {
             users?.map((item, index) => (
               <Link
                 href={{
-                  pathname: "/profile/user",
+                  //pathname: `/user/${item?.username?.replace(/\s+/g, "-").toLowerCase()}`,
+                  pathname: `/profile/user`,
                   query: {
                     userId: item._id,
                   },

@@ -1,3 +1,4 @@
+"use client";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";

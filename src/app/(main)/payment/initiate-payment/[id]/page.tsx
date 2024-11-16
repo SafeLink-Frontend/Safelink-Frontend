@@ -11,15 +11,13 @@ import Loading from "@/app/loading";
 const page = () => {
   const router = useRouter();
   const pathName = usePathname();
-  const params = useSearchParams();
-  const id = pathName.split("/").pop(); //params.get("id") || "";
+  const id = pathName.split("/").pop() || ""; //params.get("id") || "";
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState<"card" | "transfer">("card");
 
   console.log("id", id);
   const initiateTransaction = async () => {
     setIsLoading(true);
-
     const response = await initiateSubcription(router, id);
     if (!response) {
       // toast.error("Error initiating payment, please try again later");
