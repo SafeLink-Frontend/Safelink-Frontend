@@ -114,7 +114,7 @@ const ProfileHeader = () => {
             <RWebShare
               data={{
                 text: "User Profile",
-                url: shareUrl,
+                url: user?.shareableLink,
                 title: "share profile",
               }}
               onClick={() => console.log("shared successfully!")}
@@ -152,7 +152,7 @@ const ProfileHeader = () => {
         <RWebShare
           data={{
             text: "",
-            url: shareUrl,
+            url: user?.shareableLink,
             title: "share profile",
           }}
           onClick={() => console.log("shared successfully!")}

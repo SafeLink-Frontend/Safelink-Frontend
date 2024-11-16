@@ -18,6 +18,7 @@ export interface User {
   leisurePictures?: string[];
   professionalPictures?: string[];
   workPictures?: string[];
+  shareableLink?: string;
   createdAt?: string;
   updatedAt?: string;
   __v: number;

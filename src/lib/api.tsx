@@ -6,10 +6,11 @@ import { PaymentPlan } from "@/types/PaymentPlan";
 import { Answer, Question } from "@/types/Question";
 import { User } from "@/types/user";
 import { SubscriptionStatus } from "@/types/SubscriptionStatus";
+import { Product } from "@/types/product";
 //const { fetch } = useFetch();
 
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-// export const baseUrl = "http://localhost:3001/api/v1";
+//export const baseUrl = "http://localhost:3001/api/v1";
 export const createApiInstance = async (router: any) => {
   const accessToken = getAccessToken();
   console.log({ accessToken });
@@ -76,39 +77,32 @@ export const fetchInventory = async (router: any): Promise<any[] | null> => {
 };
 
 export const fetchSingleInventory = async (
-  id: string | null,
-  router: any
-): Promise<any[] | null> => {
-  Toast.dismiss();
+  id: string | null
+): Promise<Product | null> => {
+  // Toast.dismiss();
   try {
-    const api = await createApiInstance(router);
-    const response = await api.get(`/inventory/${id}`);
+    const response = await axios.get(`${baseUrl}/inventory/${id}`);
     console.log("Inventory response:", response);
 
     const data = response.data.data;
     return data;
   } catch (error) {
     console.error("Error fetching inventory:", error);
-    Toast.error("Error fetching inventory");
+    // Toast.error("Error fetching inventory");
     return null;
   }
 };
 
-export const fetchUserInventory = async (
-  id: string,
-  router: any
-): Promise<any[] | null> => {
-  Toast.dismiss();
+export const fetchUserInventory = async (id: string): Promise<any[] | null> => {
   try {
-    const api = await createApiInstance(router);
-    const response = await api.get(`/inventory/user/${id}`);
+    const response = await axios.get(`${baseUrl}/inventory/user/${id}`);
     console.log("Inventory response:", response);
 
     const data = response.data.data;
     return data;
   } catch (error) {
     console.error("Error fetching inventory:", error);
-    Toast.error("Error fetching inventory");
+
     return null;
   }
 };
@@ -259,7 +253,7 @@ export const fetchQuestionsAnswers = async (
 export const fetchQuestionsAnswersByUserId = async (
   id: string
 ): Promise<any[] | null> => {
-  Toast.dismiss();
+  // toast.dismiss();
   try {
     const response = await axios.get(`${baseUrl}/questions/answer/user/${id}`);
     console.log("Questions and Answers response:", response);
@@ -310,6 +304,24 @@ export const fetchUserById = async (id: string): Promise<User | null> => {
   // Toast.dismiss();
   try {
     const response = await axios.get(`${baseUrl}/user/${id}`);
+    // console.log("User response:", response);
+
+    const data = response.data.data as User;
+    return data;
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    // Toast.error("Error fetching user");
+    return null;
+  }
+};
+
+export const fetchUserByUsername = async (
+  username: string
+): Promise<User | null> => {
+  // Toast.dismiss();
+  try {
+    console.log("username", username);
+    const response = await axios.get(`${baseUrl}/user/profile/${username}`);
     // console.log("User response:", response);
 
     const data = response.data.data as User;
