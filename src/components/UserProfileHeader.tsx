@@ -26,7 +26,7 @@ const ProfileHeader = ({ user }: { user: User }) => {
   const isVisitor = useUserStore().user === null;
 
   useEffect(() => {
-    setShareUrl(`${window.location.origin}/profile/og/${user?._id}`);
+    setShareUrl(`${window.location.origin}/${user?.shareableLink}`);
   }, [user?._id]);
 
   const [open, setOpen] = useState(false);
@@ -56,20 +56,16 @@ const ProfileHeader = ({ user }: { user: User }) => {
       />
       <div className="relative ">
         <img
-          src={
-            user?.profilePicture || user.profilePicture === ""
-              ? "/cp-placeholder.png"
-              : user.profilePicture
-          }
+          src={user?.coverPicture ?? "/cp-placeholder.png"}
           alt=""
           className="h-[150px] w-full object-cover"
         />
-        <button
+        {/* <button
           className="capitalize absolute top-2 left-2 flex items-center gap-2"
           onClick={handleBackNavigation}
         >
           <FaArrowLeftLong size={24} /> back
-        </button>
+        </button> */}
         {/* <div className="absolute top-2 right-2 z-50 bg-red-500">
           <Drawer />
         </div> */}
@@ -82,11 +78,7 @@ const ProfileHeader = ({ user }: { user: User }) => {
           >
             <img
               className="w-full h-full rounded-full"
-              src={
-                user?.profilePicture || user.profilePicture === ""
-                  ? "/pp-placeholder.png"
-                  : user.profilePicture
-              }
+              src={user?.profilePicture || "/pp-placeholder.png"}
               alt="profile"
             />
           </button>
@@ -110,7 +102,7 @@ const ProfileHeader = ({ user }: { user: User }) => {
             <RWebShare
               data={{
                 text: "User Profile",
-                url: shareUrl,
+                url: user.shareableLink,
                 title: "share profile",
               }}
               onClick={() => console.log("shared successfully!")}
@@ -132,7 +124,7 @@ const ProfileHeader = ({ user }: { user: User }) => {
         <RWebShare
           data={{
             text: "",
-            url: shareUrl,
+            url: user.shareableLink,
             title: "share profile",
           }}
           onClick={() => console.log("shared successfully!")}

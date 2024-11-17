@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import useListStore from "@/store/useListStore";
 import Link from "next/link";
 import { User } from "@/types/user";
+import Loading from "@/app/loading";
 //import { User } from "@/types/user"; // Add this import
 
 interface _Product extends Product {
@@ -94,9 +95,11 @@ export function Showcase() {
             Our Top Sellers
           </h2>
         </div>
-        <div className="grid grid-cols-3 sm:grid-cols-2  gap-10">
+        <div className="grid grid-cols-3 sm:grid-cols-2 gap-10 sm:gap-2">
           {isLoading ? (
-            <div>Loading...</div>
+            <div>
+              <Loading />
+            </div>
           ) : (
             users.length > 0 &&
             users?.map((item, index) => (
@@ -109,16 +112,14 @@ export function Showcase() {
                   },
                 }}
                 key={index}
-                className="border-x border-b border-[#000000] rounded-lg  flex flex-col"
+                className="border-x border-b border-[#000000] rounded-lg flex flex-col"
               >
                 <div className="items-center mb-4 flex flex-col">
                   <div
-                    className="w-full h-[200px] border rounded-lg bg-cover bg-no-repeat relative"
+                    className="w-full h-[200px] sm:h-[150px] border rounded-lg bg-cover bg-no-repeat relative"
                     style={{
                       backgroundImage: `url(${
-                        item?.profilePicture
-                          ? item.profilePicture
-                          : "/Placeholder_view_vector.svg.png"
+                        item?.coverPicture || "/cp-placeholder.png"
                       })`,
                     }}
                   >
@@ -130,11 +131,11 @@ export function Showcase() {
                       />
                     </div>
                   </div>
-                  <div className="px-4 mt-10 w-full">
-                    <h3 className="text-[18px] text-left leading-6 text-black my-2">
-                      {item?.username}
+                  <div className="px-4 sm:px-1 mt-10 w-full">
+                    <h3 className="text-[18px] break-all text-left leading-6 text-ellipsis text-black my-2">
+                      {item?.username || "Seller"}
                     </h3>
-                    <p className="text-[#444544F2] text-left leading-5 text-[14px] tracking-wide">
+                    <p className="text-[#444544F2] text-left leading-5 line-clamp-4 text-[14px] tracking-wide">
                       {item?.about}
                     </p>
                   </div>

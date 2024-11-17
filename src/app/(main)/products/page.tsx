@@ -55,7 +55,7 @@ const Listings = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-grow container mx-auto p-4 min-h-screen">
+      <main className="flex-grow container mx-auto sm:mt-12 p-4 min-h-screen">
         <LoadingModal isOpen={isLoading}>
           <Loading />
         </LoadingModal>

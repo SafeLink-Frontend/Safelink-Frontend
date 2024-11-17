@@ -26,8 +26,10 @@ import { RWebShare } from "react-web-share";
 function Page({ inventory }: { inventory: Product }) {
   const router = useRouter();
   const pathname = usePathname();
+  console.log("pathname", pathname);
   //   const url = `${window.location.href}/product?id=${inventory._id}`;
-  const url = window.location.href;
+  const url = `https://www.joinsafelink.com${pathname}`; //typeof window !== "undefined" && window.location.href;
+  console.log(url);
 
   const [open, setOpen] = useState(false);
   const [mediaType, setMediaType] = useState<"images" | "videos">("images");
@@ -92,15 +94,15 @@ function Page({ inventory }: { inventory: Product }) {
         <Lightbox plugins={[Video]} slides={videoSlides} />
       )}
       <div className="mt-4 mx-4 text-center">
-        <div className="mt-2 mx-4 flex-row flex items-center">
+        <div className="mt-2 mx-4 sm:mx-0 sm:mb-4 flex-row sm:flex-col flex items-start">
           <button
             onClick={() => router.back()}
-            className="bg-transparent flex flex-row space-x-2"
+            className="bg-transparent flex flex-row  space-x-2"
           >
             <FaArrowLeft size={24} />
             <div>Back</div>
           </button>
-          <div className="flex flex-1 flex-col">
+          <div className="flex flex-1 flex-col w-full">
             <h2 className="font-bold sm:text-lg text-2xl text-primary">
               {inventory?.title}
             </h2>

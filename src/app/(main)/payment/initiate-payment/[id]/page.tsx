@@ -44,7 +44,7 @@ const page = () => {
   }
 
   return (
-    <section className="px-5 py-10">
+    <section className="px-5 py-10 ">
       {/* <div className="flex items-start justify-between mb-5">
         <button
           className="p-2 -mt-5"
