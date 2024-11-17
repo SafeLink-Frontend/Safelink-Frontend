@@ -91,6 +91,14 @@ export default function LoginForm() {
           </button>
           {/* <ModalButton actionKey="openSignUp">Sign up</ModalButton> */}
         </div>
+        <div className="mt-1 ">
+          <Link
+            href={"/request-password-reset"}
+            className="text-[14px] text-blue-500"
+          >
+            forgot password
+          </Link>
+        </div>
       </div>
     </>
   );

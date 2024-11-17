@@ -51,54 +51,57 @@ export function Nav({ children }: { children: ReactNode }) {
   }, [pathName]);
   return (
     <>
-      {pathName === "/" && (
-        <div
-          className={`sm:flex items-center justify-between px-2 bg-black bg-opacity-30 hidden fixed z-50 top-0 left-0  w-full `}
-        >
-          <button className="p-4  " onClick={openDrawer}>
-            <FaBars size={24} color="white" />
-          </button>
-          <div>
-            <Link
-              href={"/"}
-              className="w-full flex justify-center bg-transparent"
-            >
-              <Image width={100} height={50} alt="logo" src={"/logo.svg"} />
-            </Link>
-          </div>
-
-          {user?.email ? (
-            <div className="">
+      {pathName !== "/login" &&
+        pathName !== "/signup" &&
+        pathName !== "/request-password-reset" &&
+        pathName !== "/reset-password" && (
+          <div
+            className={`sm:flex items-center justify-between px-2 bg-black bg-opacity-30 hidden fixed z-50 top-0 left-0  w-full `}
+          >
+            <button className="p-4  " onClick={openDrawer}>
+              <FaBars size={24} color="white" />
+            </button>
+            <div>
               <Link
-                href={{
-                  pathname: "/profile",
-                  // query: {
-                  //   id: user?._id,
-                  // },
-                }}
-                className="text-[#f2f2f2]"
+                href={"/"}
+                className="w-full flex justify-center bg-transparent"
               >
-                <FaRegUserCircle size={30} />
+                <Image width={100} height={50} alt="logo" src={"/logo.svg"} />
               </Link>
             </div>
-          ) : (
-            <>
-              <button
-                onClick={openLogInModal}
-                className="border hover:text-primary sm:hidden border-primary rounded-[4px] py-3 px-6 mr-4"
-              >
-                Log In
-              </button>
-              {/* <button
+
+            {user?.email ? (
+              <div className="">
+                <Link
+                  href={{
+                    pathname: "/profile",
+                    // query: {
+                    //   id: user?._id,
+                    // },
+                  }}
+                  className="text-[#f2f2f2]"
+                >
+                  <FaRegUserCircle size={30} />
+                </Link>
+              </div>
+            ) : (
+              <>
+                <button
+                  onClick={openLogInModal}
+                  className="border hover:text-primary sm:hidden border-primary rounded-[4px] py-3 px-6 mr-4"
+                >
+                  Log In
+                </button>
+                {/* <button
                 onClick={openSignUpModal}
                 className="bg-primary rounded-[4px] py-3 px-6 hover:text-white hover:bg-primary/[0.8]  focus-visible:text-white"
               >
                 Sign Up
               </button> */}
-            </>
-          )}
-        </div>
-      )}
+              </>
+            )}
+          </div>
+        )}
 
       <nav
         className={`bg-black flex  justify-between text-white sm:hidden h-16 items-center pl-6 pr-4`}

@@ -67,13 +67,21 @@ async function page() {
       </button> */}
 
       <GoogleAuthButton />
-      <div className="flex flex-row w-full justify-center space-x-[2px] mt-2">
+      <div className="flex flex-row w-full justify-center space-x-[4px] mt-2">
         <div className="text-[14px] font-medium">Don't have an account?</div>
         <Link
           href={"/signup"}
           className="text-blue-500 text-[14px] font-medium"
         >
           Sign up
+        </Link>
+      </div>
+      <div className="mt-1 ">
+        <Link
+          href={"/request-password-reset"}
+          className="text-[14px] text-blue-500"
+        >
+          forgot password
         </Link>
       </div>
     </div>

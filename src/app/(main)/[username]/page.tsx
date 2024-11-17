@@ -13,16 +13,18 @@ import { headers } from "next/headers";
 import { Metadata } from "next";
 import AboutMeSection from "@/components/AboutMeSection";
 
-export async function getUser() {
-  const headersList = headers();
-  const url = headersList.get("referer") || "";
-  const username = url.split("/").pop();
+export async function getUser(username: string) {
   console.log("username", username);
 
-  const user = await fetchUserByUsername(username ?? "");
-  const questions =
-    user?._id && (await fetchQuestionsAnswersByUserId(user?._id));
-  const inventory = user?.id && (await fetchUserInventory(user?._id));
+  const [user, questions, inventory] = await Promise.all([
+    fetchUserByUsername(username),
+    fetchUserByUsername(username).then((user) =>
+      user?._id ? fetchQuestionsAnswersByUserId(user._id) : null
+    ),
+    fetchUserByUsername(username).then((user) =>
+      user?._id ? fetchUserInventory(user._id) : null
+    ),
+  ]);
   console.log("user", user);
 
   return { user, questions, inventory };
@@ -31,9 +33,10 @@ export async function getUser() {
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: { username: string };
 }): Promise<Metadata> {
-  const { user } = await getUser();
+  const { username } = params;
+  const { user } = await getUser(username);
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "usesafelink.com"; //|| `https://${headers().get("host")}`;
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -49,7 +52,8 @@ export async function generateMetadata({
       title: `${user?.username} | ${user?.email}`,
       description: `${user?.about || "Visit my profile"}`,
       images: [ogImageUrl],
-      url: `${baseUrl}/link/${user?.username || user?.email}`,
+      url: `${baseUrl}/link/${encodeURIComponent(user?.username || "")}`,
+
       type: "profile",
     },
     twitter: {
@@ -61,8 +65,14 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const { user, questions, inventory } = await getUser();
+export default async function Page({
+  params,
+}: {
+  params: { username: string };
+}) {
+  const { username } = params;
+  const { user, questions, inventory } = await getUser(username);
+  console.log("username from params", username);
 
   return (
     <div className="w-full  flex-1">
@@ -77,6 +87,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       {user && inventory && (
         <AboutMeSection user={user} inventory={inventory} />
       )}
+      {/* <div>username from params {username}</div> */}
     </div>
   );
 }

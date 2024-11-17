@@ -31,7 +31,7 @@ const page = () => {
 
   return (
     <section className="px-5 py-10">
-      <div className="flex items-center justify-between mb-2">
+      {/* <div className="flex items-center justify-between mb-2">
         <button
           className=" "
           onClick={() => {
@@ -48,9 +48,9 @@ const page = () => {
         >
           <FaRegUserCircle size={24} />
         </button>
-      </div>
+      </div> */}
 
-      <div className="flex-1 text-center">
+      <div className="flex-1 text-center sm:mt-8">
         <h1 className="font-semibold text-[#252625] text-[20px] leading-7">
           Prices
         </h1>

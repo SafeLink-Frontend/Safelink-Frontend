@@ -1,36 +1,46 @@
 import { useFetch } from "@/hooks/useFetch";
 import Toast, { toast } from "react-hot-toast";
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import { clearUserData, getAccessToken } from "./userDetails";
 import { PaymentPlan } from "@/types/PaymentPlan";
 import { Answer, Question } from "@/types/Question";
 import { User } from "@/types/user";
 import { SubscriptionStatus } from "@/types/SubscriptionStatus";
 import { Product } from "@/types/product";
+
 //const { fetch } = useFetch();
 
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-//export const baseUrl = "http://localhost:3001/api/v1";
-export const createApiInstance = async (router: any) => {
+// export const baseUrl = "http://localhost:3001/api/v1";
+
+export const createApiInstance = (router: any): AxiosInstance => {
   const accessToken = getAccessToken();
-  console.log({ accessToken });
+
   const api = axios.create({
     baseURL: baseUrl,
-    //timeout: 20000,
     headers: {
-      Authorization: `Bearer ${accessToken ?? ""}`,
+      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
     },
   });
 
   api.interceptors.response.use(
     (response) => response,
-    (error) => {
-      if (error.response && error.response.status === 401) {
-        // Redirect to sign-in page
-        //router.replace("/account-type");
-        clearUserData();
-        //logOut();
-        router.replace("/login");
+    async (error) => {
+      if (error.response) {
+        if (error.response.status === 401) {
+          // Handle token expiration or unauthorized access
+          clearUserData();
+          await router.replace("/login");
+        } else if (error.response.status >= 500) {
+          console.error(
+            "Server error:",
+            error.response.data?.message || "Unknown server error"
+          );
+        }
+      } else if (error.request) {
+        console.error("Network error: No response received from server");
+      } else {
+        console.error("Unexpected error:", error.message);
       }
       return Promise.reject(error);
     }
@@ -244,7 +254,7 @@ export const fetchQuestionsAnswers = async (
 
     return data;
   } catch (error) {
-    console.error("Error fetching question and answers:", error);
+    console.log("Error fetching question and answers:", error);
     //Toast.error("Error fetching question and answers:");
     return null;
   }
@@ -272,7 +282,7 @@ export const fetchUsers = async (router: any): Promise<any[] | null> => {
   Toast.dismiss();
   try {
     const api = await createApiInstance(router);
-    const response = await api.get(`/user/all`);
+    const response = await api.get(`/user/complete-profiles`); //complete-profiles
     // console.log("Users response:", response);
 
     const data = response.data.data;
@@ -327,7 +337,7 @@ export const fetchUserByUsername = async (
     const data = response.data.data as User;
     return data;
   } catch (error) {
-    console.error("Error fetching user:", error);
+    console.log("Error fetching user:", error);
     // Toast.error("Error fetching user");
     return null;
   }
@@ -369,6 +379,65 @@ export const initiateSubcription = async (
     console.error("Error initiating payment:", error);
     Toast.error("Error initiating payment");
     return null;
+  }
+};
+
+export const updateProfilePicture = async (
+  router: any,
+  image: File
+): Promise<any | null> => {
+  Toast.dismiss();
+  try {
+    const api = await createApiInstance(router);
+    const response = await api.post("/profile/profile-picture", {
+      image,
+    });
+    console.log("image upload response", response);
+
+    const data = response.data;
+    return data;
+  } catch (error) {
+    console.error("Error Updating profile picture:", error);
+    Toast.error("Error Updating profile picture");
+    return null;
+  }
+};
+
+export const handleRequestResetLink = async (email: string) => {
+  try {
+    toast.dismiss();
+    const response = await axios.post(`${baseUrl}/auth/reset-password/link`, {
+      email,
+    }); // Replace with your API endpoint
+    toast.success(
+      response.data.message || "Reset link sent! Check your email."
+    );
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message || "An error occurred.");
+  }
+};
+
+export const handleResetPassword = async (
+  router: any,
+  password: string,
+  confirmPassword: string,
+  token: string
+) => {
+  if (password !== confirmPassword) {
+    toast.error("Passwords do not match.");
+    return;
+  }
+
+  try {
+    const response = await axios.patch(`${baseUrl}/auth/reset-password`, {
+      password,
+      confirmPassword,
+      token,
+    }); // Replace with your API endpoint
+    toast.success(response.data.message || "Password reset successfully!");
+    router.push("/login"); // Redirect to login page
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message || "An error occurred.");
   }
 };
 

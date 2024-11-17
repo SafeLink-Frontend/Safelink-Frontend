@@ -32,7 +32,8 @@ const Inventory = ({ inventory }: { inventory: Product[] }) => {
               <Link
                 href={{
                   pathname: "/product",
-                  query: { id: item._id as string },
+                  //@ts-ignore
+                  query: { id: item._id },
                 }}
               >
                 view more

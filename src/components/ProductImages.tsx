@@ -11,7 +11,7 @@ function ProductImages({ images }: { images: string[] }) {
           <div className="space-y-1">
             <img
               src={images[0]} // Replace with your image URL
-              className="h-[400px] w-[90vw] "
+              className="h-[400px] w-[90vw] sm:h-[300px] "
             />
 
             <div className="grid grid-cols-3 sm:grid-cols-2 gap-2">

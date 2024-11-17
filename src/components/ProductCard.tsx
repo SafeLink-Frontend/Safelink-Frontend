@@ -32,10 +32,10 @@ function ProductCard({ data }: { data: Product }) {
     <Link
       className="border  rounded-lg flex flex-col"
       href={{
-        pathname: "/product",
-        query: {
-          id: data._id.$oid as string,
-        },
+        pathname: `product/${data._id.$oid}`,
+        // query: {
+        //   id: data._id.$oid as string,
+        // },
       }}
     >
       <div className="items-center mb-4 flex flex-col">
