@@ -10,8 +10,8 @@ import { Product, UserProduct } from "@/types/product";
 
 //const { fetch } = useFetch();
 
-// export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-export const baseUrl = "http://localhost:3001/api/v1";
+export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+// export const baseUrl = "http://localhost:3001/api/v1";
 
 export const createApiInstance = (): AxiosInstance => {
   const accessToken = getAccessToken();
