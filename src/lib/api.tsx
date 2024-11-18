@@ -6,14 +6,14 @@ import { PaymentPlan } from "@/types/PaymentPlan";
 import { Answer, Question } from "@/types/Question";
 import { User } from "@/types/user";
 import { SubscriptionStatus } from "@/types/SubscriptionStatus";
-import { Product } from "@/types/product";
+import { Product, UserProduct } from "@/types/product";
 
 //const { fetch } = useFetch();
 
-export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-// export const baseUrl = "http://localhost:3001/api/v1";
+// export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+export const baseUrl = "http://localhost:3001/api/v1";
 
-export const createApiInstance = (router: any): AxiosInstance => {
+export const createApiInstance = (): AxiosInstance => {
   const accessToken = getAccessToken();
 
   const api = axios.create({
@@ -30,7 +30,7 @@ export const createApiInstance = (router: any): AxiosInstance => {
         if (error.response.status === 401) {
           // Handle token expiration or unauthorized access
           clearUserData();
-          await router.replace("/login");
+          window.location.href = "/login";
         } else if (error.response.status >= 500) {
           console.error(
             "Server error:",
@@ -70,25 +70,22 @@ export const handleGoogleLogin = async (
   }
 };
 
-export const fetchInventory = async (router: any): Promise<any[] | null> => {
-  Toast.dismiss();
-  try {
-    const api = await createApiInstance(router);
-    const response = await api.get("/inventory");
-    console.log("Inventory response:", response);
+export const fetchMyInventory = async () => {
+  const api = await createApiInstance();
+  const response = await api.get(`/inventory/user`);
+  return response.data.data; // Assuming your API response has data here
+};
 
-    const data = response.data.data;
-    return data;
-  } catch (error) {
-    console.error("Error fetching inventory:", error);
-    //Toast.error("Error fetching inventory");
-    return null;
-  }
+export const generateShareableLink = async () => {
+  const api = await createApiInstance();
+  const response = await api.get(`/user/shareable-link`);
+  // console.log("sl", response);
+  return response.data.data; // Assuming your API response has data here
 };
 
 export const fetchSingleInventory = async (
   id: string | null
-): Promise<Product | null> => {
+): Promise<UserProduct | null> => {
   // Toast.dismiss();
   try {
     const response = await axios.get(`${baseUrl}/inventory/${id}`);
@@ -122,7 +119,7 @@ export const fetchInventoryBySearch = async (
 ): Promise<any[] | null> => {
   Toast.dismiss();
   try {
-    //const api = await createApiInstance(router);
+    //const api = await createApiInstance();
     // const formData = new FormData();
     // formData.append("query", query);
 
@@ -148,9 +145,9 @@ export const fetchInventoryBySearch = async (
 
 export const updateProfile = async (data: any, router: any, setUser: any) => {
   Toast.dismiss();
-  const api = await createApiInstance(router);
+  const api = await createApiInstance();
   try {
-    const response = await api.put(`user/`, data);
+    const response = await api.put(`/user`, data);
     console.log("rr", response.data.data);
     if (response.status === 200) {
       if (typeof window !== "undefined") {
@@ -180,7 +177,7 @@ export const updateProfile = async (data: any, router: any, setUser: any) => {
 
 export const addInventory = async (data: any, router: any) => {
   Toast.dismiss();
-  const api = await createApiInstance(router);
+  const api = await createApiInstance();
   try {
     const response = await api.post(`/inventory`, data);
     console.log("rr", response);
@@ -202,7 +199,7 @@ export const fetchQuestions = async (
 ): Promise<Question[] | null> => {
   Toast.dismiss();
   try {
-    const api = await createApiInstance(router);
+    const api = await createApiInstance();
     const response = await axios.get(`${baseUrl}/questions`);
     console.log("Questions response:", response);
 
@@ -221,7 +218,7 @@ export const submitAnswer = async (
   router: any
 ) => {
   Toast.dismiss();
-  const api = await createApiInstance(router);
+  const api = await createApiInstance();
   try {
     const response = await api.post(`/questions/${questionId}/answer`, {
       answer,
@@ -246,7 +243,7 @@ export const fetchQuestionsAnswers = async (
 ): Promise<Answer[] | null> => {
   Toast.dismiss();
   try {
-    const api = await createApiInstance(router);
+    const api = await createApiInstance();
     const response = await api.get(`/questions/answer`);
     //console.log("Questions and Answers response:", response);
 
@@ -278,26 +275,15 @@ export const fetchQuestionsAnswersByUserId = async (
   }
 };
 
-export const fetchUsers = async (router: any): Promise<any[] | null> => {
-  Toast.dismiss();
-  try {
-    const api = await createApiInstance(router);
-    const response = await api.get(`/user/complete-profiles`); //complete-profiles
-    // console.log("Users response:", response);
-
-    const data = response.data.data;
-    return data;
-  } catch (error) {
-    console.error("Error fetching user:", error);
-    //Toast.error("Error fetching user");
-    return null;
-  }
+export const fetchUsers = async (): Promise<User[] | null> => {
+  const response = await axios.get(`${baseUrl}/user/complete-profiles`); //complete-profiles
+  return response.data.data; // Assuming your API response has data here
 };
 
 export const fetchUser = async (router: any): Promise<any[] | null> => {
   Toast.dismiss();
   try {
-    const api = await createApiInstance(router);
+    const api = await createApiInstance();
     const response = await api.get(`/user/`);
     console.log("User response:", response);
 
@@ -348,7 +334,7 @@ export const getSubscriptionPlans = async (
 ): Promise<PaymentPlan[] | null> => {
   Toast.dismiss();
   try {
-    const api = await createApiInstance(router);
+    const api = await createApiInstance();
     const response = await api.get("/subscription/plan");
     console.log("Subscription plans response:", response);
 
@@ -367,7 +353,7 @@ export const initiateSubcription = async (
 ): Promise<any | null> => {
   Toast.dismiss();
   try {
-    const api = await createApiInstance(router);
+    const api = await createApiInstance();
     const response = await api.post("/subscription/subscribe", {
       planId: id,
     });
@@ -388,7 +374,7 @@ export const updateProfilePicture = async (
 ): Promise<any | null> => {
   Toast.dismiss();
   try {
-    const api = await createApiInstance(router);
+    const api = await createApiInstance();
     const response = await api.post("/profile/profile-picture", {
       image,
     });

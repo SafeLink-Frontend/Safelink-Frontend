@@ -1,8 +1,6 @@
-import Product from "@/components/Product";
+import { Product } from "@/components/Product";
 import { fetchSingleInventory } from "@/lib/api";
 import { Metadata } from "next";
-import { useSearchParams } from "next/dist/client/components/navigation";
-import { headers } from "next/headers";
 
 export async function getInventory(id: string) {
   console.log("id", id);
@@ -46,6 +44,7 @@ export async function generateMetadata({
 export default async function Page({ params }: { params: { id: string } }) {
   const { id } = params;
   const inventory = await getInventory(id);
+
   return (
     <div className="w-full sm:mt-8 flex-1">
       {inventory && <Product inventory={inventory} />}

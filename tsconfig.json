@@ -28,6 +28,6 @@
     ".next/types/**/*.ts",
     "src/app/products",
     "src/app/product"
-  ],
+, "src/app/(main)/user/[id]"  ],
   "exclude": ["node_modules"]
 }

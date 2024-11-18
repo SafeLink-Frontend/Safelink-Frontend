@@ -11,6 +11,8 @@ import SignupModal from "@/components/SignupModal";
 import { Toaster } from "react-hot-toast";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import useLocalStorage from "use-local-storage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientCustomProvider } from "@/components/QueryClientCustomProvider";
 
 const raleway = Raleway({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -27,7 +29,7 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://usesafelink.com"), // Set the base URL for metadata
+  metadataBase: new URL("https://www.joinsafelink.com"), // Set the base URL for metadata
   title: "SAFELINK",
   description:
     "SAFELINK helps you tell your prospects and clients about yourself, your business and why they should buy from you",
@@ -72,23 +74,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <GoogleOAuthProvider clientId={googleClientKey}>
-        <body className={`${raleway.className}`}>
-          <Nav>
-            <NavLink href={"/create-listing"}>List With Us</NavLink>
-            <NavLink href={"/pricing"}>Pricing</NavLink>
-          </Nav>
-          <Toaster />
-          <div className="min-h-[500px]">{children}</div>
-          <Drawer />
-          <LoginModal>
-            <LoginForm />
-          </LoginModal>
-          <SignupModal>
-            <SignupForm />
-          </SignupModal>
+        <QueryClientCustomProvider>
+          <body className={`${raleway.className}`}>
+            <Nav>
+              <NavLink href={"/create-listing"}>List With Us</NavLink>
+              <NavLink href={"/pricing"}>Pricing</NavLink>
+            </Nav>
+            <Toaster />
+            <div className="min-h-[500px]">{children}</div>
+            <Drawer />
+            <LoginModal>
+              <LoginForm />
+            </LoginModal>
+            <SignupModal>
+              <SignupForm />
+            </SignupModal>
 
-          <Footer />
-        </body>
+            <Footer />
+          </body>
+        </QueryClientCustomProvider>
       </GoogleOAuthProvider>
     </html>
   );

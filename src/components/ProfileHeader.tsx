@@ -21,19 +21,16 @@ import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import { SubscriptionStatus } from "@/types/SubscriptionStatus";
 import { updateProfilePicture } from "@/lib/api";
 import Loading from "@/app/loading";
+import { useFetchShareableLink } from "@/hooks/useFetchShareableLink";
 //import { ShareSocial } from "react-share-social";
 
 const ProfileHeader = () => {
   const router = useRouter();
   const { user, setUser } = useUserStore();
+  const { data: shareableLink, error } = useFetchShareableLink();
+  console.log("shareable link", shareableLink, error);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
-
-  const [shareUrl, setShareUrl] = useState("");
-
-  useEffect(() => {
-    setShareUrl(`${window.location.origin}/profile/og/${user?._id}`);
-  }, [user?._id]);
 
   const [open, setOpen] = useState(false);
   const imageSlides = [{ src: user?.profilePicture || "/pp-placeholder.png" }];
@@ -85,6 +82,7 @@ const ProfileHeader = () => {
         carousel={{ finite: imageSlides.length <= 1 }}
         plugins={[Fullscreen]}
       />
+
       <div className="z-10 ">
         <img
           src={user?.coverPicture || "/cp-placeholder.png"}
@@ -97,7 +95,7 @@ const ProfileHeader = () => {
           <FaArrowLeftLong size={24} /> back
         </button> */}
       </div>
-      <div className="w-full px-[100px] flex items-center mt-[-40px] sm:mt-3 z-40 justify-between sm1:px-2 ">
+      <div className="w-full px-[100px] flex items-center mt-[-40px] sm:mt-3 sm1:mt-0 z-40 justify-between sm1:px-2 ">
         <div className="flex flex-row items-center gap-2 ">
           <button
             onClick={() => setOpen(true)}
@@ -111,7 +109,7 @@ const ProfileHeader = () => {
           </button>
           <button
             onClick={handleImageClick}
-            className="relative -bottom-12 -left-8 sm:-bottom-4 sm:-left-4 rounded-full bg-gray-800/80 p-2 sm:p-1 cursor-pointer hover:bg-gray-700/80 transition-colors"
+            className="relative -bottom-12 -left-8 sm:-bottom-4 sm:-left-4 sm1:-bottom-[28px]  sm1:-left-8 rounded-full bg-gray-800/80 p-2 sm:p-1 cursor-pointer hover:bg-gray-700/80 transition-colors"
             disabled={isUploading}
           >
             <FaRegEdit size={"12px"} className="text-primary z-50" />
@@ -152,19 +150,21 @@ const ProfileHeader = () => {
               <MdEdit size={20} />
               edit profile
             </Link>
-
-            <RWebShare
-              data={{
-                text: "User Profile",
-                url: user?.shareableLink,
-                title: "share profile",
-              }}
-              onClick={() => console.log("shared successfully!")}
-            >
-              <button className="bg-[#F2BE5C] text-white capitalize flex items-center gap-3 leading-6 p-2 border border-[#F2BE5C] rounded-md cursor-pointer text-nowrap sm1:hidden">
-                share profile
-              </button>
-            </RWebShare>
+            {user?.subscriptionStatus !== SubscriptionStatus.FREE &&
+              shareableLink && (
+                <RWebShare
+                  data={{
+                    text: "User Profile",
+                    url: shareableLink?.shareableLink,
+                    title: "share profile",
+                  }}
+                  onClick={() => console.log("shared successfully!")}
+                >
+                  <button className="bg-[#F2BE5C] text-white capitalize flex items-center gap-3 leading-6 p-2 border border-[#F2BE5C] rounded-md cursor-pointer text-nowrap sm1:hidden">
+                    share profile
+                  </button>
+                </RWebShare>
+              )}
 
             {user?.subscriptionStatus === SubscriptionStatus.FREE ? (
               <Link
@@ -175,11 +175,8 @@ const ProfileHeader = () => {
                 upgrade account
               </Link>
             ) : (
-              <div className="flex flex-col">
-                <div className="font-semibold">Subscription Plan</div>
-                <div className="text-primary text-lg font-semibold">
-                  {user?.subscriptionStatus}
-                </div>
+              <div className="text-primary text-[16px] font-semibold flex flex-row min-w-[128px]">
+                {user?.subscriptionStatus} plan
               </div>
             )}
           </div>
@@ -189,21 +186,23 @@ const ProfileHeader = () => {
       <p className="my-2 mx-[5%] sm1:mx-[5%] mt-[28px] text-[#444544] tracking-wide sm:text-[12px] text-[18px] leading-4">
         {user?.about}
       </p>
-
-      <div className="mb-2 mt-4 w-full justify-center hidden sm1:flex">
-        <RWebShare
-          data={{
-            text: "",
-            url: user?.shareableLink,
-            title: "share profile",
-          }}
-          onClick={() => console.log("shared successfully!")}
-        >
-          <button className="bg-[#F2BE5C]  w-[90%] rounded-md text-white capitalize flex items-center justify-center gap-3 leading-6 p-2 border border-[#F2BE5C] cursor-pointer text-nowrap">
-            share profile
-          </button>
-        </RWebShare>
-      </div>
+      {user?.subscriptionStatus !== SubscriptionStatus.FREE &&
+        shareableLink && (
+          <div className="mb-2 mt-4 w-full justify-center hidden sm1:flex">
+            <RWebShare
+              data={{
+                text: "",
+                url: shareableLink?.shareableLink,
+                title: "share profile",
+              }}
+              onClick={() => console.log("shared successfully!")}
+            >
+              <button className="bg-[#F2BE5C]  w-[90%] rounded-md text-white capitalize flex items-center justify-center gap-3 leading-6 p-2 border border-[#F2BE5C] cursor-pointer text-nowrap">
+                share profile
+              </button>
+            </RWebShare>
+          </div>
+        )}
 
       <div className="hidden sm1:flex items-center justify-between mx-[5%]">
         <>

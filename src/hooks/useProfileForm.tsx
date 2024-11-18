@@ -108,7 +108,7 @@ export const useProfileForm = (
     const files = (e.target as HTMLInputElement).files;
 
     if (files) {
-      setForm((prevForm) => ({
+      setForm((prevForm: any) => ({
         ...prevForm,
         [name]:
           name === "cover" || name === "profile"
