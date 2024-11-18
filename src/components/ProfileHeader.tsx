@@ -22,6 +22,7 @@ import { SubscriptionStatus } from "@/types/SubscriptionStatus";
 import { updateProfilePicture } from "@/lib/api";
 import Loading from "@/app/loading";
 import { useFetchShareableLink } from "@/hooks/useFetchShareableLink";
+import { useSubscriptionStatus } from "@/hooks/useSubscriptionStatus";
 //import { ShareSocial } from "react-share-social";
 
 const ProfileHeader = () => {
@@ -29,6 +30,9 @@ const ProfileHeader = () => {
   const { user, setUser } = useUserStore();
   const { data: shareableLink, error } = useFetchShareableLink();
   console.log("shareable link", shareableLink, error);
+  const { data: subscriptionStatus } = useSubscriptionStatus();
+  console.log("subscription status", subscriptionStatus);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -150,7 +154,7 @@ const ProfileHeader = () => {
               <MdEdit size={20} />
               edit profile
             </Link>
-            {user?.subscriptionStatus !== SubscriptionStatus.FREE &&
+            {subscriptionStatus?.plan.name !== SubscriptionStatus.FREE &&
               shareableLink && (
                 <RWebShare
                   data={{
@@ -166,7 +170,7 @@ const ProfileHeader = () => {
                 </RWebShare>
               )}
 
-            {user?.subscriptionStatus === SubscriptionStatus.FREE ? (
+            {subscriptionStatus?.plan.name === SubscriptionStatus.FREE ? (
               <Link
                 href={"/pricing"}
                 className="bg-[#252625] text-[#F2F2F2] capitalize flex items-center gap-3 leading-6 p-2 border border-[#252625] rounded cursor-pointer text-nowrap sm1:hidden"
@@ -176,7 +180,7 @@ const ProfileHeader = () => {
               </Link>
             ) : (
               <div className="text-primary text-[16px] font-semibold flex flex-row min-w-[128px]">
-                {user?.subscriptionStatus} plan
+                {subscriptionStatus?.plan.name} plan
               </div>
             )}
           </div>
@@ -186,7 +190,7 @@ const ProfileHeader = () => {
       <p className="my-2 mx-[5%] sm1:mx-[5%] mt-[28px] text-[#444544] tracking-wide sm:text-[12px] text-[18px] leading-4">
         {user?.about}
       </p>
-      {user?.subscriptionStatus !== SubscriptionStatus.FREE &&
+      {subscriptionStatus?.plan.name !== SubscriptionStatus.FREE &&
         shareableLink && (
           <div className="mb-2 mt-4 w-full justify-center hidden sm1:flex">
             <RWebShare
