@@ -1,7 +1,9 @@
 // app/payment/verify/page.tsx
 "use client";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 
 export default function Page() {
@@ -10,6 +12,14 @@ export default function Page() {
 
   const trxref = searchParams.get("trxref");
   const reference = searchParams.get("reference");
+
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    queryClient.invalidateQueries({
+      queryKey: ["profile", "users", "shareablelink"],
+    });
+  }, []);
 
   return (
     <section className="px-5 py-10">

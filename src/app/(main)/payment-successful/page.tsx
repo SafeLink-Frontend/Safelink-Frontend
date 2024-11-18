@@ -1,10 +1,19 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FaArrowLeft } from "react-icons/fa";
+import { useQueryClient } from "@tanstack/react-query";
 
 const page = () => {
   const router = useRouter();
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    queryClient.invalidateQueries({
+      queryKey: ["profile", "users", "shareablelink"],
+    });
+  }, []);
+
   return (
     <section className="px-5 py-10 ">
       <div className="flex items-start justify-between sm:mt-8 mb-5">

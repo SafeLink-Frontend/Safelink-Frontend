@@ -19,6 +19,7 @@ import Head from "next/head";
 import { useFetchTopUsers } from "@/hooks/useFetchTopUsers";
 import { useFetchMyInventory } from "@/hooks/useFetchMyInventory";
 import { useFetchShareableLink } from "@/hooks/useFetchShareableLink";
+import { useFetchMyProfile } from "@/hooks/useFetchMyProfile";
 
 // export async function generateMetadata(): Promise<Metadata> {
 //   return {
@@ -47,7 +48,8 @@ import { useFetchShareableLink } from "@/hooks/useFetchShareableLink";
 // }
 
 const Page = () => {
-  const { user } = useUserStore();
+  // const { user } = useUserStore();
+  const { data: user } = useFetchMyProfile();
   console.log("user", user);
 
   const [type, setType] = useState<"images" | "inventory">("inventory");
@@ -94,7 +96,7 @@ const Page = () => {
   const { data: inventory, isLoading, isError } = useFetchMyInventory();
 
   const LoadingSpinner = () => (
-    <div className="flex justify-center items-center">
+    <div className="flex flex-1 min-h-screen justify-center items-center">
       <div className="my-4 border-t-2 border-b-2 border-primary rounded-full  animate-spin w-8 h-8 sm:w-6 sm:h-6"></div>
     </div>
   );
@@ -170,7 +172,7 @@ const Page = () => {
         )
       ) : isLoading ? (
         <LoadingSpinner />
-      ) : inventory.length > 0 ? (
+      ) : inventory && inventory?.length > 0 ? (
         <Inventory inventory={inventory} />
       ) : (
         <div>

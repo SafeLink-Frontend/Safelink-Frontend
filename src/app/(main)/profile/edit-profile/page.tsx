@@ -26,7 +26,7 @@ function Page() {
   if (isLoading) return <Loading />;
 
   return (
-    <section className="px-4 py-8">
+    <section className="px-4 py-8 sm:mt-8">
       <form onSubmit={handleSubmit} noValidate>
         <PersonalInfoForm form={form} onChange={handleChange} />
 

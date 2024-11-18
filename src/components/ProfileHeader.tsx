@@ -126,7 +126,7 @@ const ProfileHeader = () => {
               <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
             </div>
           )} */}
-          <div className="">
+          <div className="mt-2 -ml-4">
             <h1 className="flex items-center gap-1 font-semibold sm:w-auto w-[40vw] text-[22px] sm1:text-[12px] break-words">
               <span className="max-w-full overflow-hidden">
                 {user?.username ?? user?.email}
