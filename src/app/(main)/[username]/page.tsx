@@ -9,7 +9,6 @@ import "yet-another-react-lightbox/plugins/thumbnails.css";
 import LoadingModal from "@/components/LoadingModal";
 import Loading from "@/app/loading";
 import UserProfileHeader from "@/components/UserProfileHeader";
-import { headers } from "next/headers";
 import { Metadata } from "next";
 import AboutMeSection from "@/components/AboutMeSection";
 

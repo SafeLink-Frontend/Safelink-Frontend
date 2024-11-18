@@ -1,7 +1,7 @@
 "use client";
 import Loading from "@/app/loading";
 import useListStore from "@/store/useListStore";
-import { Product } from "@/types/product";
+import { Product, UserProduct } from "@/types/product";
 import { User } from "@/types/user";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -13,7 +13,7 @@ function AboutMeSection({
   inventory,
 }: {
   user: User;
-  inventory: Product[];
+  inventory: UserProduct[];
 }) {
   const [type, setType] = useState<"images" | "inventory">("inventory");
   const router = useRouter();

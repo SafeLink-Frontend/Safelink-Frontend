@@ -1,11 +1,8 @@
 "use client";
 import Inventory from "@/components/Inventory";
 import PictureCategories from "@/components/PictureCategories";
-import ProfileHeader from "@/components/ProfileHeader";
 import QA from "@/components/QA";
 import {
-  baseUrl,
-  fetchQuestionsAnswers,
   fetchQuestionsAnswersByUserId,
   fetchUserById,
   fetchUserInventory,
@@ -17,15 +14,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { IoLogoWhatsapp } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
-import useUserStore from "@/store/useUserStore";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import LoadingModal from "@/components/LoadingModal";
 import Loading from "@/app/loading";
 import UserProfileHeader from "@/components/UserProfileHeader";
-import router from "next/router";
 import Head from "next/head";
-import useLocalStorage from "use-local-storage";
 import { User } from "@/types/user";
 
 const Page = () => {

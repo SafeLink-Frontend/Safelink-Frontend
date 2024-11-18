@@ -1,19 +1,10 @@
 "use client";
 
-// pages/Listings.js
-
-import Image from "next/image";
 import { ChangeEvent, Suspense, useEffect, useState } from "react";
-import { FaRegHeart } from "react-icons/fa";
-import { HiHeart } from "react-icons/hi";
 import { IoSearch } from "react-icons/io5";
-import Toast from "react-hot-toast";
 import Loading from "@/app/loading";
-import { baseUrl, fetchInventory, fetchInventoryBySearch } from "@/lib/api";
-import customFetch from "@/lib/customFetch";
-import { useFetch } from "@/hooks/useFetch";
+import { fetchInventoryBySearch } from "@/lib/api";
 import { Product } from "@/types/product";
-import Inventory from "@/components/Inventory";
 import { useRouter } from "next/navigation";
 import useSearchStore from "@/store/useSearchStore";
 import LoadingModal from "@/components/LoadingModal";
@@ -24,7 +15,6 @@ const Listings = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [inventory, setInventory] = useState<Product[]>([]);
   const { query, setQuery } = useSearchStore();
-  const { fetch } = useFetch();
 
   const searchInventory = async () => {
     setIsLoading(true);

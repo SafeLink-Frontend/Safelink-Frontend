@@ -16,6 +16,9 @@ import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import { Metadata } from "next";
 import Head from "next/head";
+import { useFetchTopUsers } from "@/hooks/useFetchTopUsers";
+import { useFetchMyInventory } from "@/hooks/useFetchMyInventory";
+import { useFetchShareableLink } from "@/hooks/useFetchShareableLink";
 
 // export async function generateMetadata(): Promise<Metadata> {
 //   return {
@@ -51,8 +54,6 @@ const Page = () => {
   const router = useRouter();
   //const inventory = createObjectCopies(inventoryObject);
   const [questions, setQuestions] = useState<any>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [inventory, setInventory] = useState<Product | any>({});
   const { favorites, addToFavorites, removeFromFavorites, clearFavorites } =
     useListStore();
   const [isCategoriesLoading, setIsCategoriesLoading] = useState(true);
@@ -83,16 +84,6 @@ const Page = () => {
     }
   };
 
-  const loadInventory = async () => {
-    setIsLoading(true);
-    const data = user && (await fetchUserInventory(user._id));
-    if (data) {
-      setInventory(data);
-      console.log("loaded inventory", data);
-    }
-    setIsLoading(false);
-  };
-
   useEffect(() => {
     fetchQuestionsAndAnswerdata();
     setIsCategoriesLoading(true);
@@ -100,11 +91,7 @@ const Page = () => {
     setTimeout(() => setIsCategoriesLoading(false), 1000);
   }, []);
 
-  useEffect(() => {
-    if (user) {
-      loadInventory();
-    }
-  }, [user]);
+  const { data: inventory, isLoading, isError } = useFetchMyInventory();
 
   const LoadingSpinner = () => (
     <div className="flex justify-center items-center">

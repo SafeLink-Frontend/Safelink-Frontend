@@ -1,29 +1,23 @@
 "use client";
-import BlackOverlay from "@/components/BlackOverlay";
 import NextJsLightBox from "@/components/NextJsLightBox";
 import ProductImages from "@/components/ProductImages";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 import { FaArrowLeft, FaWhatsapp } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import Lightbox, { SlideImage } from "yet-another-react-lightbox";
+import Lightbox from "yet-another-react-lightbox";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
-import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Video from "yet-another-react-lightbox/plugins/video";
 import ProductVideos from "@/components/ProductVideos";
-import { Product } from "@/types/product";
-import { fetchSingleInventory } from "@/lib/api";
+import { UserProduct } from "@/types/product";
 import Loading from "@/app/loading";
 import useListStore from "@/store/useListStore";
 import Toast from "react-hot-toast";
-import { RWebShare } from "react-web-share";
 
-function Page({ inventory }: { inventory: Product }) {
+export function Product({ inventory }: { inventory: UserProduct }) {
   const router = useRouter();
   const pathname = usePathname();
   console.log("pathname", pathname);
@@ -57,7 +51,7 @@ function Page({ inventory }: { inventory: Product }) {
       // Add the item to favorites with relevant properties
       Toast.success("item added to your list");
       addToFavorites({
-        id: typeof inventory?._id === "string" ? inventory._id : "",
+        id: inventory?._id,
         title: inventory.title,
         description: inventory.description,
         price: inventory.price,
@@ -80,8 +74,7 @@ function Page({ inventory }: { inventory: Product }) {
   const videoSlides = inventory?.videos?.map((video: any) => ({ src: video }));
 
   return (
-    <div>
-      :
+    <div className="">
       {mediaType === "images" ? (
         <Lightbox
           open={open}
@@ -93,7 +86,7 @@ function Page({ inventory }: { inventory: Product }) {
       ) : (
         <Lightbox plugins={[Video]} slides={videoSlides} />
       )}
-      <div className="mt-4 mx-4 text-center">
+      <div className="mt-4 mx-4 text-center sm:mt-16">
         <div className="mt-2 mx-4 sm:mx-0 sm:mb-4 flex-row sm:flex-col flex items-start">
           <button
             onClick={() => router.back()}
@@ -188,5 +181,3 @@ function Page({ inventory }: { inventory: Product }) {
     </div>
   );
 }
-
-export default Page;

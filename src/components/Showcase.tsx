@@ -1,15 +1,11 @@
 "use client";
-import Image from "next/image";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
 import useModalStore from "@/store/useModalStore";
-import { fetchInventory, fetchUsers } from "@/lib/api";
-import { useEffect, useState } from "react";
 import { Product } from "@/types/product";
 import { useRouter } from "next/navigation";
 import useListStore from "@/store/useListStore";
 import Link from "next/link";
-import { User } from "@/types/user";
 import Loading from "@/app/loading";
+import { useFetchTopUsers } from "@/hooks/useFetchTopUsers";
 //import { User } from "@/types/user"; // Add this import
 
 interface _Product extends Product {
@@ -28,22 +24,8 @@ export function Showcase() {
     openDrawer,
     closeDrawer,
   } = useModalStore();
-  const [users, setUsers] = useState<User[]>([]); // Add type annotation
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
-  useEffect(() => {
-    const getUsers = async () => {
-      setIsLoading(true);
-      const usersArray = await fetchUsers(router);
-      // console.log("users loaded", usersArray);
-      if (usersArray) {
-        setUsers(usersArray);
-      }
-      setIsLoading(false);
-    };
-    getUsers();
-  }, [router]); // Add router to the dependency array
+  const router = useRouter();
 
   const { favorites, addToFavorites, removeFromFavorites, clearFavorites } =
     useListStore();
@@ -66,6 +48,8 @@ export function Showcase() {
       });
     }
   };
+
+  const { data: users, isLoading, isError } = useFetchTopUsers();
 
   return (
     <>
@@ -95,56 +79,57 @@ export function Showcase() {
             Our Top Sellers
           </h2>
         </div>
-        <div className="grid grid-cols-3 sm:grid-cols-2 gap-10 sm:gap-2">
-          {isLoading ? (
-            <div>
-              <Loading />
-            </div>
-          ) : (
-            users.length > 0 &&
-            users?.map((item, index) => (
-              <Link
-                href={{
-                  //pathname: `/user/${item?.username?.replace(/\s+/g, "-").toLowerCase()}`,
-                  pathname: `/profile/user`,
-                  query: {
-                    userId: item._id,
-                  },
-                }}
-                key={index}
-                className="border-x border-b border-[#000000] rounded-lg flex flex-col"
-              >
-                <div className="items-center mb-4 flex flex-col">
-                  <div
-                    className="w-full h-[200px] sm:h-[150px] border rounded-lg bg-cover bg-no-repeat relative"
-                    style={{
-                      backgroundImage: `url(${
-                        item?.coverPicture || "/cp-placeholder.png"
-                      })`,
-                    }}
-                  >
-                    <div className="absolute -bottom-5 left-3">
-                      <img
-                        src={item?.profilePicture || "/image7.png"}
-                        alt="Profile"
-                        className="rounded-full w-12 h-12 bg-cover"
-                      />
+        {isLoading ? (
+          <div className="flex justify-center w-full">
+            <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-primary"></div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 sm:grid-cols-2 gap-10 sm:gap-2">
+            {users &&
+              users.length > 0 &&
+              users?.map((item, index) => (
+                <Link
+                  href={{
+                    //pathname: `/user/${item?.username?.replace(/\s+/g, "-").toLowerCase()}`,
+                    pathname: `/profile/user`,
+                    query: {
+                      userId: item._id,
+                    },
+                  }}
+                  key={index}
+                  className="border-x border-b border-[#000000] rounded-lg flex flex-col"
+                >
+                  <div className="items-center mb-4 flex flex-col">
+                    <div
+                      className="w-full h-[200px] sm:h-[150px] border rounded-lg bg-cover bg-no-repeat relative"
+                      style={{
+                        backgroundImage: `url(${
+                          item?.coverPicture || "/cp-placeholder.png"
+                        })`,
+                      }}
+                    >
+                      <div className="absolute -bottom-5 left-3">
+                        <img
+                          src={item?.profilePicture || "/image7.png"}
+                          alt="Profile"
+                          className="rounded-full w-12 h-12 bg-cover"
+                        />
+                      </div>
+                    </div>
+                    <div className="px-4 sm:px-1 mt-10 w-full">
+                      <h3 className="text-[18px] break-all text-left leading-6 text-ellipsis text-black my-2">
+                        {item?.username || "Seller"}
+                      </h3>
+                      <p className="text-[#444544F2] text-left leading-5 line-clamp-4 text-[14px] tracking-wide">
+                        {item?.about}
+                      </p>
                     </div>
                   </div>
-                  <div className="px-4 sm:px-1 mt-10 w-full">
-                    <h3 className="text-[18px] break-all text-left leading-6 text-ellipsis text-black my-2">
-                      {item?.username || "Seller"}
-                    </h3>
-                    <p className="text-[#444544F2] text-left leading-5 line-clamp-4 text-[14px] tracking-wide">
-                      {item?.about}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex-grow mb-4"></div>
-              </Link>
-            ))
-          )}
-        </div>
+                  <div className="flex-grow mb-4"></div>
+                </Link>
+              ))}
+          </div>
+        )}
       </section>
 
       <section className="mb-4">

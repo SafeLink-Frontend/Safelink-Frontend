@@ -1,9 +1,9 @@
-import { Product } from "@/types/product";
+import { Product, UserProduct } from "@/types/product";
 import Link from "next/link";
 import React from "react";
 import { FaRegHeart } from "react-icons/fa";
 
-const Inventory = ({ inventory }: { inventory: Product[] }) => {
+const Inventory = ({ inventory }: { inventory: UserProduct[] }) => {
   return (
     <section className="w-full h-full p-6">
       <div className="flex justify-start items-start gap-4 w-full flex-wrap">
@@ -31,9 +31,7 @@ const Inventory = ({ inventory }: { inventory: Product[] }) => {
             <button className="bg-[#F2BE5C] py-2 rounded-lg w-full text-white border-[#CAC4D0] border">
               <Link
                 href={{
-                  pathname: "/product",
-                  //@ts-ignore
-                  query: { id: item._id },
+                  pathname: `product/${item._id}`,
                 }}
               >
                 view more

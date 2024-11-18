@@ -60,14 +60,20 @@ export default function CreateListing() {
       currency,
       price,
       description,
-      cover: await convertFileToBase64(cover),
-      images: await convertFilesToBase64(images),
+      cover: cover ? await convertFileToBase64(cover) : cover,
+      images: images.length > 0 ? await convertFilesToBase64(images) : images,
       videos,
     };
     console.log({ data });
 
-    const response = await addInventory(data, router);
-    console.log("rt", response);
+    try {
+      const response = await addInventory(data, router);
+      setIsLoading(false);
+      console.log("rt", response);
+    } catch (error: any) {
+      console.log("error", error.response);
+      setIsLoading(false);
+    }
     setIsLoading(false);
   };
 
