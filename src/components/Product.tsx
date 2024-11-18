@@ -158,7 +158,7 @@ export function Product({ inventory }: { inventory: UserProduct }) {
                 <div className="flex flex-row sm:flex-col justify-between  w-full ">
                   <div className="flex items-center gap-2   ">
                     <a
-                      className="bg-green-700 hover:bg-opacity-80 py-1 px-2 font-semibold sm:justify-center rounded-lg text-white flex flex-row items-center sm:space-x-2 space-x-1"
+                      className="bg-green-700 hover:bg-opacity-80 py-1 px-2 font-semibold sm:justify-center rounded-lg sm:w-full text-white flex flex-row items-center sm:space-x-2 space-x-1"
                       href={`https://wa.me/${"+234" + inventory.owner.phoneNumber}/?text=${whatsappText}`}
                       data-action="share/whatsapp/share"
                     >

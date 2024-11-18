@@ -13,6 +13,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import useLocalStorage from "use-local-storage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { QueryClientCustomProvider } from "@/components/QueryClientCustomProvider";
+import { useFetchMyInventory } from "@/hooks/useFetchMyInventory";
 
 const raleway = Raleway({
   weight: ["400", "500", "600", "700", "800", "900"],

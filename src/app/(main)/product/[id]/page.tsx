@@ -46,7 +46,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const inventory = await getInventory(id);
 
   return (
-    <div className="w-full sm:mt-8 flex-1">
+    <div className="w-full sm:mt-8 flex-1 mb-4">
       {inventory && <Product inventory={inventory} />}
     </div>
   );

@@ -70,7 +70,7 @@ export const handleGoogleLogin = async (
   }
 };
 
-export const fetchMyInventory = async () => {
+export const fetchMyInventory = async (): Promise<UserProduct[] | null> => {
   const api = await createApiInstance();
   const response = await api.get(`/inventory/user`);
   return response.data.data; // Assuming your API response has data here
@@ -175,22 +175,30 @@ export const updateProfile = async (data: any, router: any, setUser: any) => {
   }
 };
 
-export const addInventory = async (data: any, router: any) => {
+export const addInventory = async (data: any) => {
   Toast.dismiss();
   const api = await createApiInstance();
   try {
     const response = await api.post(`/inventory`, data);
-    console.log("rr", response);
-    if (response.status === 200 || response.status === 201) {
+    console.log("Response:", response);
+
+    if (response.status >= 200 && response.status < 300) {
       Toast.success("Inventory added successfully");
-    } else {
-      console.log("error addidng inventory", response);
-      Toast.error("Error adding inventory");
+      return response.data; // Return the data for consistent handling
     }
-  } catch (e) {
-    console.error("Error adding inventory:", e);
-    Toast.error("Error adding inventory");
+
+    // Handle unexpected success responses
+    console.warn("Unexpected response status:", response.status);
+    Toast.error("Unexpected response status");
     return null;
+  } catch (error: any) {
+    console.error("Error adding inventory:", error.message || error);
+    Toast.error(
+      error.response.data.message ||
+        error.response.data.error ||
+        "Error adding inventory"
+    );
+    throw error; // Re-throw the error for upstream handling
   }
 };
 
@@ -280,20 +288,13 @@ export const fetchUsers = async (): Promise<User[] | null> => {
   return response.data.data; // Assuming your API response has data here
 };
 
-export const fetchUser = async (router: any): Promise<any[] | null> => {
-  Toast.dismiss();
-  try {
-    const api = await createApiInstance();
-    const response = await api.get(`/user/`);
-    console.log("User response:", response);
+export const fetchUser = async (): Promise<User | null> => {
+  const api = await createApiInstance();
+  const response = await api.get(`/user/`);
+  console.log("User response:", response);
 
-    const data = response.data.data;
-    return data;
-  } catch (error) {
-    console.error("Error fetching user:", error);
-    //Toast.error("Error fetching user");
-    return null;
-  }
+  const data = response.data.data;
+  return data;
 };
 
 export const fetchUserById = async (id: string): Promise<User | null> => {
