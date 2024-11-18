@@ -20,6 +20,7 @@ import { useFetchTopUsers } from "@/hooks/useFetchTopUsers";
 import { useFetchMyInventory } from "@/hooks/useFetchMyInventory";
 import { useFetchShareableLink } from "@/hooks/useFetchShareableLink";
 import { useFetchMyProfile } from "@/hooks/useFetchMyProfile";
+import { useSubscriptionStatus } from "@/hooks/useSubscriptionStatus";
 
 // export async function generateMetadata(): Promise<Metadata> {
 //   return {

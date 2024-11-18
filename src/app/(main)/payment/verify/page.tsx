@@ -17,7 +17,7 @@ export default function Page() {
 
   useEffect(() => {
     queryClient.invalidateQueries({
-      queryKey: ["profile", "users", "shareablelink"],
+      queryKey: ["profile", "users", "shareablelink", "payment"],
     });
   }, []);
 

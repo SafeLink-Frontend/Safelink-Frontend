@@ -5,7 +5,10 @@ import { clearUserData, getAccessToken } from "./userDetails";
 import { PaymentPlan } from "@/types/PaymentPlan";
 import { Answer, Question } from "@/types/Question";
 import { User } from "@/types/user";
-import { SubscriptionStatus } from "@/types/SubscriptionStatus";
+import {
+  SubscriptionData,
+  SubscriptionStatus,
+} from "@/types/SubscriptionStatus";
 import { Product, UserProduct } from "@/types/product";
 
 //const { fetch } = useFetch();
@@ -427,6 +430,13 @@ export const handleResetPassword = async (
     toast.error(error?.response?.data?.message || "An error occurred.");
   }
 };
+
+export const getUserSubscriptionStatus =
+  async (): Promise<SubscriptionData | null> => {
+    const api = createApiInstance();
+    const response = await api.get(`subscription/subscription-status`);
+    return response.data.subscriptionStatus; // Assuming your backend returns 'subscriptionStatus'
+  };
 
 // try {
 //   const response = await axios.post("/api/listing", data);
