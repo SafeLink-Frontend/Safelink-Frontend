@@ -99,8 +99,8 @@ const ProfileHeader = () => {
           <FaArrowLeftLong size={24} /> back
         </button> */}
       </div>
-      <div className="w-full px-[100px] flex items-center mt-[-40px] sm:mt-3 sm1:mt-0 z-40 justify-between sm1:px-2 ">
-        <div className="flex flex-row items-center gap-2 ">
+      <div className="w-full px-[20px] flex items-center mt-[-40px] sm:mt-3 sm1:mt-0 z-40 justify-between sm1:px-2 ">
+        <div className="flex flex-row items-center gap-2  ">
           <button
             onClick={() => setOpen(true)}
             className="w-[150px] h-[150px]  sm1:h-12 sm1:w-12 rounded-full"
@@ -130,12 +130,12 @@ const ProfileHeader = () => {
               <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
             </div>
           )} */}
-          <div className="mt-2 -ml-4">
-            <h1 className="flex items-center gap-1 font-semibold sm:w-auto w-[40vw] text-[22px] sm1:text-[12px] break-words">
+          <div className="mt-2 -ml-8 flex flex-col justify-center ">
+            <h1 className="flex items-center gap-1 font-semibold w-auto  text-[22px] sm1:text-[12px] break-words">
               <span className="max-w-full overflow-hidden">
                 {user?.username ?? user?.email}
               </span>
-              <img src={"/verification.svg"} alt="" />
+              <img src={"/verification.svg"} className="w-4 h-4" alt="" />
             </h1>
             <small className="text-[14px]  sm1:text-[12px] font-semibold leading-5 text-[#737373]">
               Joined: {user?.createdAt && user?.createdAt.slice(0, 4)}
@@ -154,35 +154,27 @@ const ProfileHeader = () => {
               <MdEdit size={20} />
               edit profile
             </Link>
-            {subscriptionStatus?.plan.name !== SubscriptionStatus.FREE &&
-              shareableLink && (
-                <RWebShare
-                  data={{
-                    text: "User Profile",
-                    url: shareableLink?.shareableLink,
-                    title: "share profile",
-                  }}
-                  onClick={() => console.log("shared successfully!")}
-                >
-                  <button className="bg-[#F2BE5C] text-white capitalize flex items-center gap-3 leading-6 p-2 border border-[#F2BE5C] rounded-md cursor-pointer text-nowrap sm1:hidden">
-                    share profile
-                  </button>
-                </RWebShare>
-              )}
 
-            {subscriptionStatus?.plan.name === SubscriptionStatus.FREE ? (
-              <Link
-                href={"/pricing"}
-                className="bg-[#252625] text-[#F2F2F2] capitalize flex items-center gap-3 leading-6 p-2 border border-[#252625] rounded cursor-pointer text-nowrap sm1:hidden"
-              >
-                <HiUpload size={20} />
-                upgrade account
-              </Link>
-            ) : (
-              <div className="text-primary text-[16px] font-semibold flex flex-row min-w-[128px]">
-                {subscriptionStatus?.plan.name} plan
-              </div>
-            )}
+            <RWebShare
+              data={{
+                text: "User Profile",
+                url: shareableLink?.shareableLink,
+                title: "share profile",
+              }}
+              onClick={() => console.log("shared successfully!")}
+            >
+              <button className="bg-[#F2BE5C] text-white capitalize flex items-center gap-3 leading-6 p-2 border border-[#F2BE5C] rounded-md cursor-pointer text-nowrap sm1:hidden">
+                share profile
+              </button>
+            </RWebShare>
+
+            <Link
+              href={"/pricing"}
+              className="bg-[#252625] text-[#F2F2F2] capitalize flex items-center gap-3 leading-6 p-2 border border-[#252625] rounded cursor-pointer text-nowrap sm1:hidden"
+            >
+              <HiUpload size={20} />
+              upgrade account
+            </Link>
           </div>
         </div>
       </div>
@@ -190,23 +182,21 @@ const ProfileHeader = () => {
       <p className="my-2 mx-[5%] sm1:mx-[5%] mt-[28px] text-[#444544] tracking-wide sm:text-[12px] text-[18px] leading-4">
         {user?.about}
       </p>
-      {subscriptionStatus?.plan.name !== SubscriptionStatus.FREE &&
-        shareableLink && (
-          <div className="mb-2 mt-4 w-full justify-center hidden sm1:flex">
-            <RWebShare
-              data={{
-                text: "",
-                url: shareableLink?.shareableLink,
-                title: "share profile",
-              }}
-              onClick={() => console.log("shared successfully!")}
-            >
-              <button className="bg-[#F2BE5C]  w-[90%] rounded-md text-white capitalize flex items-center justify-center gap-3 leading-6 p-2 border border-[#F2BE5C] cursor-pointer text-nowrap">
-                share profile
-              </button>
-            </RWebShare>
-          </div>
-        )}
+
+      <div className="mb-2 mt-4 w-full justify-center hidden sm1:flex">
+        <RWebShare
+          data={{
+            text: "",
+            url: shareableLink?.shareableLink,
+            title: "share profile",
+          }}
+          onClick={() => console.log("shared successfully!")}
+        >
+          <button className="bg-[#F2BE5C]  w-[90%] rounded-md text-white capitalize flex items-center justify-center gap-3 leading-6 p-2 border border-[#F2BE5C] cursor-pointer text-nowrap">
+            share profile
+          </button>
+        </RWebShare>
+      </div>
 
       <div className="hidden sm1:flex items-center justify-between mx-[5%]">
         <>
