@@ -287,8 +287,8 @@ export const fetchQuestionsAnswersByUserId = async (
 };
 
 export const fetchUsers = async (): Promise<User[] | null> => {
-  const response = await axios.get(`${baseUrl}/user/all`); //complete-profiles
-  return response.data.data; // Assuming your API response has data here
+  const response = await axios.get(`${baseUrl}/user/complete-profiles`); //complete-profiles
+  return response.data.users; // Assuming your API response has data here
 };
 
 export const fetchUser = async (): Promise<User | null> => {

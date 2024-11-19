@@ -63,7 +63,7 @@ body {
 }
 
 .bg_blend{
-  background-image: url('/background2.jpeg'), linear-gradient(to right, #00000000, #00000061, #000000CC);
+  background-image: url('/homepage-image-18.jpg'), linear-gradient(to right, #00000000, #00000061, #000000CC);
   background-blend-mode: multiply;
   /* background-color: #171717; */
   background-position: center;

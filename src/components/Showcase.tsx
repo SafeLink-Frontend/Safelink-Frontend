@@ -50,6 +50,7 @@ export function Showcase() {
   };
 
   const { data: users, isLoading, isError } = useFetchTopUsers();
+  console.log("uu", users);
 
   return (
     <>
@@ -135,7 +136,7 @@ export function Showcase() {
       <section className="mb-4">
         <div className="h-[50vh] w-full my-2">
           <div
-            className=" h-full w-full image flex flex-col items-center justify-center bg_blend"
+            className=" h-full w-full image flex flex-col items-center justify-center brightness-75 contrast-75 bg_blend"
             // style={{
             //   backgroundImage: "url('/background2.jpeg')",
             //   backgroundSize: "cover",
