@@ -76,7 +76,7 @@ export default function RootLayout({
     <html lang="en">
       <GoogleOAuthProvider clientId={googleClientKey}>
         <QueryClientCustomProvider>
-          <body className={`${raleway.className}`}>
+          <body className={`${(raleway.className, openSans.className)}`}>
             <Nav>
               <NavLink href={"/create-listing"}>List With Us</NavLink>
               <NavLink href={"/pricing"}>Pricing</NavLink>

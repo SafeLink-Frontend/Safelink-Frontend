@@ -15,12 +15,12 @@ const config: Config = {
       },
 
       fontFamily: {
-        openSsans: ['var(--font-open-sans)'],
-        poppins: ['var(--font-poppins)'],
+        openSans: ["var(--font-open-sans)"],
+        poppins: ["var(--font-poppins)"],
+        raleway: ["var(--font-raleway)"],
       },
 
       colors: {
-      
         primary: "#f2be5c",
       },
     },
@@ -38,5 +38,3 @@ const config: Config = {
   plugins: [],
 };
 export default config;
-
-

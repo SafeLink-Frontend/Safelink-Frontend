@@ -38,4 +38,5 @@ export interface ImageUploaderProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onDelete: (index?: number) => void;
   multiple?: boolean;
+  required?: boolean;
 }

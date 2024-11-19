@@ -179,7 +179,7 @@ const ProfileHeader = () => {
         </div>
       </div>
 
-      <p className="my-2 mx-[5%] sm1:mx-[5%] mt-[28px] text-[#444544] tracking-wide sm:text-[12px] text-[18px] leading-4">
+      <p className="my-2 mx-[5%] sm1:mx-[5%] mt-[28px] text-[#444544] font-raleway text-[14px]">
         {user?.about}
       </p>
 

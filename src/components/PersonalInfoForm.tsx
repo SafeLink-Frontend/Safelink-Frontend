@@ -15,10 +15,10 @@ export const PersonalInfoForm: React.FC<PersonalInfoProps> = ({
   <>
     <div className="flex flex-col items-start gap-2 my-2">
       <label
-        className="text-[#252625] font-medium text-[14px] mb-1 leading-3"
+        className="text-[#252625] flex flex-row items-center font-medium text-[14px] mb-1 leading-3"
         htmlFor="username"
       >
-        User Name
+        User Name <div className="text-red-700 text-[20px]">*</div>
       </label>
       <input
         className="border-[0.5px] border-[#A6A6A6] rounded w-full p-2 focus:outline-none"
@@ -34,10 +34,10 @@ export const PersonalInfoForm: React.FC<PersonalInfoProps> = ({
 
     <div className="flex flex-col items-start gap-2 my-2">
       <label
-        className="text-[#252625] font-medium text-[14px] mb-1 leading-3"
+        className="text-[#252625] font-medium flex flex-row text-[14px] mb-1 leading-3"
         htmlFor="firstName"
       >
-        First Name
+        First Name <div className="text-red-700 text-[20px]">*</div>
       </label>
       <input
         className="border-[0.5px] border-[#A6A6A6] rounded w-full p-2 focus:outline-none"
@@ -53,10 +53,10 @@ export const PersonalInfoForm: React.FC<PersonalInfoProps> = ({
 
     <div className="flex flex-col items-start gap-2 my-2">
       <label
-        className="text-[#252625] font-medium text-[14px] mb-1 leading-3"
+        className="text-[#252625] font-medium flex flex-row text-[14px] mb-1 leading-3"
         htmlFor="lastName"
       >
-        Last Name
+        Last Name <div className="text-red-700 text-[20px]">*</div>
       </label>
       <input
         className="border-[0.5px] border-[#A6A6A6] rounded w-full p-2 focus:outline-none"
@@ -70,12 +70,50 @@ export const PersonalInfoForm: React.FC<PersonalInfoProps> = ({
       />
     </div>
 
-    <div className="flex flex-col items-start mt-4">
+    <div className="flex flex-col items-start gap-2 my-2">
+      <label
+        className="text-[#252625] font-medium flex flex-row text-[14px] mb-1 leading-3"
+        htmlFor="phone1"
+      >
+        Phone Number 1(Whatsapp number){" "}
+        <div className="text-red-700 text-[20px]">*</div>
+      </label>
+      <input
+        className="border-[0.5px] border-[#A6A6A6] rounded w-full p-2 focus:outline-none"
+        type="tel"
+        id="phone1"
+        name="phone1"
+        value={form.phone1 || ""}
+        onChange={onChange}
+        required
+        aria-required="true"
+      />
+    </div>
+
+    <div className="flex flex-col items-start gap-2 my-2">
       <label
         className="text-[#252625] font-medium text-[14px] mb-1 leading-3"
+        htmlFor="phone2"
+      >
+        Phone Number 2
+      </label>
+      <input
+        className="border-[0.5px] border-[#A6A6A6] rounded w-full p-2 focus:outline-none"
+        type="tel"
+        id="phone2"
+        name="phone2"
+        value={form.phone2 || ""}
+        onChange={onChange}
+        aria-required="true"
+      />
+    </div>
+
+    <div className="flex flex-col items-start mt-4">
+      <label
+        className="text-[#252625] font-medium flex flex-row text-[14px] mb-1 leading-3"
         htmlFor="about"
       >
-        About
+        About <div className="text-red-700 text-[20px]">*</div>
       </label>
       <textarea
         className="border-[0.5px] border-[#A6A6A6] rounded w-full p-2 focus:outline-none"
@@ -83,6 +121,7 @@ export const PersonalInfoForm: React.FC<PersonalInfoProps> = ({
         name="about"
         value={form.about || ""}
         onChange={onChange}
+        required
       />
     </div>
   </>

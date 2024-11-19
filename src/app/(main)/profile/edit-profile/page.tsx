@@ -1,5 +1,6 @@
 "use client";
 import Loading from "@/app/loading";
+import { AddressForm } from "@/components/AddressForm";
 import { ImageUploader } from "@/components/ImageUploader";
 import { PersonalInfoForm } from "@/components/PersonalInfoForm";
 import { QuestionsForm } from "@/components/QuestionsForm";
@@ -27,7 +28,7 @@ function Page() {
 
   return (
     <section className="px-4 py-8 sm:mt-8">
-      <form onSubmit={handleSubmit} noValidate>
+      <form onSubmit={handleSubmit}>
         <PersonalInfoForm form={form} onChange={handleChange} />
 
         <ImageUploader
@@ -37,6 +38,7 @@ function Page() {
           onChange={handleChange}
           onDelete={() => handleDelete("profile")}
           multiple={false}
+          required={true}
         />
 
         <ImageUploader
@@ -46,6 +48,7 @@ function Page() {
           onChange={handleChange}
           onDelete={() => handleDelete("cover")}
           multiple={false}
+          required={true}
         />
 
         <ImageUploader
@@ -74,6 +77,8 @@ function Page() {
           onDelete={() => handleDelete("leisurePictures")}
           multiple={true}
         />
+
+        <AddressForm form={form} onChange={handleChange} />
 
         <QuestionsForm
           questions={questions}
