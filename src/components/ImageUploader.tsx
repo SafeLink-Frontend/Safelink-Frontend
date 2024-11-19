@@ -7,6 +7,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   onChange,
   onDelete,
   multiple = false,
+  required = false,
 }) => {
   const renderPreview = () => {
     if (Array.isArray(value)) {
@@ -58,10 +59,10 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   return (
     <div className="flex flex-col items-start mt-4">
       <label
-        className="text-[#252625] font-medium text-[14px] mb-1 leading-3"
+        className="text-[#252625] flex flex-row font-medium text-[14px] mb-1 leading-3"
         htmlFor={name}
       >
-        {label}
+        {label} {required && <div className="text-red-700 text-[20px]">*</div>}
       </label>
       <input
         className="border-[0.5px] border-[#A6A6A6] rounded w-full p-2 focus:outline-none"
@@ -72,6 +73,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
         multiple={multiple}
         accept="image/png,image/jpeg,image/gif"
         aria-label={label}
+        required={required}
       />
       <p className="text-[#252625] font-medium text-[12px] leading-3">
         PNG, JPG, GIF up to 5MB

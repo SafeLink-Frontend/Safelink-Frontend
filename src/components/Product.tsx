@@ -16,6 +16,7 @@ import { UserProduct } from "@/types/product";
 import Loading from "@/app/loading";
 import useListStore from "@/store/useListStore";
 import Toast from "react-hot-toast";
+import { formatCurrency } from "@/util/formatCurrency";
 
 export function Product({ inventory }: { inventory: UserProduct }) {
   const router = useRouter();
@@ -100,10 +101,7 @@ export function Product({ inventory }: { inventory: UserProduct }) {
               {inventory?.title}
             </h2>
             <p className="font-semibold">
-              {new Intl.NumberFormat("en-NG", {
-                style: "currency",
-                currency: "NGN",
-              }).format(inventory?.price ?? 0)}
+              {formatCurrency(inventory.price, inventory.currency)}
             </p>
           </div>
         </div>

@@ -134,19 +134,17 @@ export function Showcase() {
       </section>
 
       <section className="mb-4">
-        <div className="h-[50vh] w-full my-2">
+        <div className="h-[50vh] w-full my-2 relative">
+          {/* Background Image with Overlay */}
           <div
-            className=" h-full w-full image flex flex-col items-center justify-center brightness-75 contrast-75 bg_blend"
-            // style={{
-            //   backgroundImage: "url('/background2.jpeg')",
-            //   backgroundSize: "cover",
-            //   backgroundRepeat: "no-repeat",
-            //   backgroundPosition: "center",
-            // }}
-          >
-            <div className="flex flex-col items-center ">
+            className="absolute inset-0 bg_blend brightness-75 contrast-75"
+            aria-hidden="true"
+          ></div>
+
+          {/* Content */}
+          <div className="relative flex flex-col items-center justify-center h-full">
+            <div className="flex flex-col items-center">
               <h2 className="text-white font-semibold sm:text-lg text-[28px] sm:text-[18px] text-center">
-                {" "}
                 Present Yourself and Your Business Better with{" "}
                 <span className="text-primary uppercase font-semibold text-[28px]">
                   SAFELINK
@@ -157,7 +155,7 @@ export function Showcase() {
                 className="text-[#f2f2f2] sm:w-[90%] w-[80%] text-center sm:text-[14px] mt-2"
               >
                 SAFELINK helps you tell your prospects and clients about
-                yourself, your business and why they should buy from you
+                yourself, your business, and why they should buy from you.
               </p>
             </div>
 

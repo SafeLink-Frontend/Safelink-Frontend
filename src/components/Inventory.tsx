@@ -1,4 +1,5 @@
 import { Product, UserProduct } from "@/types/product";
+import { formatCurrency } from "@/util/formatCurrency";
 import Link from "next/link";
 import React from "react";
 import { FaRegHeart } from "react-icons/fa";
@@ -22,7 +23,7 @@ const Inventory = ({ inventory }: { inventory: UserProduct[] }) => {
                 {item?.title}
               </p>
               <p className="text-[#49454F] text-[16px] tracking-wide mb-2">
-                {item.currency} {item?.price}
+                {formatCurrency(item.price, item.currency)}
               </p>
               <small className="text-[#49454F] text-[14px] leading-5 line-clamp-5 ">
                 {item?.description}
