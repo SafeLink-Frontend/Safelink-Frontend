@@ -7,8 +7,8 @@ interface AddressFormProps {
 }
 
 export const AddressForm: React.FC<AddressFormProps> = ({ form, onChange }) => (
-  <>
-    <div className="flex flex-col items-start mt-4">
+  <div className="flex flex-col items-center">
+    <div className="flex flex-col sm:w-full w-[60%] items-start mt-4">
       <label
         className="text-[#252625] flex flex-row font-medium text-[14px] mb-1 leading-3"
         htmlFor="address"
@@ -23,10 +23,11 @@ export const AddressForm: React.FC<AddressFormProps> = ({ form, onChange }) => (
         name="address"
         value={form.address || ""}
         onChange={onChange}
+        maxLength={70}
       />
     </div>
 
-    <div className="flex flex-col items-start mt-4">
+    <div className="flex flex-col sm:w-full w-[60%] items-start mt-4">
       <label
         className="text-[#252625] font-medium text-[14px] mb-1 leading-3"
         htmlFor="country"
@@ -40,10 +41,11 @@ export const AddressForm: React.FC<AddressFormProps> = ({ form, onChange }) => (
         name="country"
         value={form.country || ""}
         onChange={onChange}
+        maxLength={25}
       />
     </div>
 
-    <div className="flex flex-col items-start mt-4">
+    <div className="flex flex-col sm:w-full w-[60%] items-start mt-4">
       <label
         className="text-[#252625] font-medium text-[14px] mb-1 leading-3"
         htmlFor="state"
@@ -57,7 +59,8 @@ export const AddressForm: React.FC<AddressFormProps> = ({ form, onChange }) => (
         name="state"
         value={form.state || ""}
         onChange={onChange}
+        maxLength={25}
       />
     </div>
-  </>
+  </div>
 );

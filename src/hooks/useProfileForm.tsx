@@ -9,6 +9,9 @@ import {
 import { Answer, FormState, Question } from "@/types/edit-profile";
 import { User } from "@/types/user";
 import { convertFilesToBase64, convertFileToBase64 } from "@/util/convertImage";
+import { toast } from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
+import { SubscriptionData } from "@/types/SubscriptionStatus";
 
 export const useProfileForm = (
   router: AppRouterInstance,
@@ -18,6 +21,11 @@ export const useProfileForm = (
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [questions, setQuestions] = useState<Question[] | null>(null);
+  const queryClient = useQueryClient();
+  const subscriptionData: SubscriptionData | undefined =
+    queryClient.getQueryData(["subscription"]);
+  const subscriptionStatus = subscriptionData?.plan.name;
+
   const [form, setForm] = useState<FormState>({
     username: initialUser?.username || "",
     about: initialUser?.about || "",
@@ -44,7 +52,7 @@ export const useProfileForm = (
     try {
       const [questionsData, answersData] = await Promise.all([
         fetchQuestions(router),
-        fetchQuestionsAnswers(router),
+        fetchQuestionsAnswers(),
       ]);
 
       if (questionsData) {
@@ -106,6 +114,7 @@ export const useProfileForm = (
   ) => {
     const { name, value } = e.target;
     const files = (e.target as HTMLInputElement).files;
+    // console.log(form.phone1, form.address);
 
     if (files) {
       setForm((prevForm: any) => ({
@@ -158,11 +167,24 @@ export const useProfileForm = (
       return;
     }
 
+    if (!form.profile) {
+      setError("Please upload both cover and profile images.");
+      toast.error("Please select a profile picture");
+      return;
+    }
+
+    if (!form.cover) {
+      setError("Please upload both cover and profile images.");
+      toast.error("Please select a  cover picture");
+      return;
+    }
+
     setIsLoading(true);
     setError(null);
 
     try {
       // Handle answers submission
+
       for (const [questionId, answer] of Object.entries(form.answers)) {
         if (answer && answer.trim() !== "") {
           await submitAnswer(questionId, answer, router);
@@ -200,7 +222,8 @@ export const useProfileForm = (
           _id: initialUser._id,
         },
         router,
-        setUser
+        setUser,
+        subscriptionStatus
       );
 
       if (response) {

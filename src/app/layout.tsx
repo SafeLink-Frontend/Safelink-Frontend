@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Open_Sans, Raleway } from "next/font/google";
+import { Open_Sans, Raleway } from "next/font/google";
 import "./globals.css";
 import { Nav, NavLink } from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -10,10 +10,7 @@ import LoginModal from "@/components/LoginModal";
 import SignupModal from "@/components/SignupModal";
 import { Toaster } from "react-hot-toast";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import useLocalStorage from "use-local-storage";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { QueryClientCustomProvider } from "@/components/QueryClientCustomProvider";
-import { useFetchMyInventory } from "@/hooks/useFetchMyInventory";
 
 const raleway = Raleway({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -37,12 +34,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     title: "SAFELINK",
+    siteName: "SAFELINK",
     description:
       "SafeLink helps you organize your business details, photos, and prices in one simple link. No need to fill up your phone or your clients' phones with too many pictures—just send one link! It's easier for your customers to buy from you and share your business with others.",
     //siteName: "safelink",
     images: [
       {
-        url: "/homepage-image-2.jpg",
+        url: "https://www.joinsafelink.com/homepage-image-2.jpg",
         width: "1200",
         height: "630",
         alt: "SAFELINK Homepage Preview",
@@ -52,7 +50,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/favicon.ico",
+        url: "https://www.joinsafelink.com/favicon.ico",
         sizes: "any",
       },
     ],

@@ -6,6 +6,7 @@ import useListStore from "@/store/useListStore";
 import Link from "next/link";
 import Loading from "@/app/loading";
 import { useFetchTopUsers } from "@/hooks/useFetchTopUsers";
+import { useFetchStaticUsers } from "@/hooks/useFetchStaticUsers";
 //import { User } from "@/types/user"; // Add this import
 
 interface _Product extends Product {
@@ -49,8 +50,14 @@ export function Showcase() {
     }
   };
 
-  const { data: users, isLoading, isError } = useFetchTopUsers();
-  console.log("uu", users);
+  const { data: users, isPending, isError } = useFetchTopUsers();
+  const { data: staticUers, isPending: isStaticUsersPending } =
+    useFetchStaticUsers();
+  const combinedUsers = Array.from(
+    new Set([...(users || []), ...(staticUers || [])])
+  );
+
+  // console.log("uu", users);
 
   return (
     <>
@@ -80,15 +87,15 @@ export function Showcase() {
             Our Top Sellers
           </h2>
         </div>
-        {isLoading ? (
+        {isPending || isStaticUsersPending ? (
           <div className="flex justify-center w-full">
             <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-primary"></div>
           </div>
         ) : (
           <div className="grid grid-cols-3 sm:grid-cols-2 gap-10 sm:gap-2">
-            {users &&
-              users.length > 0 &&
-              users?.map((item, index) => (
+            {combinedUsers &&
+              combinedUsers.length > 0 &&
+              combinedUsers?.map((item, index) => (
                 <Link
                   href={{
                     //pathname: `/user/${item?.username?.replace(/\s+/g, "-").toLowerCase()}`,

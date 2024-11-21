@@ -146,7 +146,12 @@ export const fetchInventoryBySearch = async (
   }
 };
 
-export const updateProfile = async (data: any, router: any, setUser: any) => {
+export const updateProfile = async (
+  data: any,
+  router: any,
+  setUser: any,
+  subscriptionStatus: SubscriptionStatus | undefined
+) => {
   Toast.dismiss();
   const api = await createApiInstance();
   try {
@@ -160,7 +165,7 @@ export const updateProfile = async (data: any, router: any, setUser: any) => {
         Toast.success("Profile updated successfully");
 
         setTimeout(() => {
-          if (user.subscriptionStatus === SubscriptionStatus.FREE) {
+          if (subscriptionStatus === SubscriptionStatus.FREE) {
             router.push("/pricing");
           } else {
             router.push("/profile");
@@ -249,9 +254,7 @@ export const submitAnswer = async (
   }
 };
 
-export const fetchQuestionsAnswers = async (
-  router: any
-): Promise<Answer[] | null> => {
+export const fetchQuestionsAnswers = async (): Promise<Answer[] | null> => {
   Toast.dismiss();
   try {
     const api = await createApiInstance();
@@ -289,6 +292,11 @@ export const fetchQuestionsAnswersByUserId = async (
 export const fetchUsers = async (): Promise<User[] | null> => {
   const response = await axios.get(`${baseUrl}/user/complete-profiles`); //complete-profiles
   return response.data.users; // Assuming your API response has data here
+};
+
+export const fetchStaticUsers = async (): Promise<User[] | null> => {
+  const response = await axios.get(`${baseUrl}/user/static-complete-profiles`); //complete-profiles
+  return response.data.data; // Assuming your API response has data here
 };
 
 export const fetchUser = async (): Promise<User | null> => {

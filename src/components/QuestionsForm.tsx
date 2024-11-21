@@ -12,9 +12,12 @@ export const QuestionsForm: React.FC<QuestionsFormProps> = ({
   answers,
   onChange,
 }) => (
-  <>
+  <div className="flex flex-col items-center">
     {questions?.map((question) => (
-      <div key={question.id} className="flex flex-col items-start my-2">
+      <div
+        key={question.id}
+        className="flex flex-col sm:w-full w-[60%] items-start my-2"
+      >
         <label
           className="text-[#252625] font-medium text-[14px] mt-4 mb-1 leading-3"
           htmlFor={question.id}
@@ -28,8 +31,9 @@ export const QuestionsForm: React.FC<QuestionsFormProps> = ({
           name={question.id}
           value={answers[question.id] || ""}
           onChange={onChange}
+          maxLength={500}
         />
       </div>
     ))}
-  </>
+  </div>
 );

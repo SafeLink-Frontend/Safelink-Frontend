@@ -15,9 +15,9 @@ const config: Config = {
       },
 
       fontFamily: {
+        raleway: ["var(--font-raleway)"],
         openSans: ["var(--font-open-sans)"],
         poppins: ["var(--font-poppins)"],
-        raleway: ["var(--font-raleway)"],
       },
 
       colors: {

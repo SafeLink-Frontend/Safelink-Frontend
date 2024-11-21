@@ -57,7 +57,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-start mt-4">
+    <div className="flex flex-col items-start sm:w-full w-[60%] mt-4">
       <label
         className="text-[#252625] flex flex-row font-medium text-[14px] mb-1 leading-3"
         htmlFor={name}
@@ -73,7 +73,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
         multiple={multiple}
         accept="image/png,image/jpeg,image/gif"
         aria-label={label}
-        required={required}
+        // required={required}
       />
       <p className="text-[#252625] font-medium text-[12px] leading-3">
         PNG, JPG, GIF up to 5MB
