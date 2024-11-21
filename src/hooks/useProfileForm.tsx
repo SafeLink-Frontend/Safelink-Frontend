@@ -15,7 +15,7 @@ import { SubscriptionData } from "@/types/SubscriptionStatus";
 
 export const useProfileForm = (
   router: AppRouterInstance,
-  initialUser: User | null,
+  initialUser: User | null | undefined,
   setUser: (user: any) => void
 ) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -152,16 +152,20 @@ export const useProfileForm = (
   const handleDelete = useCallback((name: keyof FormState, index?: number) => {
     setForm((prev) => {
       if (index !== undefined && Array.isArray(prev[name])) {
+        // Handle deletion in arrays (e.g., professionalPictures, workPictures)
         const updatedFiles = [...(prev[name] as (File | string)[])];
         updatedFiles.splice(index, 1);
         return { ...prev, [name]: updatedFiles };
       }
+
+      // Handle single image deletion (e.g., profile, cover)
       return { ...prev, [name]: null };
     });
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("form", form);
     if (!initialUser?._id) {
       setError("User ID is missing");
       return;
@@ -218,7 +222,7 @@ export const useProfileForm = (
           coverPicture: coverPictureBase64,
           professionalPictures: professionalPicturesBase64,
           workPictures: workPicturesBase64,
-          leisurePicturesBase64: leisurePicturesBase64,
+          leisurePictures: leisurePicturesBase64,
           _id: initialUser._id,
         },
         router,
