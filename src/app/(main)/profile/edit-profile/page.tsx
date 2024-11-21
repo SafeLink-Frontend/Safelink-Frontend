@@ -6,13 +6,18 @@ import { PersonalInfoForm } from "@/components/PersonalInfoForm";
 import { QuestionsForm } from "@/components/QuestionsForm";
 import { useProfileForm } from "@/hooks/useProfileForm";
 import useUserStore from "@/store/useUserStore";
+import { User } from "@/types/user";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { Router } from "next/router";
 import React from "react";
 
 function Page() {
   const router = useRouter();
-  const { user, setUser } = useUserStore();
+  const { setUser } = useUserStore();
+  const querylient = useQueryClient();
+  const user: User | undefined = querylient.getQueryData(["profile"]);
+
   const {
     isLoading,
     error,
@@ -57,7 +62,7 @@ function Page() {
             name="professionalPictures"
             value={form.professionalPictures}
             onChange={handleChange}
-            onDelete={() => handleDelete("professionalPictures")}
+            onDelete={(index) => handleDelete("professionalPictures", index)}
             multiple={true}
           />
 
@@ -66,7 +71,7 @@ function Page() {
             name="workPictures"
             value={form.workPictures}
             onChange={handleChange}
-            onDelete={() => handleDelete("workPictures")}
+            onDelete={(index) => handleDelete("workPictures", index)}
             multiple={true}
           />
 
@@ -75,7 +80,7 @@ function Page() {
             name="leisurePictures"
             value={form.leisurePictures}
             onChange={handleChange}
-            onDelete={() => handleDelete("leisurePictures")}
+            onDelete={(index) => handleDelete("leisurePictures", index)}
             multiple={true}
           />
         </div>
