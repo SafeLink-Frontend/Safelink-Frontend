@@ -20,38 +20,26 @@ import LoadingModal from "@/components/LoadingModal";
 import Loading from "@/app/loading";
 import UserProfileHeader from "@/components/UserProfileHeader";
 import Head from "next/head";
-import { User } from "@/types/user";
+import { useFetchUserProfile } from "@/hooks/useFetchUserProfile";
+import { useFetchUserQuestionsAnsAnswers } from "@/hooks/useFetchUserQuestionsAndAnswers";
+import { useFetchUserInventory } from "@/hooks/useFetchUserInventory";
 
 const Page = () => {
-  const [user, setUser] = useState<User | null>(null);
   const params = useSearchParams();
   const id = params.get("userId");
   console.log({ id });
-
-  const fetchUser = async () => {
-    if (!id) return;
-
-    const user = await fetchUserById(id);
-    console.log("puser", user);
-    if (user) setUser(user);
-  };
-
-  useEffect(() => {
-    console.log({ id });
-    fetchUser();
-  }, [id]);
-
-  console.log("user", user);
+  const { data: user, isFetching: isUserFetching } = useFetchUserProfile(
+    id || ""
+  );
+  const { data: questions, isFetching: isQuestionsFetching } =
+    useFetchUserQuestionsAnsAnswers(id || "");
+  const { data: inventory, isFetching: isInventoryFetching } =
+    useFetchUserInventory(id || "");
 
   const [type, setType] = useState<"images" | "inventory">("inventory");
-  const router = useRouter();
-  //const inventory = createObjectCopies(inventoryObject);
-  const [questions, setQuestions] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [inventory, setInventory] = useState<Product | any>({});
   const { favorites, addToFavorites, removeFromFavorites, clearFavorites } =
     useListStore();
-  const [isCategoriesLoading, setIsCategoriesLoading] = useState(true);
 
   const categories = [
     {
@@ -68,41 +56,10 @@ const Page = () => {
     },
   ];
 
-  const fetchQuestionsAndAnswerdata = async () => {
-    setIsCategoriesLoading(true);
-    const response = await fetchQuestionsAnswersByUserId(id ?? "");
-    if (response) {
-      setQuestions(response);
-      setIsCategoriesLoading(false);
-    }
-  };
-
-  const loadInventory = async () => {
-    setIsLoading(true);
-    const data = user && (await fetchUserInventory(user._id));
-    if (data) {
-      setInventory(data);
-      console.log("loaded inventory", data);
-    }
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    if (id) {
-      fetchQuestionsAndAnswerdata();
-    }
-  }, [id]);
-
-  useEffect(() => {
-    if (user) {
-      loadInventory();
-    }
-  }, [user]);
-
   return (
     <div className="w-full  flex-1">
-      <LoadingModal isOpen={user === null}>
-        {user === null && <Loading />}
+      <LoadingModal isOpen={isUserFetching}>
+        {isUserFetching && <Loading />}
       </LoadingModal>
       {user && (
         <Head>
@@ -134,7 +91,7 @@ const Page = () => {
 
       <div className="w-full">
         {user && <UserProfileHeader user={user} />}
-        {questions.length > 0 && <QA questions={questions} />}
+        {questions && questions.length > 0 && <QA questions={questions} />}
       </div>
 
       <div className="flex-row flex w-full justify-around my-8 border-y-4 border-[#ECEDEE]">
@@ -166,7 +123,7 @@ const Page = () => {
         </button>
       </div>
       {type === "images" ? (
-        isCategoriesLoading ? (
+        isUserFetching ? (
           <Loading />
         ) : categories.length > 0 ? (
           <PictureCategories categories={categories} />
@@ -175,9 +132,9 @@ const Page = () => {
             <p>No images found</p>
           </div>
         )
-      ) : isLoading ? (
+      ) : isInventoryFetching ? (
         <Loading />
-      ) : inventory.length > 0 ? (
+      ) : inventory && inventory.length > 0 ? (
         <Inventory inventory={inventory} />
       ) : (
         <div>

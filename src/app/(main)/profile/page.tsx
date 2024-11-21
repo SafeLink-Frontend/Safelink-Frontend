@@ -21,6 +21,7 @@ import { useFetchMyInventory } from "@/hooks/useFetchMyInventory";
 import { useFetchShareableLink } from "@/hooks/useFetchShareableLink";
 import { useFetchMyProfile } from "@/hooks/useFetchMyProfile";
 import { useSubscriptionStatus } from "@/hooks/useSubscriptionStatus";
+import { useFetchMyQuestionsAnsAnswers } from "@/hooks/useFetchMyQuestionsAndAnswer";
 
 // export async function generateMetadata(): Promise<Metadata> {
 //   return {
@@ -55,11 +56,12 @@ const Page = () => {
 
   const [type, setType] = useState<"images" | "inventory">("inventory");
   const router = useRouter();
-  //const inventory = createObjectCopies(inventoryObject);
-  const [questions, setQuestions] = useState<any>([]);
   const { favorites, addToFavorites, removeFromFavorites, clearFavorites } =
     useListStore();
   const [isCategoriesLoading, setIsCategoriesLoading] = useState(true);
+  const { data: subscriptionStatus } = useSubscriptionStatus();
+
+  console.log({ subscriptionStatus });
 
   const categories = [
     {
@@ -76,25 +78,13 @@ const Page = () => {
     },
   ];
 
-  const fetchQuestionsAndAnswerdata = async () => {
-    setIsCategoriesLoading(true);
-    const response = await fetchQuestionsAnswers(router);
-    if (response) {
-      setQuestions(response);
-      setIsCategoriesLoading(false);
-    } else {
-      setIsCategoriesLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchQuestionsAndAnswerdata();
-    setIsCategoriesLoading(true);
-    // Simulate loading time for categories (remove this in production)
-    setTimeout(() => setIsCategoriesLoading(false), 1000);
-  }, []);
-
-  const { data: inventory, isLoading, isError } = useFetchMyInventory();
+  const {
+    data: inventory,
+    isPending: isInventoryPending,
+    isError,
+  } = useFetchMyInventory();
+  const { data: questions, isPending: isQuestionsPending } =
+    useFetchMyQuestionsAnsAnswers();
 
   const LoadingSpinner = () => (
     <div className="flex flex-1 min-h-screen justify-center items-center">
@@ -132,7 +122,7 @@ const Page = () => {
       )}
 
       <ProfileHeader />
-      {questions.length > 0 && <QA questions={questions} />}
+      {questions && questions.length > 0 && <QA questions={questions} />}
       <div className="flex-row flex justify-around my-8 border-y-4 border-[#ECEDEE]">
         <button
           className="items-center flex flex-col"
@@ -171,7 +161,7 @@ const Page = () => {
             <p>No images found</p>
           </div>
         )
-      ) : isLoading ? (
+      ) : isInventoryPending ? (
         <LoadingSpinner />
       ) : inventory && inventory?.length > 0 ? (
         <Inventory inventory={inventory} />

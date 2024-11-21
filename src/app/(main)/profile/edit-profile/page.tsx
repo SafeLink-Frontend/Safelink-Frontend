@@ -31,52 +31,54 @@ function Page() {
       <form onSubmit={handleSubmit}>
         <PersonalInfoForm form={form} onChange={handleChange} />
 
-        <ImageUploader
-          label="Profile picture"
-          name="profile"
-          value={form.profile}
-          onChange={handleChange}
-          onDelete={() => handleDelete("profile")}
-          multiple={false}
-          required={true}
-        />
+        <div className="flex flex-col items-center">
+          <ImageUploader
+            label="Profile picture"
+            name="profile"
+            value={form.profile}
+            onChange={handleChange}
+            onDelete={() => handleDelete("profile")}
+            multiple={false}
+            required={true}
+          />
 
-        <ImageUploader
-          label="Cover picture"
-          name="cover"
-          value={form.cover}
-          onChange={handleChange}
-          onDelete={() => handleDelete("cover")}
-          multiple={false}
-          required={true}
-        />
+          <ImageUploader
+            label="Cover picture"
+            name="cover"
+            value={form.cover}
+            onChange={handleChange}
+            onDelete={() => handleDelete("cover")}
+            multiple={false}
+            required={true}
+          />
 
-        <ImageUploader
-          label="Professional pictures"
-          name="professionalPictures"
-          value={form.professionalPictures}
-          onChange={handleChange}
-          onDelete={() => handleDelete("professionalPictures")}
-          multiple={true}
-        />
+          <ImageUploader
+            label="Professional pictures"
+            name="professionalPictures"
+            value={form.professionalPictures}
+            onChange={handleChange}
+            onDelete={() => handleDelete("professionalPictures")}
+            multiple={true}
+          />
 
-        <ImageUploader
-          label="Work pictures"
-          name="workPictures"
-          value={form.workPictures}
-          onChange={handleChange}
-          onDelete={() => handleDelete("workPictures")}
-          multiple={true}
-        />
+          <ImageUploader
+            label="Work pictures"
+            name="workPictures"
+            value={form.workPictures}
+            onChange={handleChange}
+            onDelete={() => handleDelete("workPictures")}
+            multiple={true}
+          />
 
-        <ImageUploader
-          label="Leisure pictures"
-          name="leisurePictures"
-          value={form.leisurePictures}
-          onChange={handleChange}
-          onDelete={() => handleDelete("leisurePictures")}
-          multiple={true}
-        />
+          <ImageUploader
+            label="Leisure pictures"
+            name="leisurePictures"
+            value={form.leisurePictures}
+            onChange={handleChange}
+            onDelete={() => handleDelete("leisurePictures")}
+            multiple={true}
+          />
+        </div>
 
         <AddressForm form={form} onChange={handleChange} />
 
@@ -88,7 +90,7 @@ function Page() {
 
         <button
           type="submit"
-          className="bg-primary text-white rounded-md px-4 py-2 mt-4"
+          className="bg-primary text-white rounded-md px-4 py-2 sm:ml-0 ml-[20%] mt-4"
         >
           Save Changes
         </button>

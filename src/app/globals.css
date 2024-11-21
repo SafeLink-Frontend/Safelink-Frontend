@@ -18,6 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
+  font-family: var(--raleway);
   /* background: linear-gradient(
       to bottom,
       transparent,
@@ -45,6 +46,17 @@ body {
   align-items: center;
   color: white;
 } */
+
+/* @layer base {
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/Roboto.woff2) format('woff2');
+  }
+} */
+
 
 
 .modal-enter {

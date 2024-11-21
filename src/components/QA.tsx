@@ -1,10 +1,7 @@
+import { Answer } from "@/types/Question";
 import React from "react";
 
-const QA = ({
-  questions,
-}: {
-  questions: { question: string; answer: string }[];
-}) => {
+const QA = ({ questions }: { questions: Answer[] }) => {
   return (
     <section className="pr-6 ml-[5%] mb-8">
       <div className="text-[18px] font-medium my-4 leading-7">

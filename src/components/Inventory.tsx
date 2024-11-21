@@ -29,15 +29,15 @@ const Inventory = ({ inventory }: { inventory: UserProduct[] }) => {
                 {item?.description}
               </small>
             </div>
-            <button className="bg-[#F2BE5C] py-2 rounded-lg w-full text-white border-[#CAC4D0] border">
-              <Link
-                href={{
-                  pathname: `product/${item._id}`,
-                }}
-              >
-                view more
-              </Link>
-            </button>
+
+            <Link
+              href={{
+                pathname: `/product/${item._id}`,
+              }}
+              className="bg-[#F2BE5C] py-2 rounded-lg w-full flex justify-center text-white border-[#CAC4D0] border"
+            >
+              view more
+            </Link>
           </div>
         ))}
       </div>

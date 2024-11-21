@@ -107,6 +107,7 @@ export default function CreateListing() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded"
+            maxLength={250}
           />
         </div>
         <div className="mb-4">
