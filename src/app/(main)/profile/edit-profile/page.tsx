@@ -44,7 +44,7 @@ function Page() {
             onChange={handleChange}
             onDelete={() => handleDelete("profile")}
             multiple={false}
-            required={true}
+            // required={true}
           />
 
           <ImageUploader
@@ -54,7 +54,7 @@ function Page() {
             onChange={handleChange}
             onDelete={() => handleDelete("cover")}
             multiple={false}
-            required={true}
+            // required={true}
           />
 
           <ImageUploader

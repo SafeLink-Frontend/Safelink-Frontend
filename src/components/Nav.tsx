@@ -81,7 +81,17 @@ export function Nav({ children }: { children: ReactNode }) {
                   }}
                   className="text-[#f2f2f2]"
                 >
-                  <FaRegUserCircle size={30} />
+                  {user.profilePicture ? (
+                    <img
+                      className="w-8 h-8 border-gray-700 border rounded-full"
+                      src={user.profilePicture}
+                    />
+                  ) : (
+                    <FaRegUserCircle
+                      size={30}
+                      color={pathName === "/profile" ? "#f2be56" : "#fff"}
+                    />
+                  )}
                 </Link>
               </div>
             ) : (
@@ -127,10 +137,17 @@ export function Nav({ children }: { children: ReactNode }) {
               }}
               className=""
             >
-              <FaRegUserCircle
-                size={30}
-                color={pathName === "/profile" ? "#f2be56" : "#fff"}
-              />
+              {user.profilePicture ? (
+                <img
+                  className="w-8 h-8 rounded-full border border-gray-700"
+                  src={user.profilePicture}
+                />
+              ) : (
+                <FaRegUserCircle
+                  size={30}
+                  color={pathName === "/profile" ? "#f2be56" : "#fff"}
+                />
+              )}
             </Link>
           ) : (
             <>

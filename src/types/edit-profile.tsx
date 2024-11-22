@@ -26,7 +26,7 @@ export interface FormState {
   state: string;
   zip: string;
   email: string;
-  phone1: string;
+  phoneNumber: string;
   phone2: string;
   answers: Record<string, string>;
 }
