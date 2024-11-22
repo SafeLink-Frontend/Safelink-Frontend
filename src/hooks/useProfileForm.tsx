@@ -41,7 +41,7 @@ export const useProfileForm = (
     state: initialUser?.state || "",
     zip: "",
     email: initialUser?.email || "",
-    phone1: initialUser?.phoneNumber || "",
+    phoneNumber: initialUser?.phoneNumber || "",
     phone2: "",
     answers: {},
   });
@@ -171,17 +171,17 @@ export const useProfileForm = (
       return;
     }
 
-    if (!form.profile) {
-      setError("Please upload both cover and profile images.");
-      toast.error("Please select a profile picture");
-      return;
-    }
+    // if (!form.profile) {
+    //   setError("Please upload both cover and profile images.");
+    //   toast.error("Please select a profile picture");
+    //   return;
+    // }
 
-    if (!form.cover) {
-      setError("Please upload both cover and profile images.");
-      toast.error("Please select a  cover picture");
-      return;
-    }
+    // if (!form.cover) {
+    //   setError("Please upload both cover and profile images.");
+    //   toast.error("Please select a  cover picture");
+    //   return;
+    // }
 
     setIsLoading(true);
     setError(null);

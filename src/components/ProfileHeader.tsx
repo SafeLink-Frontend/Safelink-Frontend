@@ -113,7 +113,7 @@ const ProfileHeader = () => {
           </button>
           <button
             onClick={handleImageClick}
-            className="relative -bottom-12 -left-8 sm:-bottom-4 sm:-left-4 sm1:-bottom-[28px]  sm1:-left-8 rounded-full bg-gray-800/80 p-2 sm:p-1 cursor-pointer hover:bg-gray-700/80 transition-colors"
+            className="relative -bottom-12 -left-8 sm:-bottom-4 sm:-left-4 sm1:-bottom-[24px]  sm1:-left-[28px] rounded-full bg-gray-800/80 p-2 sm:p-1 sm1-p-1 cursor-pointer hover:bg-gray-700/80 transition-colors"
             disabled={isUploading}
           >
             <FaRegEdit size={"12px"} className="text-primary z-50" />

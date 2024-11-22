@@ -290,7 +290,7 @@ export const fetchQuestionsAnswersByUserId = async (
 };
 
 export const fetchUsers = async (): Promise<User[] | null> => {
-  const response = await axios.get(`${baseUrl}/user/complete-profiles`); //complete-profiles
+  const response = await axios.get(`${baseUrl}/user/top-12-sellers`); //complete-profiles
   return response.data.users; // Assuming your API response has data here
 };
 

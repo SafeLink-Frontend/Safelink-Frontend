@@ -51,17 +51,20 @@ import { useFetchMyQuestionsAnsAnswers } from "@/hooks/useFetchMyQuestionsAndAns
 
 const Page = () => {
   // const { user } = useUserStore();
-  const { data: user } = useFetchMyProfile();
+  const { data: user, isPending: isUserPending } = useFetchMyProfile();
   console.log("user", user);
 
   const [type, setType] = useState<"images" | "inventory">("inventory");
   const router = useRouter();
   const { favorites, addToFavorites, removeFromFavorites, clearFavorites } =
     useListStore();
-  const [isCategoriesLoading, setIsCategoriesLoading] = useState(true);
-  const { data: subscriptionStatus } = useSubscriptionStatus();
 
-  console.log({ subscriptionStatus });
+  const {
+    data: subscriptionStatus,
+    isPending: isUserSunscriptionStatudPending,
+  } = useSubscriptionStatus();
+
+  console.log("sub status", subscriptionStatus?.plan.name);
 
   const categories = [
     {
@@ -152,7 +155,7 @@ const Page = () => {
         </button>
       </div>
       {type === "images" ? (
-        isCategoriesLoading ? (
+        isUserPending ? (
           <LoadingSpinner />
         ) : categories.length > 0 ? (
           <PictureCategories categories={categories} />
