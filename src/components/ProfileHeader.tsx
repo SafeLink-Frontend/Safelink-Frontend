@@ -23,15 +23,16 @@ import { updateProfilePicture } from "@/lib/api";
 import Loading from "@/app/loading";
 import { useFetchShareableLink } from "@/hooks/useFetchShareableLink";
 import { useSubscriptionStatus } from "@/hooks/useSubscriptionStatus";
+import { useFetchMyProfile } from "@/hooks/useFetchMyProfile";
 //import { ShareSocial } from "react-share-social";
 
 const ProfileHeader = () => {
   const router = useRouter();
-  const { user, setUser } = useUserStore();
   const { data: shareableLink, error } = useFetchShareableLink();
   console.log("shareable link", shareableLink, error);
   const { data: subscriptionStatus } = useSubscriptionStatus();
   console.log("subscription status", subscriptionStatus);
+  const { data: user } = useFetchMyProfile();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -111,13 +112,13 @@ const ProfileHeader = () => {
               alt="profile"
             />
           </button>
-          <button
+          {/* <button
             onClick={handleImageClick}
             className="relative -bottom-12 -left-8 sm:-bottom-4 sm:-left-4 sm1:-bottom-[24px]  sm1:-left-[28px] rounded-full bg-gray-800/80 p-2 sm:p-1 sm1-p-1 cursor-pointer hover:bg-gray-700/80 transition-colors"
             disabled={isUploading}
           >
             <FaRegEdit size={"12px"} className="text-primary z-50" />
-          </button>
+          </button> */}
           <input
             ref={fileInputRef}
             type="file"
@@ -130,7 +131,7 @@ const ProfileHeader = () => {
               <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
             </div>
           )} */}
-          <div className="mt-2 -ml-8 flex flex-col justify-center ">
+          <div className="mt-2  flex flex-col justify-center ">
             <h1 className="flex items-center gap-1 font-semibold w-auto  text-[22px] sm1:text-[12px] break-words">
               <span className="max-w-full overflow-hidden">
                 {user?.username ?? user?.email}
@@ -179,7 +180,7 @@ const ProfileHeader = () => {
         </div>
       </div>
 
-      <p className="my-2 mx-[5%] sm1:mx-[5%] mt-[28px] text-[#444544] font-raleway text-[14px]">
+      <p className="my-2 mx-[5%] sm1:mx-[5%] mt-[28px] text-[#444544] font-raleway text-[18px]">
         {user?.about}
       </p>
 

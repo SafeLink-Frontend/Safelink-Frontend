@@ -45,7 +45,9 @@ export function Showcase() {
         title: data.title,
         description: data.description,
         price: data.price,
+        currency: data.currency,
         image: data.images[0],
+        owner: { id: data.owner._id, phoneNumber: data.owner.phoneNumber },
       });
     }
   };

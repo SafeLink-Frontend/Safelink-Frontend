@@ -6,7 +6,7 @@ export const useFetchMyProfile = () => {
   return useQuery({
     queryKey: ["profile"],
     queryFn: fetchUser,
-    staleTime: 10 * 60 * 1000, // Cache the data for 5 minutes
-    refetchOnReconnect: "always",
+    staleTime: 5 * 60 * 1000, // Cache the data for 5 minutes
+    // refetchOnReconnect: "always",
   });
 };

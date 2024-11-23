@@ -1,13 +1,19 @@
 // userStore.ts
 
-import create from "zustand";
+import { Product } from "@/types/product";
+import { create } from "zustand";
 
 type FavoriteItem = {
   id: string; // Assuming item IDs are strings
   title: string;
   description: string;
   price: number;
+  currency: string;
   image: string;
+  owner: {
+    id: string;
+    phoneNumber: number;
+  };
 };
 
 type ListStore = {

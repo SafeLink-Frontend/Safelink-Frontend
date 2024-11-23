@@ -10,6 +10,6 @@ export const useFetchMyQuestionsAnsAnswers = () => {
   return useQuery({
     queryKey: ["my-answers"],
     queryFn: fetchQuestionsAnswers,
-    staleTime: 30 * 60 * 1000, // Cache the data for 5 minutes
+    staleTime: 10 * 60 * 1000, // Cache the data for 5 minutes
   });
 };

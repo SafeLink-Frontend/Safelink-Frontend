@@ -73,7 +73,7 @@ export default function CreateListing() {
       const response = await addInventory(data);
       console.log("rt", response);
 
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
+      queryClient.invalidateQueries({ queryKey: ["profile", "inventory"] });
       router.push("/profile");
     } catch (error) {
       console.error("Error in handleSubmit:", error);

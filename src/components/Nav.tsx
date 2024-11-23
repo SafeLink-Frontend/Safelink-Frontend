@@ -2,18 +2,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ComponentProps, ReactNode, useEffect, useState } from "react";
-import Modal from "./LoginModal";
+import { ComponentProps, ReactNode, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import dynamic from "next/dynamic";
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
 import { FaBars } from "react-icons/fa";
-import Drawer from "./Drawer";
 import useModalStore from "@/store/useModalStore";
 import { FaRegUserCircle } from "react-icons/fa";
-import useLocalStorage from "use-local-storage";
 import useUserStore from "@/store/useUserStore";
+import AlertDialogComponent from "./AlertDialogComponent";
+import { useQueryClient } from "@tanstack/react-query";
+import { clearUserData } from "@/lib/userDetails";
 
 export function NavLink(props: Omit<ComponentProps<typeof Link>, "className">) {
   const pathName = usePathname();
@@ -29,7 +26,7 @@ export function NavLink(props: Omit<ComponentProps<typeof Link>, "className">) {
 }
 
 export function Nav({ children }: { children: ReactNode }) {
-  const { user } = useUserStore();
+  const { user, setUser } = useUserStore();
   const pathName = usePathname();
   const {
     isLogInModalOpen,
@@ -42,6 +39,14 @@ export function Nav({ children }: { children: ReactNode }) {
     openDrawer,
     closeDrawer,
   } = useModalStore();
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const handleLogOut = () => {
+    queryClient.invalidateQueries();
+    clearUserData();
+    setUser(null);
+    router.replace("/login");
+  };
 
   // if (pathName === "/login") return <div></div>;
 
@@ -56,7 +61,7 @@ export function Nav({ children }: { children: ReactNode }) {
         pathName !== "/request-password-reset" &&
         pathName !== "/reset-password" && (
           <div
-            className={`sm:flex items-center justify-between px-2 bg-black bg-opacity-30 hidden fixed z-50 top-0 left-0  w-full `}
+            className={`sm:flex items-center justify-between px-2 bg-black bg-opacity-30 hidden fixed z-30 top-0 left-0  w-full `}
           >
             <button className="p-4  " onClick={openDrawer}>
               <FaBars size={24} color="white" />
@@ -127,6 +132,19 @@ export function Nav({ children }: { children: ReactNode }) {
         </Link>
         <div className="flex flex-row items-center">
           {children}
+
+          {user && (
+            <AlertDialogComponent
+              action={handleLogOut}
+              actionButtonText="Log out"
+              description="You are about to be logged out"
+              title="Are you sure?"
+              triggerButtonText="Log Out"
+              backgroundColor="bg-transparent"
+              borderColor="border-primary"
+              hoverBackgroundColor="bg-red-700/[0.3]"
+            />
+          )}
           {user ? (
             <Link
               href={{
@@ -135,13 +153,15 @@ export function Nav({ children }: { children: ReactNode }) {
                 //   id: user?._id,
                 // },
               }}
-              className=""
+              className="ml-2"
             >
               {user.profilePicture ? (
-                <img
-                  className="w-8 h-8 rounded-full border border-gray-700"
-                  src={user.profilePicture}
-                />
+                <div className="flex space-x-2">
+                  <img
+                    className="w-8 h-8 rounded-full border border-gray-700"
+                    src={user.profilePicture}
+                  />
+                </div>
               ) : (
                 <FaRegUserCircle
                   size={30}
