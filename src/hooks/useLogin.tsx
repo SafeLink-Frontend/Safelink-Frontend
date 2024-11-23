@@ -6,10 +6,12 @@ import { baseUrl } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import useUserStore from "@/store/useUserStore";
 import { saveAccessToken } from "@/lib/userDetails";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function useLogin() {
   const [isLoading, setIsLoading] = useState(false);
   const { closeLogInModal } = useModalStore();
+  const queryClient = useQueryClient();
   const { setUser } = useUserStore();
   console.log("fgh", baseUrl);
   const router = useRouter();
@@ -59,6 +61,15 @@ export function useLogin() {
       saveAccessToken(token);
       // localStorage.setItem("accessToken", data.data.accessToken);
       setUser(data.data.user);
+      queryClient.invalidateQueries({
+        queryKey: [
+          "profile",
+          "inventory",
+          "my-answers",
+          "shareable-link",
+          "subscription",
+        ],
+      });
 
       // localStorage.setItem("user", JSON.stringify(data.data.user));
 

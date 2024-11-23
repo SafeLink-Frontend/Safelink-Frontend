@@ -25,6 +25,7 @@ export const useProfileForm = (
   const subscriptionData: SubscriptionData | undefined =
     queryClient.getQueryData(["subscription"]);
   const subscriptionStatus = subscriptionData?.plan.name;
+  console.log("initial user", initialUser);
 
   const [form, setForm] = useState<FormState>({
     username: initialUser?.username || "",
@@ -232,6 +233,7 @@ export const useProfileForm = (
 
       if (response) {
         // Show success message or handle response
+        // queryClient.invalidateQuer(['profile', 'my-answers', 'inventory'])
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");

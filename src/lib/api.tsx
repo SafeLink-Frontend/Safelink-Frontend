@@ -55,7 +55,9 @@ export const createApiInstance = (): AxiosInstance => {
 export const handleGoogleLogin = async (
   router: any,
   googleResponse: any,
-  setUser: any
+  setUser: any,
+  closeLoginModal: any,
+  queryClient: any
 ) => {
   try {
     const response = await axios.post(`${baseUrl}/auth/google`, {
@@ -66,6 +68,16 @@ export const handleGoogleLogin = async (
     localStorage.setItem("accessToken", response.data.accessToken);
     localStorage.setItem("user", JSON.stringify(response.data.user));
     setUser(response.data.user);
+    closeLoginModal();
+    queryClient.invalidateQueries({
+      queryKey: [
+        "profile",
+        "inventory",
+        "my-answers",
+        "shareable-link",
+        "subscription",
+      ],
+    });
     router.replace("/");
   } catch (error) {
     console.log("google sign in failed", error);
@@ -92,7 +104,7 @@ export const fetchSingleInventory = async (
   // Toast.dismiss();
   try {
     const response = await axios.get(`${baseUrl}/inventory/${id}`);
-    console.log("Inventory response:", response);
+    // console.log("Inventory response:", response);
 
     const data = response.data.data;
     return data;
@@ -119,31 +131,21 @@ export const fetchUserInventory = async (id: string): Promise<any[] | null> => {
 
 export const fetchInventoryBySearch = async (
   query: string
-): Promise<any[] | null> => {
+): Promise<Product[] | null> => {
   Toast.dismiss();
-  try {
-    //const api = await createApiInstance();
-    // const formData = new FormData();
-    // formData.append("query", query);
+  const response = await axios.post(
+    "https://safelink-search-api.onrender.com/search",
+    { query },
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+  console.log("Inventory search response:", response);
 
-    const response = await axios.post(
-      "https://safelink-search-api.onrender.com/search",
-      { query },
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-    console.log("Inventory search response:", response);
-
-    const data = response.data;
-    return data;
-  } catch (error) {
-    console.error("Error fetching search inventory:", error);
-    //Toast.error("Error fetching inventory");
-    return null;
-  }
+  const data = response.data;
+  return data;
 };
 
 export const updateProfile = async (
@@ -205,6 +207,60 @@ export const addInventory = async (data: any) => {
       error.response.data.message ||
         error.response.data.error ||
         "Error adding inventory"
+    );
+    throw error; // Re-throw the error for upstream handling
+  }
+};
+
+export const updateInventory = async (data: any, id: string) => {
+  Toast.dismiss();
+  const api = await createApiInstance();
+  try {
+    const response = await api.put(`/inventory/${id}`, data);
+    console.log("Response:", response);
+
+    if (response.status >= 200 && response.status < 300) {
+      Toast.success("Inventory updated successfully");
+      return response.data; // Return the data for consistent handling
+    }
+
+    // Handle unexpected success responses
+    console.warn("Unexpected response status:", response.status);
+    Toast.error("Unexpected response status");
+    return null;
+  } catch (error: any) {
+    console.error("Error adding inventory:", error.message || error);
+    Toast.error(
+      error.response.data.message ||
+        error.response.data.error ||
+        "Error updating inventory"
+    );
+    throw error; // Re-throw the error for upstream handling
+  }
+};
+
+export const deleteInventory = async (id: string) => {
+  Toast.dismiss();
+  const api = createApiInstance();
+  try {
+    const response = await api.delete(`/inventory/${id}`);
+    console.log("Response:", response);
+
+    if (response.status >= 200 && response.status < 300) {
+      Toast.success("Inventory deleted successfully");
+      return response.data; // Return the data for consistent handling
+    }
+
+    // Handle unexpected success responses
+    console.warn("Unexpected response status:", response.status);
+    Toast.error("Unexpected response status");
+    return null;
+  } catch (error: any) {
+    console.error("Error deleting inventory:", error.message || error);
+    Toast.error(
+      error.response.data.message ||
+        error.response.data.error ||
+        "Error deleting inventory"
     );
     throw error; // Re-throw the error for upstream handling
   }

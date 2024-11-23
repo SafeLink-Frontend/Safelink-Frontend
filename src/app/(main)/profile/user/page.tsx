@@ -10,7 +10,7 @@ import {
 import useListStore from "@/store/useListStore";
 import { Product } from "@/types/product";
 import { formatToNaira } from "@/util/formatToNaira";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { IoLogoWhatsapp } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
@@ -23,6 +23,7 @@ import Head from "next/head";
 import { useFetchUserProfile } from "@/hooks/useFetchUserProfile";
 import { useFetchUserQuestionsAnsAnswers } from "@/hooks/useFetchUserQuestionsAndAnswers";
 import { useFetchUserInventory } from "@/hooks/useFetchUserInventory";
+import { formatCurrency } from "@/util/formatCurrency";
 
 const Page = () => {
   const params = useSearchParams();
@@ -40,6 +41,10 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { favorites, addToFavorites, removeFromFavorites, clearFavorites } =
     useListStore();
+  const favoritesSpecificToUser = favorites.filter(
+    (item) => item.owner.id === user?._id
+  );
+  console.log({ favorites });
 
   const categories = [
     {
@@ -55,6 +60,34 @@ const Page = () => {
       images: user?.leisurePictures,
     },
   ];
+
+  const pathName = usePathname();
+  const url = `https://www.joinsafelink.com/`;
+
+  const shareToWhatsApp = () => {
+    if (favoritesSpecificToUser.length === 0) return;
+
+    // Format each item in the list
+    const itemsText = favoritesSpecificToUser
+      .map(
+        (item, index) => `${index + 1}. *${item.title}* 
+        Price: _${formatToNaira(item.price)}_
+        Link: ${url + "product/" + item.id}`
+      )
+      .join("\n\n");
+
+    // Complete WhatsApp message
+    const whatsappText = `Hi, I'm interested in these items from your store:\n\n${itemsText}\n\n`;
+
+    // Encode for WhatsApp URL
+    const encodedText = encodeURIComponent(whatsappText);
+
+    // Redirect to WhatsApp with pre-filled text
+    window.open(
+      `https://wa.me/${234 + user?.phoneNumber!}?text=${encodedText}`,
+      "_blank"
+    );
+  };
 
   return (
     <div className="w-full  flex-1">
@@ -141,12 +174,12 @@ const Page = () => {
           <p>No inventory found</p>
         </div>
       )}
-      {favorites.length > 0 && (
+      {favoritesSpecificToUser.length > 0 && (
         <div className="bg-[#B28E49] rounded-md p-2 my-3">
           <p className="text-[12px] leading-4 font-semibold text-white">
             Your List
           </p>
-          {favorites.map((item, index) => (
+          {favoritesSpecificToUser.map((item, index) => (
             <div className="bg-white p-1 flex items-center justify-between gap-3 my-2 rounded-md">
               <img className="w-10 h-10" src={item.image} alt="" />
               <div className="flex-1">
@@ -168,7 +201,12 @@ const Page = () => {
             </div>
           ))}
           <div className="flex items-center justify-between gap-1">
-            <button className="text-white font-semibold text-[12px] leading-5 flex items-center gap-3 bg-[#4CAF50] p-2 rounded-md my-2 flex-1 text-nowrap">
+            <button
+              onClick={shareToWhatsApp}
+              // href={`https://wa.me/${"+234" + user?.phoneNumber}/?text=${encodedText}`}
+              // data-action="share/whatsapp/share"
+              className="text-white font-semibold text-[12px] leading-5 flex items-center gap-3 bg-[#4CAF50] p-2 rounded-md my-2 flex-1 text-nowrap"
+            >
               <IoLogoWhatsapp size={25} />
               Share list to seller via Whatsapp
             </button>

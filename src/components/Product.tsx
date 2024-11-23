@@ -17,6 +17,11 @@ import Loading from "@/app/loading";
 import useListStore from "@/store/useListStore";
 import Toast from "react-hot-toast";
 import { formatCurrency } from "@/util/formatCurrency";
+import Link from "next/link";
+import { useQueryClient } from "@tanstack/react-query";
+import { User } from "@/types/user";
+import AlertDialogComponent from "./AlertDialogComponent";
+import { deleteInventory } from "@/lib/api";
 
 export function Product({ inventory }: { inventory: UserProduct }) {
   const router = useRouter();
@@ -41,6 +46,10 @@ export function Product({ inventory }: { inventory: UserProduct }) {
 
   const isFavorite = favorites.some((item) => item.id === inventory?._id);
 
+  const queryClient = useQueryClient();
+  const user: User | undefined = queryClient.getQueryData(["profile"]);
+  console.log("user", user);
+
   const handleFavoriteToggle = () => {
     if (!inventory) return;
     if (isFavorite && inventory?._id !== null) {
@@ -56,23 +65,47 @@ export function Product({ inventory }: { inventory: UserProduct }) {
         title: inventory.title,
         description: inventory.description,
         price: inventory.price,
+        currency: inventory.currency,
         image: inventory.images[0],
+        owner: {
+          id: inventory.owner._id,
+          phoneNumber: inventory.owner.phoneNumber,
+        },
       });
     }
   };
 
-  const whatsappText = `Hi, I'm interested in these items from your store: ${url} `;
+  const whatsappText = `Hi, I'm interested in these item from your store:\n
+*${inventory.title}*\n
+Price: _${formatCurrency(inventory.price, inventory.currency)}_\n
+Link: ${url}`;
+
+  const encodedText = encodeURIComponent(whatsappText);
+
+  const imageSlides = inventory?.images?.map((image: any) => ({ src: image }));
+  const videoSlides = inventory?.videos?.map((video: any) => ({ src: video }));
+
+  const handleDeleteInventory = async () => {
+    console.log("deleted");
+    setIsLoading(true);
+    await deleteInventory(inventory._id || "")
+      .then(() => {
+        setIsLoading(false);
+        queryClient.invalidateQueries({ queryKey: ["inventory"] });
+        router.push("/profile");
+      })
+      .catch((err) => {
+        setIsLoading(false);
+      });
+  };
 
   if (isLoading) {
     return (
-      <div className="flex flex-1 justify-center items-center">
+      <div>
         <Loading />
       </div>
     );
   }
-
-  const imageSlides = inventory?.images?.map((image: any) => ({ src: image }));
-  const videoSlides = inventory?.videos?.map((video: any) => ({ src: video }));
 
   return (
     <div className="">
@@ -142,34 +175,57 @@ export function Product({ inventory }: { inventory: UserProduct }) {
                 </button>
               )}
 
-              <button
-                onClick={handleFavoriteToggle}
-                className="bg-primary hover:bg-opacity-80 p-2  text-white rounded-md w-[70%] sm:w-[90%]"
-              >
-                {isFavorite
-                  ? "remove this item from your list"
-                  : "Add this item to your List"}
-              </button>
+              {user?._id !== inventory.owner._id && (
+                <button
+                  onClick={handleFavoriteToggle}
+                  className="bg-primary hover:bg-opacity-80 p-2  text-white rounded-md w-[70%] sm:w-[90%]"
+                >
+                  {isFavorite
+                    ? "remove this item from your list"
+                    : "Add this item to your List"}
+                </button>
+              )}
 
-              <div className="bg-primary/[0.6] py-4 w-[60%] rounded-lg sm:w-[90%] space-y-4 items-start px-2 flex flex-col">
-                <div className="font-semibold">Your List</div>
-                <div className="flex flex-row sm:flex-col justify-between  w-full ">
-                  <div className="flex items-center gap-2   ">
-                    <a
-                      className="bg-green-700 hover:bg-opacity-80 py-1 px-2 font-semibold sm:justify-center rounded-lg sm:w-full text-white flex flex-row items-center sm:space-x-2 space-x-1"
-                      href={`https://wa.me/${"+234" + inventory.owner.phoneNumber}/?text=${whatsappText}`}
-                      data-action="share/whatsapp/share"
+              <div className="bg-primary/[0.6] py-4 w-[70%] rounded-lg sm:w-[90%] space-y-4 items-start px-2 flex flex-col">
+                {/* <div className="font-semibold">Your List</div> */}
+                <div className="flex flex-row sm:flex-col sm:space-y-2 justify-between w-full ">
+                  {inventory.owner._id === user?._id ? (
+                    <Link
+                      href={`/product/${inventory._id}/edit-product`}
+                      className="border rounded-md bg-black text-white py-1 px-2"
                     >
-                      <FaWhatsapp size={24} color="#fff" />
-                      <div className="sm:text-sm">
-                        Share list to seller via Whatsapp
-                      </div>
-                    </a>
-                  </div>
-                  <button className="bg-red-700 hover:bg-opacity-80 p-1 font-semibold sm:justify-center rounded-lg text-white flex flex-row items-center sm:mt-2 sm:space-x-2 space-x-1">
+                      Edit product
+                    </Link>
+                  ) : (
+                    <div className="flex items-center gap-2   ">
+                      <a
+                        className="bg-green-700 hover:bg-opacity-80 py-1 px-2 font-semibold sm:justify-center rounded-lg sm:w-full text-white flex flex-row items-center sm:space-x-2 space-x-1"
+                        href={`https://wa.me/${"+234" + inventory.owner.phoneNumber}/?text=${encodedText}`}
+                        data-action="share/whatsapp/share"
+                      >
+                        <FaWhatsapp size={24} color="#fff" />
+                        <div className="sm:text-sm">
+                          Share to seller via Whatsapp
+                        </div>
+                      </a>
+                    </div>
+                  )}
+                  {inventory.owner._id === user?._id && (
+                    // <button className="border rounded-md bg-red-700 text-white py-1 px-2">
+                    //   Delete product
+                    // </button>
+                    <AlertDialogComponent
+                      action={handleDeleteInventory}
+                      actionButtonText="Yes, delete"
+                      description="This action cannot be undone. This will permanently delete this product from your inventory"
+                      title="Are you sure"
+                      triggerButtonText="Delete product"
+                    />
+                  )}
+                  {/* <button className="bg-red-700 hover:bg-opacity-80 p-1 font-semibold sm:justify-center rounded-lg text-white flex flex-row items-center sm:mt-2 sm:space-x-2 space-x-1">
                     <MdDelete color="#fff" size={24} />
                     <div>Clear list</div>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

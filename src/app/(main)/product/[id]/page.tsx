@@ -3,7 +3,7 @@ import { fetchSingleInventory } from "@/lib/api";
 import { Metadata } from "next";
 
 export async function getInventory(id: string) {
-  console.log("id", id);
+  // console.log("id", id);
   const inventory = await fetchSingleInventory(id);
   return inventory;
 }

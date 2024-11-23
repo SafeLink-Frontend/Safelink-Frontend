@@ -9,27 +9,15 @@ import { useRouter } from "next/navigation";
 import useSearchStore from "@/store/useSearchStore";
 import LoadingModal from "@/components/LoadingModal";
 import ProductCard from "@/components/ProductCard";
+import { useFetchInventoryBySearch } from "@/hooks/useFetchInventoryBySearch";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Listings = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [inventory, setInventory] = useState<Product[]>([]);
   const { query, setQuery } = useSearchStore();
-
-  const searchInventory = async () => {
-    setIsLoading(true);
-    const data = await fetchInventoryBySearch(query);
-    if (data) {
-      setInventory(data);
-      console.log("loaded inventory", data);
-      setIsLoading(false);
-    }
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    searchInventory();
-  }, []);
+  const { data: inventory, isFetching } = useFetchInventoryBySearch(query);
+  const queryClient = useQueryClient();
 
   const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -61,7 +49,9 @@ const Listings = () => {
               />
             </div>
             <button
-              onClick={searchInventory}
+              onClick={() =>
+                queryClient.fetchQuery({ queryKey: ["search-inventory"] })
+              }
               className="bg-primary flex-1 w-full text-white mx-2 px-4 py-2 rounded-md"
             >
               Search
@@ -69,11 +59,12 @@ const Listings = () => {
           </div>
         </div>
         <h2 className="text-2xl font-semibold mb-4">
-          Search Results ({inventory.length})
+          Search Results ({inventory?.length || 0})
         </h2>
         <Suspense fallback={<Loading />}>
           <div className="grid grid-cols-3 sm:grid-cols-1  gap-4">
-            {inventory.length > 0 &&
+            {inventory &&
+              inventory.length > 0 &&
               inventory.map((data, index) => (
                 <ProductCard data={data} key={index} />
               ))}

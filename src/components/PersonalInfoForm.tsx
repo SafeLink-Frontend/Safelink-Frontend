@@ -79,7 +79,7 @@ export const PersonalInfoForm: React.FC<PersonalInfoProps> = ({
         htmlFor="phoneNumber"
       >
         Phone Number 1(Whatsapp number){" "}
-        {/* <div className="text-red-700 text-[20px]">*</div> */}
+        <div className="text-red-700 text-[20px]">*</div>
       </label>
       <input
         className="border-[0.5px] border-[#A6A6A6] rounded w-full p-2 focus:outline-none"
@@ -88,7 +88,7 @@ export const PersonalInfoForm: React.FC<PersonalInfoProps> = ({
         name="phoneNumber"
         value={form.phoneNumber || ""}
         onChange={onChange}
-        // required
+        required
         aria-required="true"
         maxLength={15}
       />
@@ -118,7 +118,8 @@ export const PersonalInfoForm: React.FC<PersonalInfoProps> = ({
         className="text-[#252625] font-medium flex flex-row text-[14px] mb-1 leading-3"
         htmlFor="about"
       >
-        {/* About <div className="text-red-700 text-[20px]">*</div> */}
+        About
+        {/* <div className="text-red-700 text-[20px]">*</div> */}
       </label>
       <textarea
         className="border-[0.5px] border-[#A6A6A6] rounded w-full p-2 focus:outline-none"
