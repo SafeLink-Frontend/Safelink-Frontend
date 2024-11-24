@@ -13,15 +13,6 @@ function GoogleAuthButton() {
   const router = useRouter();
   const { setUser } = useUserStore();
   const queryClient = useQueryClient();
-  queryClient.invalidateQueries({
-    queryKey: [
-      "profile",
-      "inventory",
-      "my-answers",
-      "shareable-link",
-      "subscription",
-    ],
-  });
 
   return (
     <div className="w-[100%] flex justify-center">

@@ -62,13 +62,19 @@ export function useLogin() {
       // localStorage.setItem("accessToken", data.data.accessToken);
       setUser(data.data.user);
       queryClient.invalidateQueries({
-        queryKey: [
-          "profile",
-          "inventory",
-          "my-answers",
-          "shareable-link",
-          "subscription",
-        ],
+        queryKey: ["profile"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["inventory"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["my-answers"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["shareable-link"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["subscription"],
       });
 
       // localStorage.setItem("user", JSON.stringify(data.data.user));

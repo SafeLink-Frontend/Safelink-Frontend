@@ -70,13 +70,19 @@ export const handleGoogleLogin = async (
     setUser(response.data.user);
     closeLoginModal();
     queryClient.invalidateQueries({
-      queryKey: [
-        "profile",
-        "inventory",
-        "my-answers",
-        "shareable-link",
-        "subscription",
-      ],
+      queryKey: ["profile"],
+    });
+    queryClient.invalidateQueries({
+      queryKey: ["inventory"],
+    });
+    queryClient.invalidateQueries({
+      queryKey: ["my-answers"],
+    });
+    queryClient.invalidateQueries({
+      queryKey: ["shareable-link"],
+    });
+    queryClient.invalidateQueries({
+      queryKey: ["subscription"],
     });
     router.replace("/");
   } catch (error) {
@@ -152,10 +158,11 @@ export const updateProfile = async (
   data: any,
   router: any,
   setUser: any,
-  subscriptionStatus: SubscriptionStatus | undefined
+  subscriptionStatus: SubscriptionStatus | undefined,
+  queryClient: any
 ) => {
   Toast.dismiss();
-  const api = await createApiInstance();
+  const api = createApiInstance();
   try {
     const response = await api.put(`/user`, data);
     console.log("rr", response.data.data);
@@ -165,6 +172,8 @@ export const updateProfile = async (
         const user: User = response.data.data;
         setUser(user);
         Toast.success("Profile updated successfully");
+        queryClient.invalidateQueries({ queryKey: ["profile"] });
+        queryClient.invalidateQueries({ queryKey: ["inventory"] });
 
         setTimeout(() => {
           if (subscriptionStatus === SubscriptionStatus.FREE) {

@@ -91,7 +91,9 @@ Link: ${url}`;
     await deleteInventory(inventory._id || "")
       .then(() => {
         setIsLoading(false);
-        queryClient.invalidateQueries({ queryKey: ["inventory"] });
+        queryClient.invalidateQueries({
+          queryKey: ["inventory-id", inventory._id],
+        });
         router.push("/profile");
       })
       .catch((err) => {
