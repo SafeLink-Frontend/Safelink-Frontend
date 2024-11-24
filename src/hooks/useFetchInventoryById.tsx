@@ -19,7 +19,7 @@ const fetchSingleInventory = async (
 
 export const useFetchInventoryById = (id: string) => {
   return useQuery({
-    queryKey: ["product-id", id],
+    queryKey: ["inventory-id", id],
     queryFn: () => fetchSingleInventory(id),
     staleTime: 100 * 60 * 1000, // Cache the data for 5 minutes
     enabled: Boolean(id),

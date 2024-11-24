@@ -193,6 +193,7 @@ export const useProfileForm = (
       for (const [questionId, answer] of Object.entries(form.answers)) {
         if (answer && answer.trim() !== "") {
           await submitAnswer(questionId, answer, router);
+          queryClient.invalidateQueries({ queryKey: ["my-answers"] });
         }
       }
 
@@ -228,13 +229,9 @@ export const useProfileForm = (
         },
         router,
         setUser,
-        subscriptionStatus
+        subscriptionStatus,
+        queryClient
       );
-
-      if (response) {
-        // Show success message or handle response
-        // queryClient.invalidateQuer(['profile', 'my-answers', 'inventory'])
-      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
     } finally {

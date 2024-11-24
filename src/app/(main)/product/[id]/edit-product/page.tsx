@@ -74,7 +74,13 @@ export default function EditListing() {
       const response = await updateInventory(data, inventory?._id || "");
       console.log("rt", response);
 
-      queryClient.invalidateQueries({ queryKey: ["profile", "inventory"] });
+      queryClient.invalidateQueries({
+        queryKey: ["inventory"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["inventory-id", id],
+      });
+
       router.back();
     } catch (error) {
       console.error("Error in handleSubmit:", error);
