@@ -244,7 +244,7 @@ const ProfileHeader = () => {
               // disabled={subscriptionStatus?.plan.name === SubscriptionStatus.FREE}
               action={() => cancelMySubscription.mutate()}
               title="Are you sure?"
-              description="Your nex subscription will be cancelled "
+              description="Your subscription will be cancelled in the next billing cycle."
               triggerButtonText="Cancel subscription"
               actionButtonText="Yes, cancel subscription"
               backgroundColor="bg-white"
