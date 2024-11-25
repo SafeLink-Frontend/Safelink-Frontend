@@ -14,6 +14,7 @@ interface AlertDiagProps {
   textColor?: string;
   border?: string;
   closeDrawer?: () => void;
+  disabled?: boolean;
 }
 
 export const AlertDialogComponent = ({
@@ -28,10 +29,12 @@ export const AlertDialogComponent = ({
   textColor = "text-white",
   border = "border",
   closeDrawer = () => null,
+  disabled = false,
 }: AlertDiagProps) => (
   <AlertDialog.Root onOpenChange={closeDrawer}>
     <AlertDialog.Trigger asChild>
       <button
+        disabled={disabled}
         className={`inline-flex h-[35px] items-center justify-center ${border} ${borderColor} rounded ${backgroundColor} px-[15px] font-medium leading-none ${textColor} shadow-[0_2px_10px] shadow-blackA4 outline-none hover:${hoverBackgroundColor} `}
       >
         {triggerButtonText}
