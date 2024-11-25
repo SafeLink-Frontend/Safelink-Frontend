@@ -7,7 +7,7 @@ import { IoMdShareAlt } from "react-icons/io";
 import { HiUpload } from "react-icons/hi";
 import useLocalStorage from "use-local-storage";
 import Link from "next/link";
-import Toast from "react-hot-toast";
+import Toast, { toast } from "react-hot-toast";
 import { RWebShare } from "react-web-share";
 import useUserStore from "@/store/useUserStore";
 import { base64ToFile } from "@/util/convertImage";
@@ -19,11 +19,13 @@ import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import { SubscriptionStatus } from "@/types/SubscriptionStatus";
-import { updateProfilePicture } from "@/lib/api";
+import { cancelSubscription, updateProfilePicture } from "@/lib/api";
 import Loading from "@/app/loading";
 import { useFetchShareableLink } from "@/hooks/useFetchShareableLink";
 import { useSubscriptionStatus } from "@/hooks/useSubscriptionStatus";
 import { useFetchMyProfile } from "@/hooks/useFetchMyProfile";
+import AlertDialogComponent from "./AlertDialogComponent";
+import { useMutation } from "@tanstack/react-query";
 //import { ShareSocial } from "react-share-social";
 
 const ProfileHeader = () => {
@@ -65,7 +67,15 @@ const ProfileHeader = () => {
     setIsUploading(false);
   };
 
-  if (isUploading) {
+  const cancelMySubscription = useMutation({
+    mutationFn: cancelSubscription,
+    onError: (err: any) =>
+      toast.error(err.response.message ?? "An error occured, please try again"),
+    onSuccess: (response) =>
+      toast.success(response.message ?? "your subscription has been cancelled"),
+  });
+
+  if (isUploading || cancelMySubscription.isPending) {
     return (
       <div className="flex-1">
         <Loading />
@@ -184,6 +194,7 @@ const ProfileHeader = () => {
         {user?.about}
       </p>
 
+      {/* small screens */}
       <div className="mb-2 mt-4 w-full justify-center hidden sm1:flex">
         <RWebShare
           data={{
@@ -217,6 +228,31 @@ const ProfileHeader = () => {
             <HiUpload size={20} />
             upgrade account
           </Link>
+        </>
+      </div>
+
+      <div className="flex  items-center mt-4 justify-between mx-[5%]">
+        <>
+          <div className="flex space-x-2 sm1:space-x-0 items-center sm1:flex-col">
+            <div>Subscribed to:</div>
+            <div className="font-semibold text-[20px] text- text-primary">
+              {subscriptionStatus?.plan.name.toLocaleUpperCase()} PLAN
+            </div>
+          </div>
+          {subscriptionStatus?.plan.name !== SubscriptionStatus.FREE && (
+            <AlertDialogComponent
+              // disabled={subscriptionStatus?.plan.name === SubscriptionStatus.FREE}
+              action={() => cancelMySubscription.mutate()}
+              title="Are you sure?"
+              description="Your subscription will be cancelled in the next billing cycle."
+              triggerButtonText="Cancel subscription"
+              actionButtonText="Yes, cancel subscription"
+              backgroundColor="bg-white"
+              borderColor="border-red-500"
+              textColor="text-red-500"
+              hoverBackgroundColor="bg-red-200"
+            />
+          )}
         </>
       </div>
     </header>

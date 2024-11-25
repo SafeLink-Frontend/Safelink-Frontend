@@ -445,6 +445,12 @@ export const initiateSubcription = async (
   }
 };
 
+export const cancelSubscription = async () => {
+  const api = createApiInstance();
+  const response = await api.post("/subscription/cancel");
+  return response.data;
+};
+
 export const updateProfilePicture = async (
   router: any,
   image: File
