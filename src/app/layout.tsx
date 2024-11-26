@@ -11,6 +11,7 @@ import SignupModal from "@/components/SignupModal";
 import { Toaster } from "react-hot-toast";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { QueryClientCustomProvider } from "@/components/QueryClientCustomProvider";
+import { Analytics } from "@vercel/analytics/react";
 
 const raleway = Raleway({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -80,7 +81,10 @@ export default function RootLayout({
               <NavLink href={"/pricing"}>Pricing</NavLink>
             </Nav>
             <Toaster />
-            <div className="min-h-[500px]">{children}</div>
+            <div className="min-h-[500px]">
+              {children}
+              <Analytics />
+            </div>
             <Drawer />
             <LoginModal>
               <LoginForm />
