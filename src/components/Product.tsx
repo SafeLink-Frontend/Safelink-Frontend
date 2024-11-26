@@ -2,7 +2,7 @@
 import NextJsLightBox from "@/components/NextJsLightBox";
 import ProductImages from "@/components/ProductImages";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaArrowLeft, FaWhatsapp } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Lightbox from "yet-another-react-lightbox";
@@ -33,6 +33,12 @@ export function Product({ inventory }: { inventory: UserProduct }) {
 
   const [open, setOpen] = useState(false);
   const [mediaType, setMediaType] = useState<"images" | "videos">("images");
+
+  useEffect(() => {
+    if (inventory.images.length < 1 && inventory.videos.length > 0)
+      setMediaType("videos");
+  }, [inventory._id]);
+
   // const videos = [...Array(2)].map(() => ({
   //   src: "/video1.mp4",
   //   type: "video/mp4",
