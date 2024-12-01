@@ -429,6 +429,13 @@ export const initiateSubcription = async (
   id: string
 ): Promise<any | null> => {
   Toast.dismiss();
+  toast.loading(
+    "You're about to be redirected to a secure payment gateway provided by Paystack. This ensures that your payment information is protected by industry-standard security measures 🔒. Please proceed with confidence",
+    {
+      className: "w-[80%]",
+      style: { width: "90%" },
+    }
+  );
   try {
     const api = await createApiInstance();
     const response = await api.post("/subscription/subscribe", {

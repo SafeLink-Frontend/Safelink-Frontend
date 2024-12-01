@@ -236,10 +236,11 @@ const ProfileHeader = () => {
           <div className="flex space-x-2 sm1:space-x-0 items-center sm1:flex-col">
             <div>Subscribed to:</div>
             <div className="font-semibold text-[20px] text- text-primary">
-              {subscriptionStatus?.plan.name.toLocaleUpperCase()} PLAN
+              {subscriptionStatus?.plan?.name?.toLocaleUpperCase() ?? "FREE"}{" "}
+              PLAN
             </div>
           </div>
-          {subscriptionStatus?.plan.name !== SubscriptionStatus.FREE && (
+          {subscriptionStatus?.plan?.name !== SubscriptionStatus.FREE && (
             <AlertDialogComponent
               // disabled={subscriptionStatus?.plan.name === SubscriptionStatus.FREE}
               action={() => cancelMySubscription.mutate()}

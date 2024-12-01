@@ -12,6 +12,7 @@ import { Toaster } from "react-hot-toast";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { QueryClientCustomProvider } from "@/components/QueryClientCustomProvider";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const raleway = Raleway({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -84,6 +85,7 @@ export default function RootLayout({
             <div className="min-h-[500px]">
               {children}
               <Analytics />
+              <SpeedInsights />
             </div>
             <Drawer />
             <LoginModal>
