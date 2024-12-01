@@ -64,7 +64,7 @@ const Page = () => {
     isPending: isUserSunscriptionStatudPending,
   } = useSubscriptionStatus();
 
-  console.log("sub status", subscriptionStatus?.plan.name);
+  console.log("sub status", subscriptionStatus?.plan?.name);
 
   const categories = [
     {
@@ -125,7 +125,7 @@ const Page = () => {
       )}
 
       <ProfileHeader />
-      {questions && questions.length > 0 && <QA questions={questions} />}
+      {questions && questions?.length > 0 && <QA questions={questions} />}
       <div className="flex-row flex justify-around my-8 border-y-4 border-[#ECEDEE]">
         <button
           className="items-center flex flex-col"
@@ -173,7 +173,7 @@ const Page = () => {
           <p>No inventory found</p>
         </div>
       )}
-      {favorites.length > 0 && (
+      {favorites?.length > 0 && (
         <div className="bg-[#B28E49] rounded-md p-2 my-3">
           <p className="text-[12px] leading-4 font-semibold text-white">
             Your List
