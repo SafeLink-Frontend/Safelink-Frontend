@@ -14,6 +14,7 @@ import { Product, UserProduct } from "@/types/product";
 //const { fetch } = useFetch();
 
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+export const aiSearchBaseUrl = process.env.NEXT_PUBLIC_API_AI_SEARCH_BASE_URL;
 // export const baseUrl = "http://localhost:3001/api/v1";
 
 export const createApiInstance = (): AxiosInstance => {
@@ -140,7 +141,7 @@ export const fetchInventoryBySearch = async (
 ): Promise<Product[] | null> => {
   Toast.dismiss();
   const response = await axios.post(
-    "https://safelink-search-api.onrender.com/search",
+    `${aiSearchBaseUrl}/search`,
     { query },
     {
       headers: {

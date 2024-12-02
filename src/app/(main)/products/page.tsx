@@ -23,18 +23,10 @@ const Listings = () => {
     setQuery(e.target.value);
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex flex-1 justify-center items-center">
-        <Loading />
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow container mx-auto sm:mt-12 p-4 min-h-screen">
-        <LoadingModal isOpen={isLoading}>
+        <LoadingModal isOpen={isFetching}>
           <Loading />
         </LoadingModal>
         <div className="w-full flex justify-center">
