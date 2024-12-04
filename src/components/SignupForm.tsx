@@ -52,6 +52,18 @@ export default function SignupForm() {
         <PasswordInput id="password" label="Password" />
         <PasswordInput id="confirmPassword" label="Confirm Password" />
 
+        <div className="">
+          <div>Referral Code (Optional)</div>
+          <input
+            className="border border-[#737373] outline-none focus:border-2 focus:border-primary p-3 w-full rounded-[4px]"
+            id="referralCode"
+            title="referralCode"
+            name="referralCode"
+            placeholder="Enter a referral code"
+            type="text"
+          />
+        </div>
+
         <div className="flex flex-row space-x-2 items-start">
           <input type="checkbox"></input>
           <div className="text-xs">

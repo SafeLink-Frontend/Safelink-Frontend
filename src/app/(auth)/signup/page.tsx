@@ -8,7 +8,16 @@ import { toast } from "react-hot-toast";
 //import { useRouter } from "next/navigation"
 import { MdCancel } from "react-icons/md";
 
-async function page() {
+async function page({
+  params,
+  searchParams,
+}: {
+  params: {};
+  searchParams?: { [key: string]: string | undefined };
+}) {
+  // console.log({ params, searchParams });
+  const referralCode = searchParams?.code;
+
   return (
     <div className="flex flex-1 flex-col items-center sm:px-[5%]  max-w-[500px] mx-auto">
       <div className="flex-row w-full flex items-center">
@@ -47,6 +56,19 @@ async function page() {
         <PasswordInput id="password" label="Password" />
         <PasswordInput id="confirmPassword" label="Confirm Password" />
 
+        <div className="">
+          <div>Referral Code (Optional)</div>
+          <input
+            className="border border-[#737373] outline-none focus:border-2 focus:border-primary p-3 w-full rounded-[4px]"
+            id="referralCode"
+            title="referralCode"
+            name="referralCode"
+            placeholder="Enter a referral code"
+            type="text"
+            defaultValue={referralCode}
+          />
+        </div>
+
         <div className="flex flex-row space-x-2 items-start">
           <input type="checkbox"></input>
           <div className="text-xs">
@@ -73,7 +95,7 @@ async function page() {
         <Image width={16} height={16} src={"/google-icon.png"} alt="google" />
         <div>sign up with google</div>
       </button> */}
-      <GoogleAuthButton />
+      <GoogleAuthButton referralCode={referralCode} />
 
       <div className="flex flex-row w-full justify-center space-x-[2px] mt-2 mb-12">
         <div className="text-[14px] font-medium">Have an account?</div>

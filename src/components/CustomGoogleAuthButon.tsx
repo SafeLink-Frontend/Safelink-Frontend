@@ -8,7 +8,11 @@ import useUserStore from "@/store/useUserStore";
 import { useQueryClient } from "@tanstack/react-query";
 import useModalStore from "@/store/useModalStore";
 
-function CustomGoogleAuthButton() {
+function CustomGoogleAuthButton({
+  referralCode = "",
+}: {
+  referralCode?: string;
+}) {
   const router = useRouter();
   const { setUser } = useUserStore();
   const queryClient = useQueryClient();
@@ -22,7 +26,8 @@ function CustomGoogleAuthButton() {
         googleResponse,
         setUser,
         closeLogInModal,
-        queryClient
+        queryClient,
+        referralCode
       );
     },
     onError: () => {

@@ -37,11 +37,14 @@ const page = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-1 justify-center items-center">
+      <div className="flex flex-1 flex-col justify-center items-center">
         <Loading />
         <div>
           You're about to be redirected to a secure payment gateway provided by
-          Paystack. This ensures that your payment information is protected by
+          Paystack.
+        </div>
+        <div>
+          This ensures that your payment information is protected by
           industry-standard security measures 🔒. Please proceed with confidence
         </div>
       </div>
