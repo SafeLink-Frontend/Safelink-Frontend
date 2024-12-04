@@ -26,6 +26,7 @@ export function useSignUp() {
       username: rawFormData.get("username"),
       password: rawFormData.get("password"),
       confirmPassword: rawFormData.get("confirmPassword"),
+      referralCode: rawFormData.get("referralCode"),
     };
     console.log("form data", formData);
 
@@ -60,10 +61,13 @@ export function useSignUp() {
 
       const data = await response.json();
       console.log("response", data);
-      toast.success(
-        data.message + " Check your email to continue your registration",
-        { duration: 5000 }
+
+      toast(
+        data.message +
+          "\nPlease check your email's spam folder for the verification link. \n\nMark it as 'Not Spam' or 'Looks Safe,' then return to your inbox to click the link.",
+        { duration: 10000, style: {} }
       );
+
       closeLogInModal();
       return { success: true, data };
     } catch (error: any) {

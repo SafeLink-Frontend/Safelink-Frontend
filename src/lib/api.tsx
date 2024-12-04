@@ -58,11 +58,13 @@ export const handleGoogleLogin = async (
   googleResponse: any,
   setUser: any,
   closeLoginModal: any,
-  queryClient: any
+  queryClient: any,
+  referralCode: string
 ) => {
   try {
     const response = await axios.post(`${baseUrl}/auth/google`, {
       token: googleResponse.credential,
+      referralCode: referralCode,
     });
     console.log("google sign in response", response);
     toast.success("google sign in successful");
@@ -430,8 +432,8 @@ export const initiateSubcription = async (
   id: string
 ): Promise<any | null> => {
   Toast.dismiss();
-  toast.loading(
-    "You're about to be redirected to a secure payment gateway provided by Paystack. This ensures that your payment information is protected by industry-standard security measures 🔒. Please proceed with confidence",
+  toast(
+    "You're about to be redirected to a secure payment gateway provided by Paystack. \n\nThis ensures that your payment information is protected by industry-standard security measures 🔒. \n\nPlease proceed with confidence",
     {
       className: "w-[80%]",
       style: { width: "90%" },

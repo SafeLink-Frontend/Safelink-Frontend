@@ -8,11 +8,15 @@ import useUserStore from "@/store/useUserStore";
 import useModalStore from "@/store/useModalStore";
 import { useQueryClient } from "@tanstack/react-query";
 
-function GoogleAuthButton() {
+function GoogleAuthButton({ referralCode = "" }: { referralCode?: string }) {
   const { closeLogInModal } = useModalStore();
   const router = useRouter();
   const { setUser } = useUserStore();
   const queryClient = useQueryClient();
+  const form = typeof window !== "undefined" && document.querySelector("form"); // Assuming this button is inside a form
+  const formData = form && new FormData(form as HTMLFormElement); // Gather form data
+
+  console.log("form", formData);
 
   return (
     <div className="w-[100%] flex justify-center">
@@ -24,7 +28,8 @@ function GoogleAuthButton() {
             googleResponse,
             setUser,
             closeLogInModal,
-            queryClient
+            queryClient,
+            referralCode
           )
         }
         onError={() => {
