@@ -4,10 +4,13 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import Link from "next/link";
 import { Product } from "@/types/product";
 import useListStore from "@/store/useListStore";
+import { useVideoThumbnail } from "@/hooks/useVideoThumbnail";
 
 function ProductCard({ data }: { data: Product }) {
   console.log("sdf", data);
-  const image = data.images[0];
+  const image = data.images[0] ?? "";
+  const video = data.videos[0];
+  const { thumbnail, videoRef, canvasRef } = useVideoThumbnail(video, 2);
   const { favorites, addToFavorites, removeFromFavorites, clearFavorites } =
     useListStore();
 
@@ -40,10 +43,21 @@ function ProductCard({ data }: { data: Product }) {
         // },
       }}
     >
+      {data.images.length < 1 && data.videos.length > 0 && (
+        <>
+          <video
+            ref={videoRef}
+            src={video}
+            crossOrigin="anonymous"
+            style={{ display: "none" }}
+          />
+          <canvas ref={canvasRef} style={{ display: "none" }} />
+        </>
+      )}
       <div className="items-center mb-4 flex flex-col">
         <div
           className="w-full h-48 rounded-lg bg-cover bg-no-repeat"
-          style={{ backgroundImage: `url(${image})` }}
+          style={{ backgroundImage: `url(${image ?? thumbnail ?? ""})` }}
         >
           <div className="flex flex-row-reverse mr-4 mt-4">
             <button onClick={handleFavoriteToggle}>

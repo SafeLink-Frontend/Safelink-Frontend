@@ -1,3 +1,4 @@
+import { useVideoThumbnail } from "@/hooks/useVideoThumbnail";
 import { Product, UserProduct } from "@/types/product";
 import { formatCurrency } from "@/util/formatCurrency";
 import Link from "next/link";
@@ -13,11 +14,23 @@ const Inventory = ({ inventory }: { inventory: UserProduct[] }) => {
             key={index}
             className="relative rounded-3xl w-[400px]  bg-[#F6F6F6]"
           >
-            <img
-              className="rounded-t-3xl w-full h-[287px] object-cover"
-              src={item?.images[0]}
-              alt=""
-            />
+            {item.images.length < 1 && item.videos.length > 0 ? (
+              <video
+                src={item.videos[0]}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="rounded-t-3xl w-full h-[287px] object-cover"
+              />
+            ) : (
+              <img
+                className="rounded-t-3xl w-full h-[287px] object-cover"
+                src={item?.images[0] ?? ""}
+                alt=""
+              />
+            )}
+
             <div className="p-2">
               <p className="text-[#1C1B1F] text-[24px] font-semibold mb-1">
                 {item?.title}
