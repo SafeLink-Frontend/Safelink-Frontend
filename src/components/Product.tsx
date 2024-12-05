@@ -100,6 +100,9 @@ Link: ${url}`;
         queryClient.invalidateQueries({
           queryKey: ["inventory-id", inventory._id],
         });
+        queryClient.invalidateQueries({
+          queryKey: ["inventory"],
+        });
         router.push("/profile");
       })
       .catch((err) => {

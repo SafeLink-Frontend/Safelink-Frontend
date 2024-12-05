@@ -65,7 +65,7 @@ export default function CreateListing() {
       description,
       cover: cover ? await convertFileToBase64(cover) : cover,
       images: images.length > 0 ? await convertFilesToBase64(images) : images,
-      videos,
+      videos: videos.length > 0 ? await convertFilesToBase64(videos) : videos,
     };
     console.log({ data });
 
