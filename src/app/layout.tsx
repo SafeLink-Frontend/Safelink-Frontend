@@ -78,7 +78,7 @@ export default function RootLayout({
         <QueryClientCustomProvider>
           <body className={`${(openSans.className, raleway.className)}`}>
             <Nav>
-              <NavLink href={"/create-listing"}>List With Us</NavLink>
+              <NavLink href={"/create-listing"}>Add Product</NavLink>
               <NavLink href={"/pricing"}>Pricing</NavLink>
             </Nav>
             <Toaster />

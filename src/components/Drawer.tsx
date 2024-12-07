@@ -75,7 +75,7 @@ const Drawer = () => {
         <NavLink href="/create-listing">
           <div className="flex-row flex items-center space-x-4">
             <FaList />
-            <span>List With Us</span>
+            <span>Add Product</span>
           </div>
         </NavLink>
         {/* <NavLink href="/messages">
