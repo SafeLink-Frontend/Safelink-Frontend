@@ -33,7 +33,6 @@ body {
   }
 }
 
-
 /* .background-image {
   background-image: url('/path/to/your/image.jpg');
   background-size: cover;
@@ -57,8 +56,6 @@ body {
   }
 } */
 
-
-
 .modal-enter {
   transform: translateX(100%);
 }
@@ -74,8 +71,9 @@ body {
   transition: transform 300ms;
 }
 
-.bg_blend{
-  background-image: url('/homepage-image-18.jpg'), linear-gradient(to right, #00000000, #00000061, #000000CC);
+.bg_blend {
+  background-image: url("/3d-rendering-money-tree.jpg"),
+    linear-gradient(to right, #00000000, #00000061, #000000cc);
   background-blend-mode: multiply;
   /* background-color: #171717; */
   background-position: center;
@@ -129,5 +127,7 @@ body {
   animation-duration: 4s;
 }
 @keyframes l24 {
-  100% {transform: rotate(1turn)}
+  100% {
+    transform: rotate(1turn);
+  }
 }

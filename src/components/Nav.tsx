@@ -43,6 +43,7 @@ export function Nav({ children }: { children: ReactNode }) {
   const queryClient = useQueryClient();
   const handleLogOut = () => {
     queryClient.invalidateQueries();
+    queryClient.removeQueries();
     clearUserData();
     setUser(null);
     router.replace("/login");
