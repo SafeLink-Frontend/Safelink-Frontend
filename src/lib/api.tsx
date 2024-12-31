@@ -10,6 +10,7 @@ import {
   SubscriptionStatus,
 } from "@/types/SubscriptionStatus";
 import { Product, UserProduct } from "@/types/product";
+import { MyReferral } from "@/types/my-referral";
 
 //const { fetch } = useFetch();
 
@@ -95,8 +96,15 @@ export const handleGoogleLogin = async (
 };
 
 export const fetchMyInventory = async (): Promise<UserProduct[] | null> => {
-  const api = await createApiInstance();
+  const api = createApiInstance();
   const response = await api.get(`/inventory/user`);
+  return response.data.data; // Assuming your API response has data here
+};
+
+export const fetchMyReferral = async (): Promise<MyReferral | null> => {
+  const api = createApiInstance();
+  const response = await api.get(`/referral/my-referral`);
+  // console.log("my ref", response.data);
   return response.data.data; // Assuming your API response has data here
 };
 

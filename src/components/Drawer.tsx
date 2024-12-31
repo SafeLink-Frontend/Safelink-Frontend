@@ -12,6 +12,7 @@ import {
   FaHeart,
   FaUser,
   FaUserCircle,
+  FaHandshake,
 } from "react-icons/fa";
 import { NavLink } from "./Nav";
 import useModalStore from "@/store/useModalStore";
@@ -48,6 +49,8 @@ const Drawer = () => {
   const queryClient = useQueryClient();
   const handleLogOut = () => {
     queryClient.invalidateQueries();
+    queryClient.clear();
+    queryClient.removeQueries();
     clearUserData();
     setUser(null);
     router.replace("/login");
@@ -76,6 +79,12 @@ const Drawer = () => {
           <div className="flex-row flex items-center space-x-4">
             <FaList />
             <span>Add Product</span>
+          </div>
+        </NavLink>
+        <NavLink href="/referral">
+          <div className="flex-row flex items-center space-x-4">
+            <FaHandshake />
+            <span>Refer & Earn</span>
           </div>
         </NavLink>
         {/* <NavLink href="/messages">

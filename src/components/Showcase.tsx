@@ -153,26 +153,23 @@ export function Showcase() {
           {/* Content */}
           <div className="relative flex flex-col items-center justify-center h-full">
             <div className="flex flex-col items-center">
-              <h2 className="text-white font-semibold sm:text-lg text-[28px] sm:text-[18px] text-center">
-                Present Yourself and Your Business Better with{" "}
-                <span className="text-primary uppercase font-semibold text-[28px]">
-                  SAFELINK
-                </span>
+              <h2 className="text-white font-bold sm:text-lg text-[32px] sm:text-[18px] text-center">
+                Earn ₦1,000 per Referral!
               </h2>
               <p
                 id="homepage-about"
                 className="text-[#f2f2f2] sm:w-[90%] w-[80%] text-center sm:text-[14px] mt-2"
               >
-                SAFELINK helps you tell your prospects and clients about
-                yourself, your business, and why they should buy from you.
+                Receive ₦1,000 for every business owner that subscribes through
+                your unique referral link.
               </p>
             </div>
 
             <Link
-              href={"/signup"}
+              href={"/referral"}
               className="bg-[#F2BE5C] py-2 px-4 rounded border border-[#F2BE5C] text-white my-5 font-medium"
             >
-              SIGN UP FOR A PROFILE TODAY
+              Generate your Link
             </Link>
           </div>
         </div>
