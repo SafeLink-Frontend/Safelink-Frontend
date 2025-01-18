@@ -1,6 +1,7 @@
 import { useVideoThumbnail } from "@/hooks/useVideoThumbnail";
 import { Product, UserProduct } from "@/types/product";
 import { formatCurrency } from "@/util/formatCurrency";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaRegHeart } from "react-icons/fa";
@@ -24,7 +25,9 @@ const Inventory = ({ inventory }: { inventory: UserProduct[] }) => {
                 className="rounded-t-3xl w-full h-[287px] object-cover"
               />
             ) : (
-              <img
+              <Image
+                width={1000}
+                height={1000}
                 className="rounded-t-3xl w-full h-[287px] object-cover"
                 src={item?.images[0] ?? ""}
                 alt=""

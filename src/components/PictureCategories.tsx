@@ -1,4 +1,5 @@
 import { base64ToFile } from "@/util/convertImage";
+import Image from "next/image";
 import React from "react";
 
 const PictureCategories = ({
@@ -16,8 +17,10 @@ const PictureCategories = ({
             </h3>
             <div className="grid grid-cols-3 gap-4 sm:gap-2">
               {category?.images?.map((image, idx) => (
-                <img
+                <Image
                   key={idx}
+                  width={1000}
+                  height={1000}
                   src={image}
                   // src={URL.createObjectURL(
                   //   base64ToFile(image, `image${index}.png`, "image/png")

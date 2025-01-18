@@ -14,6 +14,7 @@ import useUserStore from "@/store/useUserStore";
 import { useGoogleLogin } from "@react-oauth/google";
 import CustomGoogleAuthButton from "./CustomGoogleAuthButon";
 import { User } from "@/types/user";
+import Image from "next/image";
 //import { ShareSocial } from "react-share-social";
 
 const ProfileHeader = ({ user }: { user: User }) => {
@@ -55,7 +56,9 @@ const ProfileHeader = ({ user }: { user: User }) => {
         plugins={[Fullscreen]}
       />
       <div className="relative ">
-        <img
+        <Image
+          width={1000}
+          height={1000}
           src={user?.coverPicture ?? "/cp-placeholder.png"}
           alt=""
           className="h-[150px] w-full object-cover"
@@ -76,7 +79,9 @@ const ProfileHeader = ({ user }: { user: User }) => {
             onClick={() => setOpen(true)}
             className="w-20 h-20  sm1:h-12 sm1:w-12 rounded-full"
           >
-            <img
+            <Image
+              width={100}
+              height={100}
               className="w-full h-full rounded-full"
               src={user?.profilePicture || "/pp-placeholder.png"}
               alt="profile"

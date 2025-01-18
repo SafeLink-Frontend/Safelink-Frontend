@@ -1,4 +1,5 @@
 import { ImageUploaderProps } from "@/types/edit-profile";
+import Image from "next/image";
 
 export const ImageUploader: React.FC<ImageUploaderProps> = ({
   label,
@@ -16,7 +17,9 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
           typeof file === "string" ? file : URL.createObjectURL(file);
         return (
           <div key={index} className="relative mr-2 mb-2">
-            <img
+            <Image
+              width={100}
+              height={100}
               src={previewSrc as string}
               alt={`${name}-${index}`}
               className="w-16 h-16 object-cover rounded"

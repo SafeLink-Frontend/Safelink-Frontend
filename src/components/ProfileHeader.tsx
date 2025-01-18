@@ -26,6 +26,7 @@ import { useSubscriptionStatus } from "@/hooks/useSubscriptionStatus";
 import { useFetchMyProfile } from "@/hooks/useFetchMyProfile";
 import AlertDialogComponent from "./AlertDialogComponent";
 import { useMutation } from "@tanstack/react-query";
+import Image from "next/image";
 //import { ShareSocial } from "react-share-social";
 
 const ProfileHeader = () => {
@@ -99,7 +100,10 @@ const ProfileHeader = () => {
       />
 
       <div className="z-10 ">
-        <img
+        <Image
+          width={1000}
+          height={1000}
+          alt="cover picture"
           src={user?.coverPicture || "/cp-placeholder.png"}
           className="w-full h-24"
         />
@@ -116,7 +120,9 @@ const ProfileHeader = () => {
             onClick={() => setOpen(true)}
             className="w-[150px] h-[150px]  sm1:h-12 sm1:w-12 rounded-full"
           >
-            <img
+            <Image
+              width={100}
+              height={100}
               className="w-full h-full rounded-full"
               src={user?.profilePicture || "/pp-placeholder.png"}
               alt="profile"

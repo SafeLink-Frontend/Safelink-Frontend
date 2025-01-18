@@ -41,7 +41,8 @@ export default function NextJsLightBox({ slide, offset, rect }) {
   return (
     <div style={{ position: "relative", width, height }}>
       <Image
-        fill
+        width={1000}
+        height={1000}
         alt=""
         src={slide}
         loading="eager"
