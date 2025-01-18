@@ -7,6 +7,7 @@ import { addInventory, updateInventory } from "@/lib/api";
 import { User } from "@/types/user";
 import { convertFilesToBase64 } from "@/util/convertImage";
 import { QueryClient, useQueryClient } from "@tanstack/react-query";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { number } from "yup";
@@ -159,7 +160,9 @@ export default function EditListing() {
           <div className="flex flex-wrap gap-4 mt-4">
             {images?.map((file: any, index: string) => (
               <div key={index} className="relative">
-                <img
+                <Image
+                  width={100}
+                  height={100}
                   src={
                     typeof file === "string" ? file : URL.createObjectURL(file)
                   }

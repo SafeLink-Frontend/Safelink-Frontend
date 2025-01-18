@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const UserPictures = ({
@@ -15,7 +16,9 @@ const UserPictures = ({
             </h3>
             <div className="grid grid-cols-3 gap-4 sm:gap-2">
               {category.images.map((image, idx) => (
-                <img
+                <Image
+                  width={1000}
+                  height={1000}
                   key={idx}
                   src={image}
                   alt={category.title}
