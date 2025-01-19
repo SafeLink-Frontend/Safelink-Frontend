@@ -63,11 +63,11 @@ export default function CreateListing() {
       currency,
       price,
       description,
-      cover: cover ? await convertFileToBase64(cover) : cover,
+      cover: "", //cover ? await convertFileToBase64(cover) : cover,
       images: images.length > 0 ? await convertFilesToBase64(images) : images,
       videos: videos.length > 0 ? await convertFilesToBase64(videos) : videos,
     };
-    console.log({ data });
+    // console.log({ data });
 
     try {
       const response = await addInventory(data);
@@ -110,7 +110,7 @@ export default function CreateListing() {
             maxLength={250}
           />
         </div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block text-gray-700">Cover</label>
           <input
             type="file"
@@ -119,7 +119,7 @@ export default function CreateListing() {
             accept="image/png, image/jpeg, image/gif"
             className="w-full p-2 border border-gray-300 rounded"
           />
-        </div>
+        </div> */}
         <div className="mb-4">
           <label className="block text-gray-700">Images</label>
           <input

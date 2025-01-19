@@ -4,9 +4,16 @@ import {
   isImageSlide,
   useLightboxProps,
   useLightboxState,
+  Slide,
 } from "yet-another-react-lightbox";
 
-function isNextJsImage(slide) {
+interface NextJsLightBoxProps {
+  slide: any;
+  offset: number;
+  rect: { width: number; height: number };
+}
+
+function isNextJsImage(slide: any) {
   return (
     isImageSlide(slide) &&
     typeof slide.width === "number" &&
@@ -14,7 +21,11 @@ function isNextJsImage(slide) {
   );
 }
 
-export default function NextJsLightBox({ slide, offset, rect }) {
+export default function NextJsLightBox({
+  slide,
+  offset,
+  rect,
+}: NextJsLightBoxProps) {
   const {
     on: { click },
     carousel: { imageFit },
