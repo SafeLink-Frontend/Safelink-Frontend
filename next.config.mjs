@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
-    ignoreBuildErrors: true, // This will ignore type errors during build
+    ignoreBuildErrors: true,
   },
   images: {
     remotePatterns: [
@@ -13,6 +13,12 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "api.joinsafelink.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "joinsafelink.com",
         port: "",
       },
     ],

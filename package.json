@@ -29,6 +29,7 @@
     "react-share": "^5.1.0",
     "react-web-share": "^2.0.2",
     "react-whatsapp": "^0.3.0",
+    "swiper": "^11.2.2",
     "use-local-storage": "^3.0.0",
     "yet-another-react-lightbox": "^3.21.3",
     "yup": "^1.4.0",
