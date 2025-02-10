@@ -209,7 +209,7 @@ Link: ${url}`;
                     </Link>
                   ) : (
                     <div className="flex items-center gap-2   ">
-                      <a
+                      <Link
                         className="bg-green-700 hover:bg-opacity-80 py-1 px-2 font-semibold sm:justify-center rounded-lg sm:w-full text-white flex flex-row items-center sm:space-x-2 space-x-1"
                         href={`https://wa.me/${"+234" + inventory.owner.phoneNumber}/?text=${encodedText}`}
                         data-action="share/whatsapp/share"
@@ -218,7 +218,7 @@ Link: ${url}`;
                         <div className="sm:text-sm">
                           Share to seller via Whatsapp
                         </div>
-                      </a>
+                      </Link>
                     </div>
                   )}
                   {inventory.owner._id === user?._id && (

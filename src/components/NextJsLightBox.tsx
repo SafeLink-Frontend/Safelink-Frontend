@@ -4,7 +4,6 @@ import {
   isImageSlide,
   useLightboxProps,
   useLightboxState,
-  Slide,
 } from "yet-another-react-lightbox";
 
 interface NextJsLightBoxProps {
@@ -30,12 +29,33 @@ export default function NextJsLightBox({
     on: { click },
     carousel: { imageFit },
   } = useLightboxProps();
-
   const { currentIndex } = useLightboxState();
 
-  const cover = isImageSlide(slide) && isImageFitCover(slide, imageFit);
+  // Optional: check if the slide should be rendered as a video (if the src ends with .mp4)
+  const src: string = slide?.src || slide;
+  const isVideo = src.endsWith(".mp4");
 
-  if (!isNextJsImage(slide)) return undefined;
+  if (isVideo) {
+    return (
+      <div
+        style={{ position: "relative", width: rect.width, height: rect.height }}
+      >
+        <video
+          controls
+          src={src}
+          className="w-full h-full object-cover"
+          onClick={
+            offset === 0 ? () => click?.({ index: currentIndex }) : undefined
+          }
+        />
+      </div>
+    );
+  }
+
+  // Fall back to Next.js Image for images
+  if (!isNextJsImage(slide)) return null;
+
+  const cover = isImageSlide(slide) && isImageFitCover(slide, imageFit);
 
   const width = !cover
     ? Math.round(
@@ -52,10 +72,11 @@ export default function NextJsLightBox({
   return (
     <div style={{ position: "relative", width, height }}>
       <Image
-        width={1000}
-        height={1000}
-        alt=""
-        src={slide}
+        width={slide.width || 1000}
+        height={slide.height || 1000}
+        alt="product image"
+        crossOrigin="anonymous"
+        src={src}
         loading="eager"
         draggable={false}
         placeholder={slide.blurDataURL ? "blur" : undefined}

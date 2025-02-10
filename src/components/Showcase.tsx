@@ -7,6 +7,7 @@ import Link from "next/link";
 import Loading from "@/app/loading";
 import { useFetchTopUsers } from "@/hooks/useFetchTopUsers";
 import { useFetchStaticUsers } from "@/hooks/useFetchStaticUsers";
+import Image from "next/image";
 //import { User } from "@/types/user"; // Add this import
 
 interface _Product extends Product {
@@ -84,11 +85,9 @@ export function Showcase() {
         </div>
       </section>
       <section className="p-5">
-        <div>
-          <h2 className="text-[#FDAF1E] font-semibold leading-6 text-[24px] my-5 w-full sm:text-center">
-            Our Top Sellers
-          </h2>
-        </div>
+        <h2 className="text-[#FDAF1E] font-semibold leading-6 text-[24px] my-5 w-full sm:text-center">
+          Our Top Sellers
+        </h2>
         {isPending ? (
           <div className="flex justify-center w-full">
             <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-primary"></div>
@@ -119,7 +118,9 @@ export function Showcase() {
                       }}
                     >
                       <div className="absolute -bottom-5 left-3">
-                        <img
+                        <Image
+                          width={100}
+                          height={100}
                           src={item?.profilePicture || "/image7.png"}
                           alt="Profile"
                           className="rounded-full w-12 h-12 bg-cover"
@@ -135,7 +136,7 @@ export function Showcase() {
                       </p>
                     </div>
                   </div>
-                  <div className="flex-grow mb-4"></div>
+                  <div className="flex-grow mb-4" />
                 </Link>
               ))}
           </div>
@@ -148,7 +149,7 @@ export function Showcase() {
           <div
             className="absolute inset-0 bg_blend brightness-75 contrast-75"
             aria-hidden="true"
-          ></div>
+          />
 
           {/* Content */}
           <div className="relative flex flex-col items-center justify-center h-full">
