@@ -22,11 +22,11 @@ export function useSignUp() {
   const signUp = async (rawFormData: FormData) => {
     console.log("raw form data", rawFormData);
     const formData = {
-      email: rawFormData.get("email"),
-      username: rawFormData.get("username"),
-      password: rawFormData.get("password"),
-      confirmPassword: rawFormData.get("confirmPassword"),
-      referralCode: rawFormData.get("referralCode"),
+      email: rawFormData.get("email")?.toString().trim(),
+      username: rawFormData.get("username")?.toString().trim(),
+      password: rawFormData.get("password")?.toString().trim(),
+      confirmPassword: rawFormData.get("confirmPassword")?.toString().trim(),
+      referralCode: rawFormData.get("referralCode")?.toString().trim(),
     };
     console.log("form data", formData);
 

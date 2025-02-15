@@ -33,3 +33,14 @@ export interface UserProduct {
     phoneNumber: number;
   };
 }
+
+export type UserProducts = {
+  _id: string;
+  title: string;
+  description: string;
+  price: number;
+  currency: string;
+  images: [string];
+  videos: [string];
+  owner: string;
+}[];
