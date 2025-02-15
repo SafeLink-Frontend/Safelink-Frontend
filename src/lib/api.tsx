@@ -9,7 +9,7 @@ import {
   SubscriptionData,
   SubscriptionStatus,
 } from "@/types/SubscriptionStatus";
-import { Product, UserProduct } from "@/types/product";
+import { Product, UserProduct, UserProducts } from "@/types/product";
 import { MyReferral } from "@/types/my-referral";
 
 //const { fetch } = useFetch();
@@ -95,7 +95,7 @@ export const handleGoogleLogin = async (
   }
 };
 
-export const fetchMyInventory = async (): Promise<UserProduct[] | null> => {
+export const fetchMyInventory = async (): Promise<UserProducts | null> => {
   const api = createApiInstance();
   const response = await api.get(`/inventory/user`);
   return response.data.data; // Assuming your API response has data here

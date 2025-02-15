@@ -168,7 +168,7 @@ const Page = () => {
       ) : isInventoryFetching ? (
         <Loading />
       ) : inventory && inventory.length > 0 ? (
-        <Inventory inventory={inventory} />
+        <Inventory inventory={inventory} ownerId={user?._id} />
       ) : (
         <div>
           <p>No inventory found</p>
