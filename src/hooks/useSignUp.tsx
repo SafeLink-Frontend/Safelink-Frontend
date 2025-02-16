@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import useModalStore from "@/store/useModalStore";
-import { object, string, InferType, ref } from "yup";
+import { object, string, InferType, ref, boolean } from "yup";
 import { baseUrl } from "@/lib/api";
 
 export function useSignUp() {
@@ -10,6 +10,7 @@ export function useSignUp() {
 
   const schema = object({
     email: string().required("Email is required").email("Invalid email format"),
+    phoneNumber: string().required("Phone Number is required"),
     username: string().required("Your Username is required"),
     password: string()
       .required("Password is required")
@@ -17,16 +18,21 @@ export function useSignUp() {
     confirmPassword: string()
       .required("Please confirm your password")
       .oneOf([ref("password")], "Passwords must match"),
+    termsAndConditions: boolean().required(
+      "Please accept the terms and conditions"
+    ),
   });
 
   const signUp = async (rawFormData: FormData) => {
     console.log("raw form data", rawFormData);
     const formData = {
       email: rawFormData.get("email")?.toString().trim(),
+      phoneNumber: rawFormData.get("phoneNumber")?.toString().trim(),
       username: rawFormData.get("username")?.toString().trim(),
       password: rawFormData.get("password")?.toString().trim(),
       confirmPassword: rawFormData.get("confirmPassword")?.toString().trim(),
       referralCode: rawFormData.get("referralCode")?.toString().trim(),
+      termsAndConditions: rawFormData.get("termsAndConditions") === "on",
     };
     console.log("form data", formData);
 
@@ -39,6 +45,7 @@ export function useSignUp() {
         headers: {
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify(formData),
       });
 

@@ -44,7 +44,7 @@ const Page = () => {
   const favoritesSpecificToUser = favorites.filter(
     (item) => item.owner.id === user?._id
   );
-  console.log({ favorites });
+  // console.log({ favorites });
 
   const categories = [
     {
@@ -179,6 +179,7 @@ const Page = () => {
           <p className="text-[12px] leading-4 font-semibold text-white">
             Your List
           </p>
+          <div className="grid grid-cols-5 sm:grid-cols-2 gap-2">
           {favoritesSpecificToUser.map((item, index) => (
             <div className="bg-white p-1 flex items-center justify-between gap-3 my-2 rounded-md">
               <img className="w-10 h-10" src={item.image} alt="" />
@@ -199,7 +200,8 @@ const Page = () => {
                 </button>
               </div>
             </div>
-          ))}
+            ))}
+          </div>
           <div className="flex items-center justify-between gap-1">
             <button
               onClick={shareToWhatsApp}

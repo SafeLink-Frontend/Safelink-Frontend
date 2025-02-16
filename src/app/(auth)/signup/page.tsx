@@ -33,7 +33,7 @@ async function page({
         <div className="">
           <div>Email</div>
           <input
-            className="border border-[#737373] outline-none focus:border-2 focus:border-primary p-3 w-full rounded-[4px]"
+            className="border border-[#737373] outline-none focus:border-2 focus:border-primary p-2 w-full rounded-[4px]"
             id="email"
             title="Email"
             name="email"
@@ -44,11 +44,23 @@ async function page({
         <div className="">
           <div>Username (Preferrably your Business Name)</div>
           <input
-            className="border border-[#737373] outline-none focus:border-2 focus:border-primary p-3 w-full rounded-[4px]"
+            className="border border-[#737373] outline-none focus:border-2 focus:border-primary p-2 w-full rounded-[4px]"
             id="username"
             title="UserName"
             name="username"
             placeholder="Enter your Username here"
+            type="text"
+          />
+        </div>
+
+        <div className="">
+          <div>Phone Number</div>
+          <input
+            className="border border-[#737373] outline-none focus:border-2 focus:border-primary p-2 w-full rounded-[4px]"
+            id="phoneNumber"
+            title="Phone Number"
+            name="phoneNumber"
+            placeholder="Enter your Phone Number here"
             type="text"
           />
         </div>
@@ -59,7 +71,7 @@ async function page({
         <div className="">
           <div>Referral Code (Optional)</div>
           <input
-            className="border border-[#737373] outline-none focus:border-2 focus:border-primary p-3 w-full rounded-[4px]"
+            className="border border-[#737373] outline-none focus:border-2 focus:border-primary p-2 w-full rounded-[4px]"
             id="referralCode"
             title="referralCode"
             name="referralCode"
@@ -70,7 +82,11 @@ async function page({
         </div>
 
         <div className="flex flex-row space-x-2 items-start">
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            id="termsAndConditions"
+            name="termsAndConditions"
+          />
           <div className="text-xs">
             By clicking here, I state that I have read and understood the{" "}
             <Link
