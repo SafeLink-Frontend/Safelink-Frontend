@@ -96,11 +96,7 @@ const Inventory = ({
                             },
                           })
                     }
-                    className={`text-green-500 py-2 px-4 rounded-lg  border-green-500 border whitespace-nowrap ${
-                      isInCart
-                        ? "border-red-500 text-red-500"
-                        : "border-green-500 text-green-500"
-                    }`}
+                    className={`text-white py-2 px-4 rounded-lg  bg-black whitespace-nowrap `}
                   >
                     {isInCart ? "Remove from Cart" : "Add to Cart"}
                   </button>
