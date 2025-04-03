@@ -86,6 +86,7 @@ async function page({
             type="checkbox"
             id="termsAndConditions"
             name="termsAndConditions"
+            
           />
           <div className="text-xs">
             By clicking here, I state that I have read and understood the{" "}
