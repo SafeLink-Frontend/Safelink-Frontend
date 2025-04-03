@@ -60,20 +60,28 @@ export default function EditListing() {
     setIsLoading(true);
 
     try {
-      setIsLoading(true);
+      // Separate existing images (strings) from new images (File objects)
+      const existingImages = images.filter(
+        (img: any) => typeof img === "string"
+      );
+      const newImages = images.filter((img: any) => typeof img !== "string");
+
       const data = {
         title,
         currency,
         price,
         description,
-        // cover: cover ? await convertFileToBase64(cover) : cover,
         _id: inventory?._id,
-        images: images.length > 0 ? await convertFilesToBase64(images) : images,
+        images: [
+          ...(newImages.length > 0
+            ? await convertFilesToBase64(newImages)
+            : []),
+        ],
+        existingImages,
         videos,
       };
-      console.log({ data });
+
       const response = await updateInventory(data, inventory?._id || "");
-      console.log("rt", response);
 
       queryClient.invalidateQueries({
         queryKey: ["inventory"],
@@ -85,7 +93,6 @@ export default function EditListing() {
       router.back();
     } catch (error) {
       console.error("Error in handleSubmit:", error);
-      setIsLoading(false);
     } finally {
       setIsLoading(false);
     }
@@ -93,6 +100,7 @@ export default function EditListing() {
   //convertFilesToBase64([cover]).then((item) => console.log("xn", item[0]));
 
   useEffect(() => {
+    console.log("inv", inventory);
     if (inventory) {
       setTitle(inventory.title);
       setDescription(inventory.description);
