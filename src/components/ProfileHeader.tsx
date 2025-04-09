@@ -1,10 +1,9 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState, useEffect, useRef } from "react";
-import { FaCamera, FaRegEdit } from "react-icons/fa";
+import { FaCamera, FaPlus, FaRegEdit } from "react-icons/fa";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { MdEdit } from "react-icons/md";
 import { IoMdShareAlt } from "react-icons/io";
-import { HiUpload } from "react-icons/hi";
 import useLocalStorage from "use-local-storage";
 import Link from "next/link";
 import Toast, { toast } from "react-hot-toast";
@@ -13,8 +12,6 @@ import useUserStore from "@/store/useUserStore";
 import { base64ToFile } from "@/util/convertImage";
 import Lightbox from "yet-another-react-lightbox";
 import NextJsLightBox from "./NextJsLightBox";
-import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
-import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
@@ -186,11 +183,11 @@ const ProfileHeader = () => {
             </RWebShare>
 
             <Link
-              href={"/pricing"}
+              href={"/create-listing"}
               className="bg-[#252625] text-[#F2F2F2] capitalize flex items-center gap-3 leading-6 p-2 border border-[#252625] rounded cursor-pointer text-nowrap sm1:hidden"
             >
-              <HiUpload size={20} />
-              upgrade account
+              <FaPlus size={20} />
+              Add Product
             </Link>
           </div>
         </div>
@@ -228,11 +225,11 @@ const ProfileHeader = () => {
             edit profile
           </button>
           <Link
-            href={"/pricing"}
+            href={"/create-listing"}
             className="bg-[#252625] text-[#F2F2F2] capitalize flex items-center gap-3 leading-6 p-2 border border-[#252625] rounded cursor-pointer text-nowrap"
           >
-            <HiUpload size={20} />
-            upgrade account
+            <FaPlus size={20} />
+            Add Product
           </Link>
         </>
       </div>
