@@ -79,7 +79,7 @@ export default function RootLayout({
           <body className={`${(openSans.className, raleway.className)}`}>
             <Nav>
               <NavLink href={"/create-listing"}>Add Product</NavLink>
-              <NavLink href={"/pricing"}>Pricing</NavLink>
+              {/* <NavLink href={"/pricing"}>Pricing</NavLink> */}
             </Nav>
             <Toaster />
             <div className="min-h-[500px]">
