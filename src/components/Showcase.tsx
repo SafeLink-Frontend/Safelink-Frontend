@@ -64,12 +64,12 @@ export function Showcase() {
 
   return (
     <>
-      <section className="flex items-center z-50 justify-center text-center bg-[#0D0D0D] p-28 my-5 sm:mt-16 sm:p-4">
-        <div>
-          <h2 className="font-medium leading-8 text-[24px] text-center text-white">
+      <section className="flex items-center z-50 justify-center text-center bg-[#0D0D0D] p-28 my-5 sm:p-4 lt:p-3 md1:p-16 xxl:p-48">
+        <div className="container ">
+          <h2 className="font-medium leading-8 text-[24px] lt:text-[20px] lg:text-[32px] xxl:text-[42px] text-center text-white">
             What is <span className="text-[#F2BE5C]">Safelink?</span>
           </h2>
-          <p className="text-[14px] text-white my-2">
+          <p className="text-[14px] lg:text-[16px] xxl:text-[20px] text-white my-2 xxl:my-6">
             SafeLink helps you organize your business details, photos, and
             prices in one simple link. No need to fill up your phone or your
             clients' phones with too many pictures—just send one link! It's
@@ -78,14 +78,14 @@ export function Showcase() {
           </p>
           <Link
             href={"/signup"}
-            className="bg-[#F2BE5C] py-2 px-4 rounded border border-[#F2BE5C] text-white my-5 font-medium"
+            className="bg-[#F2BE5C] py-2 px-4 rounded border border-[#F2BE5C] text-white my-5 font-medium "
           >
             Create an Account
           </Link>
         </div>
       </section>
-      <section className="p-5">
-        <h2 className="text-[#FDAF1E] font-semibold leading-6 text-[24px] my-5 w-full sm:text-center">
+      <section className="p-5 lt:p-3">
+        <h2 className="text-[#FDAF1E] font-semibold leading-6 text-[24px] lt:text-[20px] lg:text-[32px] xxl:text-[42px] my-5 w-full sm:text-center">
           Our Top Sellers
         </h2>
         {isPending ? (
@@ -93,7 +93,7 @@ export function Showcase() {
             <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-primary"></div>
           </div>
         ) : (
-          <div className="grid grid-cols-3 sm:grid-cols-2 gap-10 sm:gap-2">
+          <div className="container grid grid-cols-3 sm:grid-cols-2 lt:grid-cols-1 gap-10 sm:gap-5 lt:gap-3">
             {users &&
               users.length > 0 &&
               users?.map((item, index) => (
@@ -110,7 +110,7 @@ export function Showcase() {
                 >
                   <div className="items-center mb-4 flex flex-col">
                     <div
-                      className="w-full h-[200px] sm:h-[150px] border rounded-lg bg-cover bg-no-repeat relative"
+                      className="w-full h-[200px] sm:h-[150px] lt:h-[130px] lg:h-[300px] xxl:h-[400px] border rounded-lg bg-cover bg-no-repeat relative"
                       style={{
                         backgroundImage: `url(${
                           item?.coverPicture || "/cp-placeholder.png"
@@ -127,11 +127,11 @@ export function Showcase() {
                         />
                       </div>
                     </div>
-                    <div className="px-4 sm:px-1 mt-10 w-full">
-                      <h3 className="text-[18px] break-all text-left leading-6 text-ellipsis text-black my-2">
+                    <div className="px-4 sm:px-2 lt:px-1 mt-10 w-full">
+                      <h3 className="text-[18px] lt:text-[16px] lg:text-[22px] xxl:text-[28px] break-all text-left leading-6 text-ellipsis text-black my-2">
                         {item?.username || "Seller"}
                       </h3>
-                      <p className="text-[#444544F2] text-left leading-5 line-clamp-4 text-[14px] tracking-wide">
+                      <p className="text-[#444544F2] text-left leading-5 line-clamp-4 text-[14px] lg:text-[16px] xxl:text-[20px] tracking-wide">
                         {item?.about}
                       </p>
                     </div>
@@ -144,7 +144,7 @@ export function Showcase() {
       </section>
 
       <section className="mb-4">
-        <div className="h-[50vh] w-full my-2 relative">
+        <div className="h-[50vh] lt:h-[40vh] w-full my-2 relative">
           {/* Background Image with Overlay */}
           <div
             className="absolute inset-0 bg_blend brightness-75 contrast-75"
@@ -154,12 +154,12 @@ export function Showcase() {
           {/* Content */}
           <div className="relative flex flex-col items-center justify-center h-full">
             <div className="flex flex-col items-center">
-              <h2 className="text-white font-bold sm:text-lg text-[32px] sm:text-[18px] text-center">
+              <h2 className="text-white font-bold text-[32px] sm:text-[18px] lt:text-[16px] text-center">
                 Earn ₦1,000 per Referral!
               </h2>
               <p
                 id="homepage-about"
-                className="text-[#f2f2f2] sm:w-[90%] w-[80%] text-center sm:text-[14px] mt-2"
+                className="text-[#f2f2f2] w-[80%] sm:w-[90%] lt:w-[95%] text-center sm:text-[14px] lt:text-[12px] mt-2"
               >
                 Receive ₦1,000 for every business owner that subscribes through
                 your unique referral link.

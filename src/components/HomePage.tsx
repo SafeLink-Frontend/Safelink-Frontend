@@ -55,7 +55,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-white w-[75%] sm:w-[85%] py-2 flex flex-row rounded-md">
+          <div className="bg-white w-[75%] xxl:w-[60%] sm:w-[85%] py-2 flex flex-row rounded-md">
             <div className="flex flex-row items-center w-[85%] ml-2 rounded-md  px-2 bg-[#f2f4f8] sm:w-full">
               <IoSearch />
               <div className="pl-2 w-full flex items-center justify-between">

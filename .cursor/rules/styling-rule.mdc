@@ -1,0 +1,24 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+
+- For styling using tailwindcss, my tailwindcss screens is cofigured like this
+screens: {
+      lt: { max: "500px" },
+      sm: { max: "600px" },
+      sm1: { max: "840px" },
+      md: { max: "1100px" },
+      md1: { max: "850px" },
+      lg: { min: "2300px" },
+      xl: { max: "1280px" },
+      "2xl": { max: "1536px" },
+      "3xl": { max: "1800px" },
+      "4xl": { max: "2500px" },
+      "5xl": { max: "3840px" },
+      xxl: { min: "3840px" },
+    },
+ so, always take note of that, especially when i ask you to make a component or page responsive
