@@ -73,7 +73,7 @@ const ProfileHeader = ({ user }: { user: User }) => {
           <Drawer />
         </div> */}
       </div>
-      <div className=" flex mx-[2.5%] items-center mt-3 justify-between sm1:px-2 ">
+      <div className=" flex px-[20px] lg:px-[40px] xxl:px-[80px] items-center mt-3 justify-between sm1:px-2 ">
         <div className="flex flex-row items-center gap-2 ">
           <button
             onClick={() => setOpen(true)}
@@ -121,7 +121,7 @@ const ProfileHeader = ({ user }: { user: User }) => {
         </div>
       </div>
 
-      <p className="my-2 mx-[5%] sm1:mx-[5%]  text-[#444544]  font-raleway text-[18px] ">
+      <p className="my-2 px-[20px] lg:px-[40px] xxl:px-[80px] text-[#444544]  font-raleway text-[18px] ">
         {user?.about}
       </p>
 

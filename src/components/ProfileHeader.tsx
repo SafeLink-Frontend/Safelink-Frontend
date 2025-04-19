@@ -111,11 +111,11 @@ const ProfileHeader = () => {
           <FaArrowLeftLong size={24} /> back
         </button> */}
       </div>
-      <div className="w-full px-[20px] flex items-center mt-[-40px] sm:mt-3 sm1:mt-0 z-40 justify-between sm1:px-2 ">
-        <div className="flex flex-row items-center gap-2  ">
+      <div className="w-full px-[20px] lg:px-[40px] xxl:px-[80px] flex items-center mt-[-40px] sm:mt-3 sm1:mt-0 z-40 justify-between sm1:px-2 ">
+        <div className="flex flex-row items-center gap-2 lg:gap-4 xxl:gap-6">
           <button
             onClick={() => setOpen(true)}
-            className="w-[150px] h-[150px]  sm1:h-12 sm1:w-12 rounded-full"
+            className="w-[150px] h-[150px] sm1:h-12 sm1:w-12 lg:w-[180px] lg:h-[180px] xxl:w-[220px] xxl:h-[220px] rounded-full"
           >
             <Image
               width={100}
@@ -125,13 +125,6 @@ const ProfileHeader = () => {
               alt="profile"
             />
           </button>
-          {/* <button
-            onClick={handleImageClick}
-            className="relative -bottom-12 -left-8 sm:-bottom-4 sm:-left-4 sm1:-bottom-[24px]  sm1:-left-[28px] rounded-full bg-gray-800/80 p-2 sm:p-1 sm1-p-1 cursor-pointer hover:bg-gray-700/80 transition-colors"
-            disabled={isUploading}
-          >
-            <FaRegEdit size={"12px"} className="text-primary z-50" />
-          </button> */}
           <input
             ref={fileInputRef}
             type="file"
@@ -139,33 +132,29 @@ const ProfileHeader = () => {
             accept="image/*"
             onChange={handleImageChange}
           />
-          {/* {isUploading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/50 ">
-              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
-            </div>
-          )} */}
-          <div className="mt-2  flex flex-col justify-center ">
-            <h1 className="flex items-center gap-1 font-semibold w-auto  text-[22px] sm1:text-[12px] break-words">
+          <div className="mt-2 lg:mt-4 xxl:mt-6 flex flex-col justify-center ">
+            <h1 className="flex items-center gap-1 lg:gap-2 xxl:gap-3 font-semibold w-auto text-[22px] sm1:text-[12px] lg:text-[28px] xxl:text-[36px] break-words">
               <span className="max-w-full overflow-hidden">
                 {user?.username ?? user?.email}
               </span>
-              <img src={"/verification.svg"} className="w-4 h-4" alt="" />
+              <img
+                src={"/verification.svg"}
+                className="w-4 h-4 lg:w-6 lg:h-6 xxl:w-8 xxl:h-8"
+                alt=""
+              />
             </h1>
-            <small className="text-[14px]  sm1:text-[12px] font-semibold leading-5 text-[#737373]">
+            <small className="text-[14px] sm1:text-[12px] lg:text-[16px] xxl:text-[18px] font-semibold leading-5 lg:leading-6 xxl:leading-7 text-[#737373]">
               Joined: {user?.createdAt && user?.createdAt.slice(0, 4)}
             </small>
           </div>
-          {/* <button className="rounded-full  bg-gray-500/[0.5] p-2 absolute bottom-1 -right-1 sm:-right-1 cursor-pointer">
-            <FaCamera size={8} />
-          </button> */}
         </div>
-        <div className="flex items-center gap-2   ">
-          <div className="flex items-center gap-3 justify-between sm1:flex-wrap sm1:justify-center">
+        <div className="flex items-center gap-2 lg:gap-4 xxl:gap-6">
+          <div className="flex items-center gap-3 lg:gap-4 xxl:gap-5 justify-between sm1:hidden">
             <Link
               href="/profile/edit-profile"
-              className="text-[#737373] capitalize flex items-center gap-3 leading-6 p-2 border border-[#A6A6A6] rounded cursor-pointer text-nowrap sm1:hidden"
+              className="text-[#737373] capitalize flex items-center gap-3 leading-6 lg:leading-7 xxl:leading-8 p-2 lg:p-3 xxl:p-4 border border-[#A6A6A6] rounded cursor-pointer text-nowrap text-[14px] lg:text-[16px] xxl:text-[18px]"
             >
-              <MdEdit size={20} />
+              <MdEdit className="w-5 h-5 lg:w-6 lg:h-6 xxl:w-7 xxl:h-7" />
               edit profile
             </Link>
 
@@ -177,27 +166,26 @@ const ProfileHeader = () => {
               }}
               onClick={() => console.log("shared successfully!")}
             >
-              <button className="bg-[#F2BE5C] text-white capitalize flex items-center gap-3 leading-6 p-2 border border-[#F2BE5C] rounded-md cursor-pointer text-nowrap sm1:hidden">
+              <button className="bg-[#F2BE5C] text-white capitalize flex items-center gap-3 leading-6 lg:leading-7 xxl:leading-8 p-2 lg:p-3 xxl:p-4 border border-[#F2BE5C] rounded-md cursor-pointer text-nowrap text-[14px] lg:text-[16px] xxl:text-[18px]">
                 share profile
               </button>
             </RWebShare>
 
             <Link
               href={"/create-listing"}
-              className="bg-[#252625] text-[#F2F2F2] capitalize flex items-center gap-3 leading-6 p-2 border border-[#252625] rounded cursor-pointer text-nowrap sm1:hidden"
+              className="bg-[#252625] text-[#F2F2F2] capitalize flex items-center gap-3 leading-6 lg:leading-7 xxl:leading-8 p-2 lg:p-3 xxl:p-4 border border-[#252625] rounded cursor-pointer text-nowrap text-[14px] lg:text-[16px] xxl:text-[18px]"
             >
-              <FaPlus size={20} />
+              <FaPlus className="w-5 h-5 lg:w-6 lg:h-6 xxl:w-7 xxl:h-7" />
               Add Product
             </Link>
           </div>
         </div>
       </div>
 
-      <p className="my-2 mx-[5%] sm1:mx-[5%] mt-[28px] text-[#444544] font-raleway text-[18px]">
+      <p className="my-2 lg:my-4 xxl:my-6 px-[20px] lg:px-[40px] xxl:px-[80px]  mt-[28px] lg:mt-[40px] xxl:mt-[60px] text-[#444544] font-raleway text-[18px] lg:text-[20px] xxl:text-[24px]">
         {user?.about}
       </p>
 
-      {/* small screens */}
       <div className="mb-2 mt-4 w-full justify-center hidden sm1:flex">
         <RWebShare
           data={{
@@ -234,18 +222,17 @@ const ProfileHeader = () => {
         </>
       </div>
 
-      <div className="flex  items-center mt-4 justify-between mx-[5%]">
+      <div className="flex items-center mt-4 lg:mt-6 xxl:mt-8 justify-between px-[20px] lg:px-[40px] xxl:px-[80px]">
         <>
-          <div className="flex space-x-2 sm1:space-x-0 items-center sm1:flex-col">
+          <div className="flex space-x-2 sm1:space-x-0 items-center sm1:flex-col text-[14px] lg:text-[16px] xxl:text-[18px]">
             <div>Subscribed to:</div>
-            <div className="font-semibold text-[20px] text- text-primary">
+            <div className="font-semibold text-[20px] lg:text-[24px] xxl:text-[28px] text-primary">
               {subscriptionStatus?.plan?.name?.toLocaleUpperCase() ?? "FREE"}{" "}
               PLAN
             </div>
           </div>
           {subscriptionStatus?.plan?.name !== SubscriptionStatus.FREE && (
             <AlertDialogComponent
-              // disabled={subscriptionStatus?.plan.name === SubscriptionStatus.FREE}
               action={() => cancelMySubscription.mutate()}
               title="Are you sure?"
               description="Your subscription will be cancelled in the next billing cycle."

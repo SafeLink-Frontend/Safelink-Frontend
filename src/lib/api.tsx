@@ -187,11 +187,7 @@ export const updateProfile = async (
         queryClient.invalidateQueries({ queryKey: ["inventory"] });
 
         setTimeout(() => {
-          if (subscriptionStatus === SubscriptionStatus.FREE) {
-            router.push("/pricing");
-          } else {
-            router.push("/profile");
-          }
+          router.push("/profile");
         }, 2000);
       }
     } else {
