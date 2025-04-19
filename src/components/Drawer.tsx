@@ -81,12 +81,12 @@ const Drawer = () => {
             <span>Add Product</span>
           </div>
         </NavLink>
-        <NavLink href="/referral">
+        {/* <NavLink href="/referral">
           <div className="flex-row flex items-center space-x-4">
             <FaHandshake />
             <span>Refer & Earn</span>
           </div>
-        </NavLink>
+        </NavLink> */}
         {/* <NavLink href="/messages">
           <div className="flex-row flex items-center space-x-4">
             <FaEnvelope />
