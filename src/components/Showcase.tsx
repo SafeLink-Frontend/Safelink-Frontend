@@ -144,7 +144,7 @@ export function Showcase() {
       </section>
 
       <section className="mb-4">
-        <div className="h-[50vh] lt:h-[40vh] md:h-[60vh] lg:h-[70vh] xxl:h-[80vh] w-full my-2 relative overflow-hidden">
+        <div className=" w-full my-2 py-12 relative overflow-hidden">
           {/* Use a proper image element for the background instead of CSS background */}
           <Image
             src="/homepage-image-7.jpg"
@@ -156,39 +156,39 @@ export function Showcase() {
           />
 
           {/* Content */}
-          <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 md:px-8">
+          <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 md:px-8 ">
             <div className="flex flex-col items-center max-w-7xl mx-auto">
-              <h2 className="text-white font-bold text-[32px] lt:text-[24px] sm:text-[18px] md:text-[36px] lg:text-[42px] xxl:text-[48px] text-center mb-6 md:mb-8 lg:mb-10">
+              <h2 className="text-white font-bold text-[32px] lt:text-[24px] sm:text-[18px] md:text-[36px] lg:text-[42px] xxl:text-[48px] text-center mb-6 md:mb-8 lg:mb-10 ">
                 Why Choose SafeLink?
               </h2>
 
               {/* Benefits grid - responsive based on specified breakpoints */}
-              <div className="grid grid-cols-3 sm1:grid-cols-1 md1:grid-cols-3 gap-4 lt:gap-2 md:gap-6 lg:gap-8 w-full max-w-6xl mx-auto">
-                <div className="text-center bg-black/40 backdrop-blur-sm p-3 lt:p-2 md:p-4 lg:p-6 rounded-lg border border-[#F2BE5C]/20 shadow-lg transform transition-transform hover:scale-105">
-                  <h3 className="text-[#F2BE5C] font-semibold text-[18px] lt:text-[16px] sm:text-[14px] md:text-[20px] lg:text-[24px] xxl:text-[28px] mb-2">
+              <div className="grid grid-cols-3 md1:grid-cols-1 sm1:grid-cols-1 gap-8 md:gap-6 sm1:gap-4 lt:gap-2 w-full max-w-6xl mx-auto">
+                <div className="text-center bg-black/40 backdrop-blur-sm p-6 md:p-4 lt:p-2 rounded-lg border border-[#F2BE5C]/20 shadow-lg transform transition-transform hover:scale-105">
+                  <h3 className="text-[#F2BE5C] font-semibold text-[22px] md:text-[20px] sm1:text-[18px] sm:text-[16px] lt:text-[14px] lg:text-[26px] xxl:text-[32px] mb-2">
                     Showcase Your Business
                   </h3>
-                  <p className="text-white text-[14px] lt:text-[12px] sm:text-[12px] md:text-[16px] lg:text-[18px] xxl:text-[20px]">
+                  <p className="text-white text-[16px] md:text-[15px] sm1:text-[14px] sm:text-[13px] lt:text-[12px] lg:text-[20px] xxl:text-[24px]">
                     Present your products professionally with photos and details
                     all in one shareable link
                   </p>
                 </div>
 
-                <div className="text-center bg-black/40 backdrop-blur-sm p-3 lt:p-2 md:p-4 lg:p-6 rounded-lg border border-[#F2BE5C]/20 shadow-lg transform transition-transform hover:scale-105">
-                  <h3 className="text-[#F2BE5C] font-semibold text-[18px] lt:text-[16px] sm:text-[14px] md:text-[20px] lg:text-[24px] xxl:text-[28px] mb-2">
+                <div className="text-center bg-black/40 backdrop-blur-sm p-6 md:p-4 lt:p-2 rounded-lg border border-[#F2BE5C]/20 shadow-lg transform transition-transform hover:scale-105">
+                  <h3 className="text-[#F2BE5C] font-semibold text-[22px] md:text-[20px] sm1:text-[18px] sm:text-[16px] lt:text-[14px] lg:text-[26px] xxl:text-[32px] mb-2">
                     Grow Your Audience
                   </h3>
-                  <p className="text-white text-[14px] lt:text-[12px] sm:text-[12px] md:text-[16px] lg:text-[18px] xxl:text-[20px]">
+                  <p className="text-white text-[16px] md:text-[15px] sm1:text-[14px] sm:text-[13px] lt:text-[12px] lg:text-[20px] xxl:text-[24px]">
                     Easily share your business profile and let customers help
                     spread the word
                   </p>
                 </div>
 
-                <div className="text-center bg-black/40 backdrop-blur-sm p-3 lt:p-2 md:p-4 lg:p-6 rounded-lg border border-[#F2BE5C]/20 shadow-lg transform transition-transform hover:scale-105 sm1:col-span-2 md1:col-span-1">
-                  <h3 className="text-[#F2BE5C] font-semibold text-[18px] lt:text-[16px] sm:text-[14px] md:text-[20px] lg:text-[24px] xxl:text-[28px] mb-2">
+                <div className="text-center bg-black/40 backdrop-blur-sm p-6 md:p-4 lt:p-2 rounded-lg border border-[#F2BE5C]/20 shadow-lg transform transition-transform hover:scale-105">
+                  <h3 className="text-[#F2BE5C] font-semibold text-[22px] md:text-[20px] sm1:text-[18px] sm:text-[16px] lt:text-[14px] lg:text-[26px] xxl:text-[32px] mb-2">
                     Simplify Sales
                   </h3>
-                  <p className="text-white text-[14px] lt:text-[12px] sm:text-[12px] md:text-[16px] lg:text-[18px] xxl:text-[20px]">
+                  <p className="text-white text-[16px] md:text-[15px] sm1:text-[14px] sm:text-[13px] lt:text-[12px] lg:text-[20px] xxl:text-[24px]">
                     Let customers easily browse your inventory and connect with
                     you directly
                   </p>
