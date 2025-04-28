@@ -2,26 +2,21 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FaTwitter, FaLinkedin, FaFacebook } from "react-icons/fa";
+import { FaTwitter, FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
   return (
     <footer className="bg-black text-white font-semibold text-[12px]  pt-4 mt-auto">
       <div className="max-w-[2000px] mx-auto sm:px-6 px-16 grid sm:grid-cols-1 grid-cols-4 gap-8">
         <div>
-          <h2 className="font-bold text-lg mb-4">CREAMCARD</h2>
-          <p className="text-sm mb-6">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh justo
-            erat urna a nisl dolor sit amet.
-          </p>
           <div className="flex space-x-4">
-            <Link href="#">
+            <Link href="https://x.com/usesafelink?t=YyJDe2Xl2hgWfnt0DcJHqA&s=08">
               <FaTwitter className="text-xl hover:text-primary" />
             </Link>
-            <Link href="#">
-              <FaLinkedin className="text-xl hover:text-primary" />
+            <Link href="https://www.instagram.com/usesafelink?igsh=enNza3ExcTd0MjFq">
+              <FaInstagram className="text-xl hover:text-primary" />
             </Link>
-            <Link href="#">
+            <Link href="https://www.facebook.com/profile.php?id=61567223234869">
               <FaFacebook className="text-xl hover:text-primary" />
             </Link>
           </div>

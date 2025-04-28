@@ -62,9 +62,9 @@ export function Nav({ children }: { children: ReactNode }) {
         pathName !== "/request-password-reset" &&
         pathName !== "/reset-password" && (
           <div
-            className={`sm:flex items-center justify-between px-2 bg-black bg-opacity-30 hidden fixed z-30 top-0 left-0  w-full `}
+            className={` bg-black bg-opacity-30 fixed z-30 top-0 left-0  w-full `}
           >
-            <div className="max-w-[2000px] mx-auto">
+            <div className="max-w-[2000px] mx-auto sm:flex hidden items-center justify-between px-2 ">
               <button className="p-4  " onClick={openDrawer}>
                 <FaBars size={24} color="white" />
               </button>
