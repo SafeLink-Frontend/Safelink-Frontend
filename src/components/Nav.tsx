@@ -64,42 +64,113 @@ export function Nav({ children }: { children: ReactNode }) {
           <div
             className={`sm:flex items-center justify-between px-2 bg-black bg-opacity-30 hidden fixed z-30 top-0 left-0  w-full `}
           >
-            <button className="p-4  " onClick={openDrawer}>
-              <FaBars size={24} color="white" />
-            </button>
-            <div>
-              <Link
-                href={"/"}
-                className="w-full flex justify-center bg-transparent"
-              >
-                <Image width={100} height={50} alt="logo" src={"/logo.svg"} />
-              </Link>
-            </div>
-
-            {user?.email ? (
-              <div className="">
+            <div className="max-w-[2000px] mx-auto">
+              <button className="p-4  " onClick={openDrawer}>
+                <FaBars size={24} color="white" />
+              </button>
+              <div>
                 <Link
-                  href={{
-                    pathname: "/profile",
-                    // query: {
-                    //   id: user?._id,
-                    // },
-                  }}
-                  className="text-[#f2f2f2]"
+                  href={"/"}
+                  className="w-full flex justify-center bg-transparent"
                 >
-                  {user.profilePicture ? (
-                    <img
-                      className="w-8 h-8 border-gray-700 border rounded-full"
-                      src={user.profilePicture}
-                    />
-                  ) : (
-                    <FaRegUserCircle
-                      size={30}
-                      color={pathName === "/profile" ? "#f2be56" : "#fff"}
-                    />
-                  )}
+                  <Image width={100} height={50} alt="logo" src={"/logo.svg"} />
                 </Link>
               </div>
+
+              {user?.email ? (
+                <div className="">
+                  <Link
+                    href={{
+                      pathname: "/profile",
+                      // query: {
+                      //   id: user?._id,
+                      // },
+                    }}
+                    className="text-[#f2f2f2]"
+                  >
+                    {user.profilePicture ? (
+                      <img
+                        className="w-8 h-8 border-gray-700 border rounded-full"
+                        src={user.profilePicture}
+                      />
+                    ) : (
+                      <FaRegUserCircle
+                        size={30}
+                        color={pathName === "/profile" ? "#f2be56" : "#fff"}
+                      />
+                    )}
+                  </Link>
+                </div>
+              ) : (
+                <>
+                  <button
+                    onClick={openLogInModal}
+                    className="border hover:text-primary sm:hidden border-primary rounded-[4px] py-3 px-6 mr-4"
+                  >
+                    Log In
+                  </button>
+                  {/* <button
+                onClick={openSignUpModal}
+                className="bg-primary rounded-[4px] py-3 px-6 hover:text-white hover:bg-primary/[0.8]  focus-visible:text-white"
+              >
+                Sign Up
+              </button> */}
+                </>
+              )}
+            </div>
+          </div>
+        )}
+
+      <nav className={`bg-black w-full `}>
+        <div className="max-w-[2000px] mx-auto flex justify-between text-white sm:hidden h-16 items-center pl-6 pr-4">
+          <Link href={"/"}>
+            <Image
+              alt="logo"
+              src={"/logo.svg"}
+              className="object-contain"
+              width={100}
+              height={50}
+            />
+          </Link>
+          <div className="flex flex-row items-center">
+            {children}
+
+            {user && (
+              <AlertDialogComponent
+                action={handleLogOut}
+                actionButtonText="Log out"
+                description="You are about to be logged out"
+                title="Are you sure?"
+                triggerButtonText="Log Out"
+                backgroundColor="bg-transparent"
+                borderColor="border-primary"
+                hoverBackgroundColor="bg-red-700/[0.3]"
+              />
+            )}
+            {user ? (
+              <Link
+                href={{
+                  pathname: "/profile",
+                  // query: {
+                  //   id: user?._id,
+                  // },
+                }}
+                className="ml-2"
+              >
+                {user.profilePicture ? (
+                  <div className="flex space-x-2">
+                    <img
+                      className="w-8 h-8 rounded-full border border-gray-700"
+                      src={user.profilePicture}
+                    />
+                  </div>
+                ) : (
+                  <FaRegUserCircle
+                    size={30}
+                    color={pathName === "/profile" ? "#f2be56" : "#fff"}
+                  />
+                )}
+              </Link>
             ) : (
               <>
                 <button
@@ -117,75 +188,6 @@ export function Nav({ children }: { children: ReactNode }) {
               </>
             )}
           </div>
-        )}
-
-      <nav
-        className={`bg-black flex  justify-between text-white sm:hidden h-16 items-center pl-6 pr-4`}
-      >
-        <Link href={"/"}>
-          <Image
-            alt="logo"
-            src={"/logo.svg"}
-            className="object-contain"
-            width={100}
-            height={50}
-          />
-        </Link>
-        <div className="flex flex-row items-center">
-          {children}
-
-          {user && (
-            <AlertDialogComponent
-              action={handleLogOut}
-              actionButtonText="Log out"
-              description="You are about to be logged out"
-              title="Are you sure?"
-              triggerButtonText="Log Out"
-              backgroundColor="bg-transparent"
-              borderColor="border-primary"
-              hoverBackgroundColor="bg-red-700/[0.3]"
-            />
-          )}
-          {user ? (
-            <Link
-              href={{
-                pathname: "/profile",
-                // query: {
-                //   id: user?._id,
-                // },
-              }}
-              className="ml-2"
-            >
-              {user.profilePicture ? (
-                <div className="flex space-x-2">
-                  <img
-                    className="w-8 h-8 rounded-full border border-gray-700"
-                    src={user.profilePicture}
-                  />
-                </div>
-              ) : (
-                <FaRegUserCircle
-                  size={30}
-                  color={pathName === "/profile" ? "#f2be56" : "#fff"}
-                />
-              )}
-            </Link>
-          ) : (
-            <>
-              <button
-                onClick={openLogInModal}
-                className="border hover:text-primary sm:hidden border-primary rounded-[4px] py-3 px-6 mr-4"
-              >
-                Log In
-              </button>
-              {/* <button
-                onClick={openSignUpModal}
-                className="bg-primary rounded-[4px] py-3 px-6 hover:text-white hover:bg-primary/[0.8]  focus-visible:text-white"
-              >
-                Sign Up
-              </button> */}
-            </>
-          )}
         </div>
       </nav>
       {pathName === "/" && (

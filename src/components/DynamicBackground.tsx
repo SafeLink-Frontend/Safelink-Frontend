@@ -31,7 +31,7 @@ const DynamicBackground = ({
   return (
     <div className="h-[80vh] mb-8 relative overflow-hidden">
       {/* Current Image */}
-      <div className="absolute z-30 top-[25vh] sm:[15vh] left-0 right-0 flex flex-col items-center justify-center ">
+      <div className="absolute z-30 top-[25vh] sm:[15vh] left-0 right-0 flex flex-col items-center justify-center max-w-[2000px] mx-auto">
         {children}
       </div>
       <Carousel

@@ -65,7 +65,7 @@ export function Showcase() {
   return (
     <>
       <section className="flex items-center z-50 justify-center text-center bg-[#0D0D0D] p-28 my-5 sm:p-4 lt:p-3 md1:p-16 xxl:p-48">
-        <div className="container ">
+        <div className="max-w-[2000px] mx-auto ">
           <h2 className="font-medium leading-8 text-[24px] lt:text-[20px] lg:text-[32px] xxl:text-[42px] text-center text-white">
             What is <span className="text-[#F2BE5C]">Safelink?</span>
           </h2>
@@ -144,7 +144,7 @@ export function Showcase() {
       </section>
 
       <section className="mb-4">
-        <div className=" w-full my-2 py-12 relative overflow-hidden">
+        <div className=" w-full my-2 py-12 relative overflow-hidden ">
           {/* Use a proper image element for the background instead of CSS background */}
           <Image
             src="/homepage-image-7.jpg"
@@ -163,7 +163,7 @@ export function Showcase() {
               </h2>
 
               {/* Benefits grid - responsive based on specified breakpoints */}
-              <div className="grid grid-cols-3 md1:grid-cols-1 sm1:grid-cols-1 gap-8 md:gap-6 sm1:gap-4 lt:gap-2 w-full max-w-6xl mx-auto">
+              <div className="grid grid-cols-3 md1:grid-cols-1 sm1:grid-cols-1 gap-8 md:gap-6 sm1:gap-4 lt:gap-2 w-full max-w-[2000px] mx-auto">
                 <div className="text-center bg-black/40 backdrop-blur-sm p-6 md:p-4 lt:p-2 rounded-lg border border-[#F2BE5C]/20 shadow-lg transform transition-transform hover:scale-105">
                   <h3 className="text-[#F2BE5C] font-semibold text-[22px] md:text-[20px] sm1:text-[18px] sm:text-[16px] lt:text-[14px] lg:text-[26px] xxl:text-[32px] mb-2">
                     Showcase Your Business
