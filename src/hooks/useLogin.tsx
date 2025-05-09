@@ -79,7 +79,7 @@ export function useLogin() {
 
       // localStorage.setItem("user", JSON.stringify(data.data.user));
 
-      router.replace("/");
+      router.replace("/profile/edit-profile");
       toast.success("Logged in successfully");
       closeLogInModal();
       return { success: true, data };

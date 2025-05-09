@@ -1,5 +1,6 @@
 "use client";
 import Loading from "@/app/loading";
+import ProductSuccessModal from "@/components/ProductSuccessModal";
 import { addInventory } from "@/lib/api";
 import { QueryClient, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -17,6 +18,7 @@ export default function CreateListing() {
   const [images, setImages] = useState<any>([]);
   const [videos, setVideos] = useState<any>([]);
   const [cover, setCover] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const queryClient = useQueryClient();
 
@@ -74,14 +76,29 @@ export default function CreateListing() {
       console.log("rt", response);
 
       queryClient.invalidateQueries({ queryKey: ["inventory"] });
-      router.push("/profile");
+      setIsModalOpen(true);
     } catch (error) {
       console.error("Error in handleSubmit:", error);
     } finally {
       setIsLoading(false);
     }
   };
-  //convertFilesToBase64([cover]).then((item) => console.log("xn", item[0]));
+
+  const handleAddAnother = () => {
+    setIsModalOpen(false);
+    // Reset form or navigate to the form page
+    setCover(null);
+    setImages([]);
+    setVideos([]);
+    setDescription("");
+    setTitle("");
+    setPrice("");
+  };
+
+  const handleProceed = () => {
+    setIsModalOpen(false);
+    router.push("/profile");
+  };
 
   return (
     <div className="max-w-2xl mx-auto p-4 sm:mt-12 min-h-screen">
@@ -166,6 +183,13 @@ export default function CreateListing() {
           List
         </button>
       </form>
+
+      <ProductSuccessModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAddAnother={handleAddAnother}
+        onProceed={handleProceed}
+      />
     </div>
   );
 }
