@@ -88,7 +88,7 @@ export const handleGoogleLogin = async (
     queryClient.invalidateQueries({
       queryKey: ["subscription"],
     });
-    router.replace("/profile/edit-profile");
+    router.replace("/profile");
   } catch (error) {
     console.log("google sign in failed", error);
     toast.error("Google sign in failed");
