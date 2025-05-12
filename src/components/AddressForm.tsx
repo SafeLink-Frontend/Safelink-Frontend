@@ -8,7 +8,7 @@ interface AddressFormProps {
 
 export const AddressForm: React.FC<AddressFormProps> = ({ form, onChange }) => (
   <div className="flex flex-col items-center">
-    <div className="flex flex-col sm:w-full w-[60%] items-start mt-4">
+    <div className="flex flex-col sm:w-full w-[40%] lg:w-[30%] items-start mt-4">
       <label
         className="text-[#252625] flex flex-row font-medium text-[14px] mb-1 leading-3"
         htmlFor="address"
@@ -27,7 +27,7 @@ export const AddressForm: React.FC<AddressFormProps> = ({ form, onChange }) => (
       />
     </div>
 
-    <div className="flex flex-col sm:w-full w-[60%] items-start mt-4">
+    <div className="flex flex-col sm:w-full w-[40%] lg:w-[30%] items-start mt-4">
       <label
         className="text-[#252625] font-medium text-[14px] mb-1 leading-3"
         htmlFor="country"
@@ -45,7 +45,7 @@ export const AddressForm: React.FC<AddressFormProps> = ({ form, onChange }) => (
       />
     </div>
 
-    <div className="flex flex-col sm:w-full w-[60%] items-start mt-4">
+    <div className="flex flex-col sm:w-full w-[40%] lg:w-[30%] items-start mt-4">
       <label
         className="text-[#252625] font-medium text-[14px] mb-1 leading-3"
         htmlFor="state"
