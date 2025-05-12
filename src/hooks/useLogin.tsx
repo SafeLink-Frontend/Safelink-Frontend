@@ -78,8 +78,7 @@ export function useLogin() {
       });
 
       // localStorage.setItem("user", JSON.stringify(data.data.user));
-
-      router.replace("/profile/edit-profile");
+      router.replace("/profile");
       toast.success("Logged in successfully");
       closeLogInModal();
       return { success: true, data };
