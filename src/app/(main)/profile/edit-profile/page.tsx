@@ -36,7 +36,7 @@ function Page() {
       <form onSubmit={handleSubmit}>
         <PersonalInfoForm form={form} onChange={handleChange} />
 
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center w-full">
           <ImageUploader
             label="Profile picture"
             name="profile"
@@ -95,7 +95,7 @@ function Page() {
 
         <button
           type="submit"
-          className="bg-primary text-white rounded-md px-4 py-2 sm:ml-0 ml-[20%] mt-4"
+          className="bg-primary text-white rounded-md px-4 py-2 sm:ml-0 ml-[30%] lg:ml-[35%] mt-4"
         >
           Save Changes
         </button>

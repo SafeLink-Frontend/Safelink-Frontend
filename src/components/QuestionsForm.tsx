@@ -16,7 +16,7 @@ export const QuestionsForm: React.FC<QuestionsFormProps> = ({
     {questions?.map((question) => (
       <div
         key={question.id}
-        className="flex flex-col sm:w-full w-[60%] items-start my-2"
+        className="flex flex-col sm:w-full w-[40%] lg:w-[30%] items-start my-2"
       >
         <label
           className="text-[#252625] font-medium text-[14px] mt-4 mb-1 leading-3"
