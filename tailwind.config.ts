@@ -46,20 +46,7 @@ const config: Config = {
         contentShow: "contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
       },
     },
-    screens: {
-      lt: { max: "500px" },
-      sm: { max: "600px" },
-      sm1: { max: "840px" },
-      md: { max: "1100px" },
-      md1: { max: "850px" },
-      lg: { min: "2300px" },
-      xl: { max: "1280px" },
-      "2xl": { max: "1536px" },
-      "3xl": { max: "1800px" },
-      "4xl": { max: "2500px" },
-      "5xl": { max: "3840px" },
-      xxl: { min: "3840px" },
-    },
+    
   },
   plugins: [],
 };

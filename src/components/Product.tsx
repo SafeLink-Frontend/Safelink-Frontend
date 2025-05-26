@@ -119,7 +119,7 @@ Link: ${url}`;
   }
 
   return (
-    <div className="">
+    <div className="container mx-auto min-h-screen">
       {mediaType === "images" ? (
         <Lightbox
           open={open}
@@ -131,8 +131,8 @@ Link: ${url}`;
       ) : (
         <Lightbox plugins={[Video]} slides={videoSlides} />
       )}
-      <div className="mt-4 mx-4 text-center sm:mt-16">
-        <div className="mt-2 mx-4 sm:mx-0 sm:mb-4 flex-row sm:flex-col flex items-start">
+      <div className="md:mt-4 mx-4 text-center mt-16">
+        <div className="mt-2 md:mx-4 mx-0 mb-4 md:mb-0 flex-row sm:flex-col flex items-start">
           <button
             onClick={() => router.back()}
             className="bg-transparent flex flex-row  space-x-2"
@@ -141,7 +141,7 @@ Link: ${url}`;
             <div>Back</div>
           </button>
           <div className="flex flex-1 flex-col w-full">
-            <h2 className="font-bold sm:text-lg text-2xl text-primary">
+            <h2 className="font-bold text-lg lg:text-2xl text-primary">
               {inventory?.title}
             </h2>
             <p className="font-semibold">
@@ -167,7 +167,7 @@ Link: ${url}`;
           </button>
         </div>
 
-        <div className="mt-4 sm:mt-2 gap-3 grid">
+        <div className="mt-4 md:mt-2 gap-3 grid">
           {inventory?.images && inventory.videos && (
             <div className="space-y-4 flex flex-col items-center">
               {mediaType === "images" ? (
@@ -180,7 +180,7 @@ Link: ${url}`;
                 <button
                   //href={"/view-media"}
                   onClick={() => setOpen(true)}
-                  className="border-primary border hover:text-opacity-80 p-2 text-primary rounded-md w-[70%] sm:w-[90%]"
+                  className="border-primary border hover:text-opacity-80 p-2 text-primary rounded-md md:w-[70%] w-full"
                 >
                   View Media
                 </button>
@@ -189,7 +189,7 @@ Link: ${url}`;
               {user?._id !== inventory.owner._id && (
                 <button
                   onClick={handleFavoriteToggle}
-                  className="bg-primary hover:bg-opacity-80 p-2  text-white rounded-md w-[70%] sm:w-[90%]"
+                  className="bg-primary hover:bg-opacity-80 p-2  text-white rounded-md md:w-[70%] w-full"
                 >
                   {isFavorite
                     ? "remove this item from your list"
@@ -197,9 +197,9 @@ Link: ${url}`;
                 </button>
               )}
 
-              <div className="bg-primary/[0.6] py-4 w-[70%] rounded-lg sm:w-[90%] space-y-4 items-start px-2 flex flex-col">
+              <div className="bg-primary/[0.6] py-4 md:w-[70%] rounded-lg w-full space-y-4 items-start px-2 flex flex-col">
                 {/* <div className="font-semibold">Your List</div> */}
-                <div className="flex flex-row sm:flex-col sm:space-y-2 justify-between w-full ">
+                <div className="flex md:flex-row flex-col space-y-0 md:space-y-2 justify-between w-full ">
                   {inventory.owner._id === user?._id ? (
                     <Link
                       href={`/product/${inventory._id}/edit-product`}

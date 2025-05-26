@@ -12,8 +12,8 @@ export const PersonalInfoForm: React.FC<PersonalInfoProps> = ({
   form,
   onChange,
 }) => (
-  <div className="space-y-4 flex flex-col items-center ">
-    <div className="flex flex-col w-[40%] lg:w-[30%] sm:w-full items-start gap-2 my-2">
+  <div className="space-y-4 flex w-full flex-col items-center ">
+    <div className="flex flex-col w-full items-start gap-2 my-2">
       <label
         className="text-[#252625] flex flex-row items-center font-medium text-[14px] mb-1 leading-3"
         htmlFor="username"
@@ -33,7 +33,7 @@ export const PersonalInfoForm: React.FC<PersonalInfoProps> = ({
       />
     </div>
 
-    <div className="flex flex-col w-[40%] lg:w-[30%] sm:w-full items-start gap-2 my-2">
+    <div className="flex flex-col w-full items-start gap-2 my-2">
       <label
         className="text-[#252625] font-medium flex flex-row text-[14px] mb-1 leading-3"
         htmlFor="firstName"
@@ -53,7 +53,7 @@ export const PersonalInfoForm: React.FC<PersonalInfoProps> = ({
       />
     </div>
 
-    <div className="flex flex-col w-[40%] lg:w-[30%] sm:w-full items-start gap-2 my-2">
+    <div className="flex flex-col w-full items-start gap-2 my-2">
       <label
         className="text-[#252625] font-medium flex flex-row text-[14px] mb-1 leading-3"
         htmlFor="lastName"
@@ -73,7 +73,7 @@ export const PersonalInfoForm: React.FC<PersonalInfoProps> = ({
       />
     </div>
 
-    <div className="flex flex-col w-[40%] lg:w-[30%] sm:w-full items-start gap-2 my-2">
+    <div className="flex flex-col w-full items-start gap-2 my-2">
       <label
         className="text-[#252625] font-medium flex flex-row text-[14px] mb-1 leading-3"
         htmlFor="phoneNumber"
@@ -94,7 +94,7 @@ export const PersonalInfoForm: React.FC<PersonalInfoProps> = ({
       />
     </div>
 
-    {/* <div className="flex flex-col w-[60%] sm:w-full items-start gap-2 my-2">
+    {/* <div className="flex flex-col w-[60%] max-sm:w-full items-start gap-2 my-2">
       <label
         className="text-[#252625] font-medium text-[14px] mb-1 leading-3"
         htmlFor="phone2"
@@ -113,7 +113,7 @@ export const PersonalInfoForm: React.FC<PersonalInfoProps> = ({
       />
     </div> */}
 
-    <div className="flex flex-col items-start w-[40%] lg:w-[30%] sm:w-full mt-4">
+    <div className="flex flex-col items-start w-full mt-4">
       <label
         className="text-[#252625] font-medium flex flex-row text-[14px] mb-1 leading-3"
         htmlFor="about"

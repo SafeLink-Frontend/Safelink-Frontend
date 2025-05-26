@@ -145,7 +145,7 @@ const Page = () => {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full ">
       {user && (
         <Head>
           {/* These meta tags will update client-side */}
@@ -170,20 +170,21 @@ const Page = () => {
       )}
 
       <ProfileHeader />
+      <div className="w-full max-w-[1440px] mx-auto">
       {questions && questions?.length > 0 && <QA questions={questions} />}
-      <div className="flex-row flex justify-around my-8 border-y-4 border-[#ECEDEE] lg:my-12 xxl:my-16">
+      <div className="flex-row flex justify-around my-8 border-y-4 border-[#ECEDEE] lg:my-12 2xl:my-16">
         <button
           className="items-center flex flex-col"
           onClick={() => setType("images")}
         >
           <div
-            className={`text-[18px] sm:text-[13px] lg:text-[22px] xxl:text-[28px] py-2 sm:text-[#696969] leading-5 font-medium text-black/[0.5]`}
+            className={`md:text-[18px] text-[16px] lg:text-[22px] 2xl:text-[28px] py-2 sm:text-[#696969] leading-5 font-medium text-black/[0.5]`}
           >
             This is me
           </div>
           {type === "images" && (
             <div
-              className={`h-[6px] sm:h-[4px] bg-primary w-48 sm:w-28 lg:w-64 xxl:w-80 rounded-md`}
+              className={`h-[6px] md:h-[4px] bg-primary w-48 md:w-28 lg:w-64 2xl:w-80 rounded-md`}
             />
           )}
         </button>
@@ -191,11 +192,11 @@ const Page = () => {
           className="items-center flex flex-col"
           onClick={() => setType("inventory")}
         >
-          <div className="text-[18px] sm:text-[13px] lg:text-[22px] xxl:text-[28px] py-2 sm:text-[#696969] font-medium text-black/[0.5]">
+          <div className="md:text-[18px] text-[16px] lg:text-[22px] 2xl:text-[28px] py-2 sm:text-[#696969] font-medium text-black/[0.5]">
             Patronize me
           </div>
           {type === "inventory" && (
-            <div className="h-[6px] sm:h-[4px] sm:w-28 bg-primary w-48 lg:w-64 xxl:w-80 rounded-md" />
+            <div className="h-[6px] md:h-[4px] md:w-28 bg-primary w-48 lg:w-64 2xl:w-80 rounded-md" />
           )}
         </button>
       </div>
@@ -206,7 +207,7 @@ const Page = () => {
           ) : categories.length > 0 ? (
             <PictureCategories categories={categories} />
           ) : (
-            <div className="text-center px-[20px] lg:px-[40px] xxl:px-[80px]">
+            <div className="text-center px-[20px] lg:px-[40px]">
               <p>No images found</p>
             </div>
           )
@@ -215,7 +216,7 @@ const Page = () => {
         ) : inventory && inventory?.length > 0 ? (
           <Inventory inventory={inventory} ownerId={user?._id} />
         ) : (
-          <div className="text-center px-[20px] lg:px-[40px] xxl:px-[80px]">
+          <div className="text-center px-[20px] lg:px-[40px]">
             <p>No inventory found</p>
           </div>
         )}
@@ -223,12 +224,12 @@ const Page = () => {
       {hasFavorites && (
         <div
           ref={favoritesRef}
-          className="bg-[#B28E49] rounded-md py-2 lg:py-4 xxl:py-6 px-[20px] lg:px-[40px] xxl:px-[80px] my-3 lg:my-5 xxl:my-8"
+          className="bg-[#B28E49] rounded-md py-2 lg:py-4 px-[20px] lg:px-[40px] my-3 lg:my-5 2xl:my-8"
         >
-          <p className="text-[12px] lg:text-[15px] xxl:text-[18px] leading-4 lg:leading-5 xxl:leading-6 font-semibold text-white mb-2 lg:mb-3 xxl:mb-4">
+          <p className="text-[12px] lg:text-[15px] 2xl:text-[18px] leading-4 lg:leading-5 2xl:leading-6 font-semibold text-white mb-2 lg:mb-3 2xl:mb-4">
             Your List
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xxl:grid-cols-5 gap-2 lg:gap-3 xxl:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2 lg:gap-3 2xl:gap-4">
             {favorites.map((item, index) => (
               <div
                 key={index}
@@ -255,7 +256,7 @@ const Page = () => {
               </div>
             ))}
           </div>
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 lg:gap-3 mt-3 lg:mt-4">
+          <div className="flex flex-col sm:flex-row items-center justify-around gap-2 lg:gap-3 mt-3 lg:mt-4">
             <button
               onClick={clearFavorites}
               className="text-white w-full font-semibold text-[12px] lg:text-[14px] leading-5 flex items-center justify-center gap-2 lg:gap-3 bg-[#A70A0A] p-2 lg:p-3 rounded-md text-nowrap"
@@ -269,7 +270,7 @@ const Page = () => {
       {showFab && (
         <button
           onClick={handleFabClick}
-          className="fixed bottom-6 right-6 lg:bottom-8 lg:right-8 xxl:bottom-10 xxl:right-10 z-50 bg-primary text-white p-3 lg:p-4 rounded-full shadow-lg hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-300 ease-in-out"
+          className="fixed bottom-6 right-6 lg:bottom-8 lg:right-8 2xl:bottom-10 2xl:right-10 z-50 bg-primary text-white p-3 lg:p-4 rounded-full shadow-lg hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-300 ease-in-out"
           aria-label={
             isFavoritesVisible
               ? "Scroll to top of content"
@@ -289,7 +290,9 @@ const Page = () => {
             )}
           </div>
         </button>
+        
       )}
+      </div>
     </div>
   );
 };

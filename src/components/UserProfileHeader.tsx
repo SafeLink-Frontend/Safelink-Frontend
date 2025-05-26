@@ -61,7 +61,7 @@ const ProfileHeader = ({ user }: { user: User }) => {
           height={1000}
           src={user?.coverPicture ?? "/cp-placeholder.png"}
           alt=""
-          className="h-[150px] w-full object-cover"
+          className="h-[150px] md:h-[200px] w-full object-cover"
         />
         {/* <button
           className="capitalize absolute top-2 left-2 flex items-center gap-2"
@@ -73,37 +73,34 @@ const ProfileHeader = ({ user }: { user: User }) => {
           <Drawer />
         </div> */}
       </div>
-      <div className=" flex px-[20px] lg:px-[40px] xxl:px-[80px] items-center mt-3 justify-between sm1:px-2 ">
-        <div className="flex flex-row items-center gap-2 ">
+      <div className=" flex px-[20px] lg:px-[40px] items-center mt-3 justify-between max-w-[1440px] mx-auto">
+        <div className="flex flex-row w-full items-center gap-2 ">
           <button
             onClick={() => setOpen(true)}
-            className="w-20 h-20  sm1:h-12 sm1:w-12 rounded-full"
+            className="w-20 h-20 md:w-28 md:h-28 rounded-full flex justify-center items-center overflow-hidden"
           >
             <Image
-              width={100}
-              height={100}
-              className="w-full h-full rounded-full"
+              width={300}
+              height={300}
+              className="w-full h-full rounded-full object-cover"
               src={user?.profilePicture || "/pp-placeholder.png"}
               alt="profile"
             />
           </button>
           <div className="">
-            <h1 className="flex items-center gap-1 font-semibold sm:w-auto w-[40vw] text-[22px] sm1:text-[12px] break-words">
+            <h1 className="flex items-center gap-1 font-semibold md:w-[40vw] text-[22px] break-words">
               <span className="max-w-full overflow-hidden">
                 {user.username ?? user?.email}
               </span>
               <img src={"/verification.svg"} alt="" />
             </h1>
-            <small className="text-[14px]  sm1:text-[12px] font-semibold leading-5 text-[#737373]">
+            <small className="text-[14px] font-semibold leading-5 text-[#737373]">
               Joined: {user?.createdAt && user?.createdAt.slice(0, 4)}
             </small>
           </div>
-          {/* <button className="rounded-full  bg-gray-500/[0.5] p-2 absolute bottom-1 -right-1 sm:-right-1 cursor-pointer">
-            <FaCamera size={8} />
-          </button> */}
         </div>
         <div className="flex items-center gap-2 ">
-          <div className="flex items-center gap-3 justify-between sm1:flex-wrap sm1:justify-center">
+          <div className="md:flex items-center gap-3 justify-between hidden">
             <RWebShare
               data={{
                 text: "User Profile",
@@ -112,7 +109,7 @@ const ProfileHeader = ({ user }: { user: User }) => {
               }}
               onClick={() => console.log("shared successfully!")}
             >
-              <button className="bg-[#F2BE5C] text-white capitalize flex items-center gap-3 leading-6 p-2 border border-[#F2BE5C] rounded-md cursor-pointer text-nowrap sm1:hidden">
+              <button className="bg-[#F2BE5C] text-white capitalize flex items-center gap-3 leading-6 p-2 border border-[#F2BE5C] rounded-md cursor-pointer text-nowrap">
                 share profile
               </button>
             </RWebShare>
@@ -121,11 +118,11 @@ const ProfileHeader = ({ user }: { user: User }) => {
         </div>
       </div>
 
-      <p className="my-2 px-[20px] lg:px-[40px] xxl:px-[80px] text-[#444544]  font-raleway text-[18px] ">
+      <p className="my-2 max-w-[1440px] mx-auto px-[20px] lg:px-[40px]  text-[#444544]  font-raleway text-[18px] ">
         {user?.about}
       </p>
 
-      <div className="mb-2 mt-4 w-full justify-center hidden sm1:flex">
+      <div className="mb-2 mt-4 max-w-[1440px] mx-auto justify-center flex md:hidden">
         <RWebShare
           data={{
             text: "",

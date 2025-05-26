@@ -25,12 +25,12 @@ const Listings = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-grow container mx-auto sm:mt-12 p-4 min-h-screen">
+      <main className="flex-grow container border-4 mx-auto mt-12 md:mt-0 p-4 min-h-screen">
         <LoadingModal isOpen={isFetching}>
           <Loading />
         </LoadingModal>
         <div className="w-full flex justify-center">
-          <div className="bg-white w-[75%] sm:w-[100%] py-2 flex flex-row rounded-md m">
+          <div className="bg-white md:w-[75%] w-[100%] py-2 flex flex-row rounded-md">
             <div className="flex flex-row items-center w-[85%] ml-2 rounded-md  px-2 bg-[#f2f4f8]">
               <IoSearch />
               <input
@@ -54,7 +54,7 @@ const Listings = () => {
           Search Results ({inventory?.length || 0})
         </h2>
         <Suspense fallback={<Loading />}>
-          <div className="grid grid-cols-3 sm:grid-cols-1  gap-4">
+          <div className="grid lg:grid-cols-3 grid-cols-2 gap-4">
             {inventory &&
               inventory.length > 0 &&
               inventory.map((data, index) => (

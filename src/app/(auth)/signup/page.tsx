@@ -19,16 +19,16 @@ async function page({
   const referralCode = searchParams?.code;
 
   return (
-    <div className="flex flex-1 flex-col items-center sm:px-[5%]  max-w-[500px] mx-auto">
+    <div className="flex flex-1 flex-col items-center px-[5%] md:px-0 max-w-[500px] mx-auto min-h-screen">
       <div className="flex-row w-full flex items-center">
         {/* <Link href={"/"}>
           <MdCancel size={28} />
         </Link> */}
-        <div className="w-full flex justify-center mt-4 text-[24px] font-[500]">
+        <div className="w-full flex justify-center mt-4 text-[24px] font-semibold">
           SAFELINK
         </div>
       </div>
-      <div>Welcome back</div>
+      {/* <div>Welcome back</div> */}
       <form className="flex flex-col w-full mt-8 space-y-4">
         <div className="">
           <div>Email</div>
