@@ -11,16 +11,16 @@ import { MdCancel } from "react-icons/md";
 
 async function page() {
   return (
-    <div className="flex flex-col items-center sm:px-[5%] min-h-screen max-w-[500px] mx-auto">
+    <div className="flex flex-col items-center px-[5%] md:px-0 min-h-screen max-w-[500px] mx-auto">
       <div className="flex-row w-full flex items-center">
         {/* <Link href={"/"}>
           <MdCancel size={28} />
         </Link> */}
-        <div className="w-full flex justify-center mt-4 text-[24px] font-[500]">
+        <div className="w-full flex justify-center mt-4 text-[24px] font-semibold">
           SAFELINK
         </div>
       </div>
-      <div>Welcome back</div>
+      <div className="text-[24px] font-semibold">Welcome back</div>
       <form className="flex flex-col w-full mt-8 sm:w-full space-y-4">
         <div className="">
           <div>Email</div>

@@ -12,11 +12,11 @@ export const QuestionsForm: React.FC<QuestionsFormProps> = ({
   answers,
   onChange,
 }) => (
-  <div className="flex flex-col items-center">
+  <div className="flex flex-col items-center w-full">
     {questions?.map((question) => (
       <div
         key={question.id}
-        className="flex flex-col sm:w-full w-[40%] lg:w-[30%] items-start my-2"
+        className="flex flex-col w-full items-start my-2"
       >
         <label
           className="text-[#252625] font-medium text-[14px] mt-4 mb-1 leading-3"

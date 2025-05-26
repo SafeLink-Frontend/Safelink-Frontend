@@ -60,7 +60,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-start sm:w-full w-[40%] lg:w-[30%] mt-4">
+    <div className="flex flex-col items-start w-full mt-4">
       <label
         className="text-[#252625] flex flex-row font-medium text-[14px] mb-1 leading-3"
         htmlFor={name}

@@ -54,12 +54,12 @@ export default function PricingSection() {
   ];
 
   return (
-    <section className="container mx-auto p-[10%] py-4 sm:p-4">
+    <section className="container mx-auto p-[10%] py-4 max-sm:p-4">
       <h2 className="text-4xl font-bold text-center mb-8">Prices</h2>
       <p className="text-center mb-12">
         by showcasing your exclusive listings to our highly-esteemed users
       </p>
-      <div className="grid sm:grid-cols-1 grid-cols-2 gap-6">
+      <div className="grid max-sm:grid-cols-1 grid-cols-2 gap-6">
         {plans.map((plan, index) => (
           <PriceCard
             key={index}

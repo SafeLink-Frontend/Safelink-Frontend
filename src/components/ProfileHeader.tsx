@@ -96,26 +96,26 @@ const ProfileHeader = () => {
         plugins={[Fullscreen]}
       />
 
-      <div className="z-10 ">
+      <div className="z-10 w-full border-4">
         <Image
           width={1000}
           height={1000}
           alt="cover picture"
           src={user?.coverPicture || "/cp-placeholder.png"}
-          className="w-full h-24"
+          className="w-screen border-4 h-24 object-cover"
         />
         {/* <button
-          className="capitalize absolute top-[85px] left-[50px] sm:top-[10px] sm:left-[15px] flex z-20 items-center gap-2"
+          className="capitalize absolute top-[85px] left-[50px] max-sm:top-[10px] max-sm:left-[15px] flex z-20 items-center gap-2"
           onClick={() => router.back()}
         >
           <FaArrowLeftLong size={24} /> back
         </button> */}
       </div>
-      <div className="w-full px-[20px] lg:px-[40px] xxl:px-[80px] flex items-center mt-[-40px] sm:mt-3 sm1:mt-0 z-40 justify-between sm1:px-2 ">
-        <div className="flex flex-row items-center gap-2 lg:gap-4 xxl:gap-6">
+      <div className="w-full max-w-[1440px] mx-auto px-[20px] lg:px-[40px] flex items-center mt-[-40px] max-sm:mt-3 z-40 justify-between">
+        <div className="flex flex-row items-center gap-2 lg:gap-4 2xl:gap-6">
           <button
             onClick={() => setOpen(true)}
-            className="w-[150px] h-[150px] sm1:h-12 sm1:w-12 lg:w-[180px] lg:h-[180px] xxl:w-[220px] xxl:h-[220px] rounded-full"
+            className="w-[100px] h-[100px] lg:w-[180px] lg:h-[180px] 2xl:w-[220px] 2xl:h-[220px] rounded-full"
           >
             <Image
               width={100}
@@ -132,29 +132,29 @@ const ProfileHeader = () => {
             accept="image/*"
             onChange={handleImageChange}
           />
-          <div className="mt-2 lg:mt-4 xxl:mt-6 flex flex-col justify-center ">
-            <h1 className="flex items-center gap-1 lg:gap-2 xxl:gap-3 font-semibold w-auto text-[22px] sm1:text-[12px] lg:text-[28px] xxl:text-[36px] break-words">
+          <div className="max-w-[1440px] mx-auto mt-2 lg:mt-4 2xl:mt-6 flex flex-col justify-center ">
+            <h1 className="flex items-center gap-1 lg:gap-2 2xl:gap-3 font-semibold w-auto text-[22px] lg:text-[28px] 2xl:text-[36px] break-words">
               <span className="max-w-full overflow-hidden">
                 {user?.username ?? user?.email}
               </span>
               <img
                 src={"/verification.svg"}
-                className="w-4 h-4 lg:w-6 lg:h-6 xxl:w-8 xxl:h-8"
+                className="w-4 h-4 lg:w-6 lg:h-6 2xl:w-8 2xl:h-8"
                 alt=""
               />
             </h1>
-            <small className="text-[14px] sm1:text-[12px] lg:text-[16px] xxl:text-[18px] font-semibold leading-5 lg:leading-6 xxl:leading-7 text-[#737373]">
+            <small className="text-[14px] lg:text-[16px] 2xl:text-[18px] font-semibold leading-5 lg:leading-6 2xl:leading-7 text-[#737373]">
               Joined: {user?.createdAt && user?.createdAt.slice(0, 4)}
             </small>
           </div>
         </div>
-        <div className="flex items-center gap-2 lg:gap-4 xxl:gap-6">
-          <div className="flex items-center gap-3 lg:gap-4 xxl:gap-5 justify-between sm1:hidden">
+        <div className="hidden md:flex items-center gap-2 lg:gap-4 2xl:gap-6">
+          <div className="flex items-center gap-3 lg:gap-4 2xl:gap-5 justify-between">
             <Link
               href="/profile/edit-profile"
-              className="text-[#737373] capitalize flex items-center gap-3 leading-6 lg:leading-7 xxl:leading-8 p-2 lg:p-3 xxl:p-4 border border-[#A6A6A6] rounded cursor-pointer text-nowrap text-[14px] lg:text-[16px] xxl:text-[18px]"
+              className="text-[#737373] capitalize flex items-center gap-3 leading-6 lg:leading-7 2xl:leading-8 p-2 lg:p-3 2xl:p-4 border border-[#A6A6A6] rounded cursor-pointer text-nowrap text-[14px] lg:text-[16px] 2xl:text-[18px]"
             >
-              <MdEdit className="w-5 h-5 lg:w-6 lg:h-6 xxl:w-7 xxl:h-7" />
+              <MdEdit className="w-5 h-5 lg:w-6 lg:h-6 2xl:w-7 2xl:h-7" />
               edit profile
             </Link>
 
@@ -166,27 +166,29 @@ const ProfileHeader = () => {
               }}
               onClick={() => console.log("shared successfully!")}
             >
-              <button className="bg-[#F2BE5C] text-white capitalize flex items-center gap-3 leading-6 lg:leading-7 xxl:leading-8 p-2 lg:p-3 xxl:p-4 border border-[#F2BE5C] rounded-md cursor-pointer text-nowrap text-[14px] lg:text-[16px] xxl:text-[18px]">
+              <button className="bg-[#F2BE5C] text-white capitalize flex items-center gap-3 leading-6 lg:leading-7 2xl:leading-8 p-2 lg:p-3 2xl:p-4 border border-[#F2BE5C] rounded-md cursor-pointer text-nowrap text-[14px] lg:text-[16px] 2xl:text-[18px]">
                 share profile
               </button>
             </RWebShare>
 
             <Link
               href={"/create-listing"}
-              className="bg-[#252625] text-[#F2F2F2] capitalize flex items-center gap-3 leading-6 lg:leading-7 xxl:leading-8 p-2 lg:p-3 xxl:p-4 border border-[#252625] rounded cursor-pointer text-nowrap text-[14px] lg:text-[16px] xxl:text-[18px]"
+              className="bg-[#252625] text-[#F2F2F2] capitalize flex items-center gap-3 leading-6 lg:leading-7 2xl:leading-8 p-2 lg:p-3 2xl:p-4 border border-[#252625] rounded cursor-pointer text-nowrap text-[14px] lg:text-[16px] 2xl:text-[18px]"
             >
-              <FaPlus className="w-5 h-5 lg:w-6 lg:h-6 xxl:w-7 xxl:h-7" />
+              <FaPlus className="w-5 h-5 lg:w-6 lg:h-6 2xl:w-7 2xl:h-7" />
               Add Product
             </Link>
           </div>
         </div>
       </div>
 
-      <p className="my-2 lg:my-4 xxl:my-6 px-[20px] lg:px-[40px] xxl:px-[80px]  mt-[28px] lg:mt-[40px] xxl:mt-[60px] text-[#444544] font-raleway text-[18px] lg:text-[20px] xxl:text-[24px]">
+      <div className="max-w-[1440px] mx-auto">
+      <p className="my-2 lg:my-4 2xl:my-6 px-[20px] lg:px-[40px] mt-[28px] lg:mt-[40px] 2xl:mt-[60px] text-[#444544] font-raleway text-[18px] lg:text-[20px] 2xl:text-[24px]">
         {user?.about}
       </p>
+      </div>
 
-      <div className="mb-2 mt-4 w-full justify-center hidden sm1:flex">
+      <div className="mb-2 mt-4 w-full justify-center flex md:hidden">
         <RWebShare
           data={{
             text: "",
@@ -201,7 +203,7 @@ const ProfileHeader = () => {
         </RWebShare>
       </div>
 
-      <div className="hidden sm1:flex items-center justify-between mx-[5%]">
+      <div className="flex md:hidden items-center justify-between mx-[5%]">
         <>
           <button
             onClick={() => {
@@ -222,11 +224,11 @@ const ProfileHeader = () => {
         </>
       </div>
 
-      <div className="flex items-center mt-4 lg:mt-6 xxl:mt-8 justify-between px-[20px] lg:px-[40px] xxl:px-[80px]">
+      <div className="flex items-center max-w-[1440px] mx-auto mt-4 lg:mt-6 2xl:mt-8 justify-between px-[20px] lg:px-[40px] ">
         <>
-          <div className="flex space-x-2 sm1:space-x-0 items-center sm1:flex-col text-[14px] lg:text-[16px] xxl:text-[18px]">
+          <div className="flex space-x-2 md:space-x-0 items-center md:items-start md:flex-col text-[14px] lg:text-[16px] 2xl:text-[18px]">
             <div>Subscribed to:</div>
-            <div className="font-semibold text-[20px] lg:text-[24px] xxl:text-[28px] text-primary">
+            <div className="font-semibold text-[20px] lg:text-[24px] 2xl:text-[28px] text-primary">
               {subscriptionStatus?.plan?.name?.toLocaleUpperCase() ?? "FREE"}{" "}
               PLAN
             </div>

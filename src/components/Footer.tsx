@@ -6,9 +6,9 @@ import { FaTwitter, FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-white text-[12px] px-4 pt-[120px] pb-10 sm:px-2 ">
-      <div className="max-w-[2000px]  mx-auto flex sm:flex-col flex-row gap-8 justify-between">
-        <div className="w-[50%]">
+    <footer className="bg-black text-white text-[12px] md:px-4 pt-[120px] pb-10 px-2 ">
+      <div className="max-w-[1400px]  mx-auto flex flex-col md:flex-row gap-8 justify-between items-center md:items-start">
+        <div className="md:w-[50%] w-full">
           <h2 className="font-medium text-lg mb-4">SAFELINK</h2>
           <p className="text-[12px] mb-6">
             SafeLink helps you organize your business details, photos, and
@@ -52,6 +52,7 @@ export default function Footer() {
             </li>
           </ul>
         </div> */}
+        <div className="flex justify-between md:justify-around w-full">
         <div>
           <h2 className="font-medium text-lg mb-4">BUSINESS</h2>
           <ul className="space-y-2">
@@ -96,6 +97,7 @@ export default function Footer() {
               </Link>
             </li>
           </ul>
+        </div>
         </div>
       </div>
       <div className="container mx-auto sm:px-6 px-16 mt-10 text-center">

@@ -45,18 +45,18 @@ export default function Home() {
               src="/safe.svg"
               width={250}
               height={70}
-              className="object-cover my-3 sm:hidden"
+              className="object-cover my-3 max-sm:hidden"
             />
           </div>
-          <div className="sm:flex flex-col items-center mb-3 hidden">
+          <div className="md:hidden flex flex-col items-center mb-3">
             <img src="/icon.svg" alt="" />
-            <p className="text-white text-[15px] sm:block hidden">
+            <p className="text-white text-[15px] max-sm:hidden block">
               Explore our directory of businesses
             </p>
           </div>
 
-          <div className="bg-white w-[75%] xxl:w-[60%] sm:w-[85%] py-2 flex flex-row rounded-md">
-            <div className="flex flex-row items-center w-[85%] ml-2 rounded-md  px-2 bg-[#f2f4f8] sm:w-full">
+          <div className="bg-white w-[75%] 2xl:w-[60%] max-sm:w-[85%] py-2 flex flex-row rounded-md">
+            <div className="flex flex-row items-center w-[85%] ml-2 rounded-md  px-2 bg-[#f2f4f8] max-sm:w-full">
               <IoSearch />
               <div className="pl-2 w-full flex items-center justify-between">
                 <input
@@ -66,7 +66,7 @@ export default function Home() {
                   onChange={onChangeText}
                   placeholder="Search by name or keyword"
                   value={query}
-                  className=" outline-none w-full bg-transparent sm:text-xs"
+                  className=" outline-none w-full bg-transparent max-sm:text-xs"
                 />
                 <img src={"/camera.svg"} alt="" className="w-6 h-6" />
               </div>
@@ -80,7 +80,7 @@ export default function Home() {
           </div>
         </DynamicBackground>
       </div>
-      <div className="top-[15vh] ">
+      <div className="top-[15vh] md:mt-0 ">
         <Showcase />
       </div>
     </div>

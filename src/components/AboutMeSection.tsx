@@ -179,7 +179,7 @@ function AboutMeSection({
           ) : categories.length > 0 ? (
             <PictureCategories categories={categories} />
           ) : (
-            <div className="text-center px-[20px] lg:px-[40px] xxl:px-[80px]">
+            <div className="text-center px-[20px] lg:px-[40px] ">
               <p>No images found</p>
             </div>
           )
@@ -188,7 +188,7 @@ function AboutMeSection({
         ) : inventory.length > 0 ? (
           <Inventory inventory={inventory} ownerId={user?._id} />
         ) : (
-          <div className="text-center px-[20px] lg:px-[40px] xxl:px-[80px]">
+          <div className="text-center px-[20px] lg:px-[40px]">
             <p>No inventory found</p>
           </div>
         )}
@@ -196,12 +196,12 @@ function AboutMeSection({
       {hasFavorites && (
         <div
           ref={favoritesRef}
-          className="bg-[#B28E49] rounded-md p-2 my-3 lg:p-4 xxl:p-6 lg:my-5 xxl:my-8 mx-[5%] lg:mx-[8%] xxl:mx-[10%]"
+          className="bg-[#B28E49] rounded-md p-2 my-3 lg:p-4 2xl:p-6 lg:my-5 2xl:my-8 mx-[5%] lg:mx-[8%] 2xl:mx-[10%]"
         >
-          <p className="text-[12px] lg:text-[15px] xxl:text-[18px] leading-4 lg:leading-5 xxl:leading-6 font-semibold text-white mb-2 lg:mb-3 xxl:mb-4">
+          <p className="text-[12px] lg:text-[15px] 2xl:text-[18px] leading-4 lg:leading-5 2xl:leading-6 font-semibold text-white mb-2 lg:mb-3 2xl:mb-4">
             Your List for {user?.username || "this seller"}
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xxl:grid-cols-5 gap-2 lg:gap-3 xxl:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 lg:gap-3 2xl:gap-4">
             {favoritesSpecificToUser.map((item, index) => (
               <div
                 key={index}
@@ -249,7 +249,7 @@ function AboutMeSection({
       {showFab && (
         <button
           onClick={handleFabClick}
-          className="fixed bottom-6 right-6 lg:bottom-8 lg:right-8 xxl:bottom-10 xxl:right-10 z-50 bg-primary text-white p-3 lg:p-4 rounded-full shadow-lg hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-300 ease-in-out"
+          className="fixed bottom-6 right-6 lg:bottom-8 lg:right-8 2xl:bottom-10 2xl:right-10 z-50 bg-primary text-white p-3 lg:p-4 rounded-full shadow-lg hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-300 ease-in-out"
           aria-label={
             isFavoritesVisible
               ? "Scroll to top of content"

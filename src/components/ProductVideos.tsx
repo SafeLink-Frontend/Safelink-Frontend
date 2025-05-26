@@ -16,7 +16,7 @@ function ProductVideos({ videos }: { videos: string[] }) {
               <source src={videos[0]} />
             </video>
 
-            <div className="grid grid-cols-2 sm:grid-cols-2">
+            <div className="grid grid-cols-2 ">
               {otherVideos?.map((video, index) => (
                 <video
                   controls

@@ -20,7 +20,7 @@ export function NavLink(props: Omit<ComponentProps<typeof Link>, "className">) {
   return (
     <Link
       {...props}
-      className={`mr-4  ${isActiveClassName} hover:text-primary  focus-visible:text-primary`}
+      className={`mr-4  ${isActiveClassName} hover:text-primary 2xl:text-[20px] font-semibold  focus-visible:text-primary`}
     />
   );
 }
@@ -64,7 +64,7 @@ export function Nav({ children }: { children: ReactNode }) {
           <div
             className={` bg-black bg-opacity-30 fixed z-30 top-0 left-0  w-full `}
           >
-            <div className="max-w-[2000px] mx-auto sm:flex hidden items-center justify-between px-2 ">
+            <div className="max-w-[2000px] mx-auto flex md:hidden items-center justify-between px-2 ">
               <button className="p-4  " onClick={openDrawer}>
                 <FaBars size={24} color="white" />
               </button>
@@ -105,7 +105,7 @@ export function Nav({ children }: { children: ReactNode }) {
                 <>
                   <button
                     onClick={openLogInModal}
-                    className="border hover:text-primary sm:hidden border-primary rounded-[4px] py-3 px-6 mr-4"
+                    className="border hover:text-primary hidden md:block border-primary rounded-[4px] py-3 px-6 mr-4"
                   >
                     Log In
                   </button>
@@ -122,7 +122,7 @@ export function Nav({ children }: { children: ReactNode }) {
         )}
 
       <nav className={`bg-black w-full `}>
-        <div className="max-w-[2000px] mx-auto flex justify-between text-white sm:hidden h-16 items-center pl-6 pr-4">
+        <div className="max-w-[1440px] mx-auto md:flex justify-between text-white hidden h-16 items-center pl-6 pr-4 ">
           <Link href={"/"}>
             <Image
               alt="logo"
@@ -160,7 +160,7 @@ export function Nav({ children }: { children: ReactNode }) {
                 {user.profilePicture ? (
                   <div className="flex space-x-2">
                     <img
-                      className="w-8 h-8 rounded-full border border-gray-700"
+                      className="w-8 h-8 3xl:w-12 2xl:h-12 rounded-full border border-gray-700"
                       src={user.profilePicture}
                     />
                   </div>

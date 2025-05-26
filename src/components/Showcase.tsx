@@ -64,12 +64,12 @@ export function Showcase() {
 
   return (
     <>
-      <section className="flex items-center z-50 justify-center text-center bg-[#0D0D0D] p-28 my-5 sm:p-4 lt:p-3 md1:p-16 xxl:p-48">
-        <div className="max-w-[2000px] mx-auto ">
-          <h2 className="font-medium leading-8 text-[24px] lt:text-[20px] lg:text-[32px] xxl:text-[42px] text-center text-white">
+      <section className="flex items-center z-40 justify-center text-center bg-[#0D0D0D] p-8 md:p-16 lg:p-28 my-5">
+        <div className="max-w-5xl mx-auto ">
+          <h2 className="font-medium leading-8 text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-center text-white">
             What is <span className="text-[#F2BE5C]">Safelink?</span>
           </h2>
-          <p className="text-[14px] lg:text-[16px] xxl:text-[20px] text-white my-2 xxl:my-6">
+          <p className="text-sm md:text-base lg:text-lg xl:text-xl text-white my-6">
             SafeLink helps you organize your business details, photos, and
             prices in one simple link. No need to fill up your phone or your
             clients' phones with too many pictures—just send one link! It's
@@ -84,8 +84,8 @@ export function Showcase() {
           </Link>
         </div>
       </section>
-      <section className="p-5 lt:p-3">
-        <h2 className="text-[#FDAF1E] font-semibold leading-6 text-[24px] lt:text-[20px] lg:text-[32px] xxl:text-[42px] my-5 w-full sm:text-center">
+      <section className="p-5 max-sm:p-3">
+        <h2 className="text-[#FDAF1E] font-semibold leading-6 text-2xl md:text-3xl lg:text-4xl xl:text-5xl my-5 w-full text-center">
           Our Top Sellers
         </h2>
         {isPending ? (
@@ -93,13 +93,12 @@ export function Showcase() {
             <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-primary"></div>
           </div>
         ) : (
-          <div className="container grid grid-cols-3 sm:grid-cols-2 lt:grid-cols-1 gap-10 sm:gap-5 lt:gap-3">
+          <div className="max-w-[1440px] mx-auto grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
             {users &&
               users.length > 0 &&
               users?.map((item, index) => (
                 <Link
                   href={{
-                    //pathname: `/user/${item?.username?.replace(/\s+/g, "-").toLowerCase()}`,
                     pathname: `/profile/user`,
                     query: {
                       userId: item._id,
@@ -110,11 +109,9 @@ export function Showcase() {
                 >
                   <div className="items-center mb-4 flex flex-col">
                     <div
-                      className="w-full h-[200px] sm:h-[150px] lt:h-[130px] lg:h-[300px] xxl:h-[400px] border rounded-lg bg-cover bg-no-repeat relative"
+                      className="w-full h-48 sm:h-40 md:h-56 lg:h-72 border rounded-lg bg-cover bg-no-repeat relative"
                       style={{
-                        backgroundImage: `url(${
-                          item?.coverPicture || "/cp-placeholder.png"
-                        })`,
+                        backgroundImage: `url(${item?.coverPicture || "/cp-placeholder.png"})`,
                       }}
                     >
                       <div className="absolute -bottom-5 left-3">
@@ -127,11 +124,11 @@ export function Showcase() {
                         />
                       </div>
                     </div>
-                    <div className="px-4 sm:px-2 lt:px-1 mt-10 w-full">
-                      <h3 className="text-[18px] lt:text-[16px] lg:text-[22px] xxl:text-[28px] break-all text-left leading-6 text-ellipsis text-black my-2">
+                    <div className="px-4 max-sm:px-2 mt-10 w-full">
+                      <h3 className="text-lg md:text-xl lg:text-2xl break-all text-left leading-6 text-ellipsis text-black my-2">
                         {item?.username || "Seller"}
                       </h3>
-                      <p className="text-[#444544F2] text-left leading-5 line-clamp-4 text-[14px] lg:text-[16px] xxl:text-[20px] tracking-wide">
+                      <p className="text-[#444544F2] text-left leading-5 line-clamp-4 text-sm md:text-base lg:text-lg tracking-wide">
                         {item?.about}
                       </p>
                     </div>
@@ -144,7 +141,7 @@ export function Showcase() {
       </section>
 
       <section className="mb-4">
-        <div className=" w-full my-2 py-12 relative overflow-hidden ">
+        <div className="w-full my-2 py-12 relative overflow-hidden ">
           {/* Use a proper image element for the background instead of CSS background */}
           <Image
             src="/homepage-image-7.jpg"
@@ -158,37 +155,37 @@ export function Showcase() {
           {/* Content */}
           <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 md:px-8 ">
             <div className="flex flex-col items-center max-w-7xl mx-auto">
-              <h2 className="text-white font-bold text-[32px] lt:text-[24px] sm:text-[18px] md:text-[36px] lg:text-[42px] xxl:text-[48px] text-center mb-6 md:mb-8 lg:mb-10 ">
+              <h2 className="text-white font-bold text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-center mb-6 md:mb-8 lg:mb-10 ">
                 Why Choose SafeLink?
               </h2>
 
-              {/* Benefits grid - responsive based on specified breakpoints */}
-              <div className="grid grid-cols-3 md1:grid-cols-1 sm1:grid-cols-1 gap-8 md:gap-6 sm1:gap-4 lt:gap-2 w-full max-w-[2000px] mx-auto">
-                <div className="text-center bg-black/40 backdrop-blur-sm p-6 md:p-4 lt:p-2 rounded-lg border border-[#F2BE5C]/20 shadow-lg transform transition-transform hover:scale-105">
-                  <h3 className="text-[#F2BE5C] font-semibold text-[22px] md:text-[20px] sm1:text-[18px] sm:text-[16px] lt:text-[14px] lg:text-[26px] xxl:text-[32px] mb-2">
+              {/* Benefits grid - responsive based on default breakpoints */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full max-w-5xl mx-auto">
+                <div className="text-center bg-black/40 backdrop-blur-sm p-6 md:p-4 rounded-lg border border-[#F2BE5C]/20 shadow-lg transform transition-transform hover:scale-105">
+                  <h3 className="text-[#F2BE5C] font-semibold text-lg md:text-xl lg:text-2xl mb-2">
                     Showcase Your Business
                   </h3>
-                  <p className="text-white text-[16px] md:text-[15px] sm1:text-[14px] sm:text-[13px] lt:text-[12px] lg:text-[20px] xxl:text-[24px]">
+                  <p className="text-white text-base md:text-lg lg:text-xl">
                     Present your products professionally with photos and details
                     all in one shareable link
                   </p>
                 </div>
 
-                <div className="text-center bg-black/40 backdrop-blur-sm p-6 md:p-4 lt:p-2 rounded-lg border border-[#F2BE5C]/20 shadow-lg transform transition-transform hover:scale-105">
-                  <h3 className="text-[#F2BE5C] font-semibold text-[22px] md:text-[20px] sm1:text-[18px] sm:text-[16px] lt:text-[14px] lg:text-[26px] xxl:text-[32px] mb-2">
+                <div className="text-center bg-black/40 backdrop-blur-sm p-6 md:p-4 rounded-lg border border-[#F2BE5C]/20 shadow-lg transform transition-transform hover:scale-105">
+                  <h3 className="text-[#F2BE5C] font-semibold text-lg md:text-xl lg:text-2xl mb-2">
                     Grow Your Audience
                   </h3>
-                  <p className="text-white text-[16px] md:text-[15px] sm1:text-[14px] sm:text-[13px] lt:text-[12px] lg:text-[20px] xxl:text-[24px]">
+                  <p className="text-white text-base md:text-lg lg:text-xl">
                     Easily share your business profile and let customers help
                     spread the word
                   </p>
                 </div>
 
-                <div className="text-center bg-black/40 backdrop-blur-sm p-6 md:p-4 lt:p-2 rounded-lg border border-[#F2BE5C]/20 shadow-lg transform transition-transform hover:scale-105">
-                  <h3 className="text-[#F2BE5C] font-semibold text-[22px] md:text-[20px] sm1:text-[18px] sm:text-[16px] lt:text-[14px] lg:text-[26px] xxl:text-[32px] mb-2">
+                <div className="text-center bg-black/40 backdrop-blur-sm p-6 md:p-4 rounded-lg border border-[#F2BE5C]/20 shadow-lg transform transition-transform hover:scale-105">
+                  <h3 className="text-[#F2BE5C] font-semibold text-lg md:text-xl lg:text-2xl mb-2">
                     Simplify Sales
                   </h3>
-                  <p className="text-white text-[16px] md:text-[15px] sm1:text-[14px] sm:text-[13px] lt:text-[12px] lg:text-[20px] xxl:text-[24px]">
+                  <p className="text-white text-base md:text-lg lg:text-xl">
                     Let customers easily browse your inventory and connect with
                     you directly
                   </p>
@@ -198,7 +195,7 @@ export function Showcase() {
 
             <Link
               href={"/signup"}
-              className="mt-6 md:mt-8 lg:mt-10 bg-[#F2BE5C] py-2 px-6 lt:px-4 md:py-3 md:px-8 lg:py-4 lg:px-10 xxl:py-5 xxl:px-12 rounded-lg border-2 border-[#F2BE5C] text-white font-medium text-base md:text-lg lg:text-xl xxl:text-2xl hover:bg-transparent hover:text-[#F2BE5C] transition-all duration-300 shadow-lg"
+              className="mt-6 md:mt-8 lg:mt-10 bg-[#F2BE5C] py-2 px-6 md:py-3 md:px-8 lg:py-4 lg:px-10 rounded-lg border-2 border-[#F2BE5C] text-white font-medium text-base md:text-lg lg:text-xl hover:bg-transparent hover:text-[#F2BE5C] transition-all duration-300 shadow-lg"
             >
               Get Started Today
             </Link>
